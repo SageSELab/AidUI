@@ -1,5 +1,5 @@
 import spacy
-
+import utils
 import pprint
 pp = pprint.PrettyPrinter()
 
@@ -40,3 +40,4 @@ def rank_candidates():
     for key, value in candidate_per_matchID.items():
         candidate_per_matchID[key]["rank"] = value["length"] / max_length
     pp.pprint(candidate_per_matchID)
+    utils.write_json_file(candidate_per_matchID)
