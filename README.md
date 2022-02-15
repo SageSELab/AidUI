@@ -12,8 +12,13 @@ Overall code structure:
 │   │   │   ├── ranking (generate rankings for matched patterns)
 │   │   │   ├── utils (utility functions)
 │   │   ├── sentiment_analysis (TBD)
+|   │   │   ├── nlp_model
 │   │   
 │   ├── visual_analysis (TBD)
+│   │   ├── histogram_analysis
+│   │   ├── object_detetion (v2s)
 |   |
 │   ├── spatial_analysis (TBD)
+│   │   ├── size_analysis
+│   │   ├── proximity_analysis
 ```
