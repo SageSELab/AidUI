@@ -1,22 +1,19 @@
 This is the README file for DLDarkPatterns Project
 
-
-
+Overall code structure:
 ```bash
-├── video_frame_extractor
-│   ├── README.md
-│   ├── classification_data.xlsx
-│   ├── main.py
-│   ├── utils.py
-│   ├── video_parser.py
-│   ├── xlsx_parser.py
-│   ├── Videos
-│   │   ├── entertainment
-│   │   │   ├── entertainment_##-**-**.mp4
-│   │   │   ├── entertainment_##-**-**.mp4
-│   │   ├── family
-│   │   │   ├── family_##-**-**.mp4
-│   │   │   ├── family_##-**-**.mp4
-│   │   │   ... ... ...
-│   │   │   ... ... ...
+├── DLDarkPatterns
+│   ├── UIED (UI area(text/non text) extraction)
+|   |
+│   ├── text_analysis
+│   │   ├── pattern_matching
+│   │   │   ├── matching (main file)
+│   │   │   ├── patterns (different textual patterns defined here)
+│   │   │   ├── ranking (generate rankings for matched patterns)
+│   │   │   ├── utils (utility functions)
+│   │   ├── sentiment_analysis (TBD)
+│   │   
+│   ├── visual_analysis (TBD)
+|   |
+│   ├── spatial_analysis (TBD)
 ```
