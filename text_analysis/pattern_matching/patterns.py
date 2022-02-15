@@ -1,17 +1,10 @@
 # activity message:
 # ==============================================================================
-# pattern1
 # X people/person/visitors/users ordered/purchased/subscribed/viewed/booked in last 24 hours'
 # 8 people ordered in last 24 hours
 # 8 people are looking right now
-
 # people booked 78 times in last 24 hours
-
-#
-# pattern2
 # jack just saved 52$ on his order
-#
-# pattern3
 # X items sold in Y time/this hour
 
 pattern_generic_activity_message = [
