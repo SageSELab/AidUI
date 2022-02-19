@@ -1,5 +1,6 @@
 import glob
 import text_analysis.pattern_matching.matching as pattern_matching
+import utils.utils as utils
 
 files = [file for file in glob.glob("UIED/data/output/ocr/" + "*.json")]
 files.sort()

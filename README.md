@@ -7,16 +7,15 @@ Overall code structure:
 |   |
 │   ├── text_analysis
 │   │   ├── pattern_matching
-│   │   │   ├── matching (main file)
-│   │   │   ├── patterns (different textual patterns defined here)
-│   │   │   ├── ranking (generate rankings for matched patterns)
-│   │   │   ├── utils (utility functions)
+│   │   │   ├── matching (matching patterns)
+│   │   │   ├── patterns (definition of patterns)
+│   │   │   
 │   │   ├── sentiment_analysis (TBD)
 |   │   │   ├── nlp_model
 │   │   
 │   ├── visual_analysis (TBD)
 │   │   ├── histogram_analysis
-│   │   ├── object_detetion (v2s)
+│   │   ├── object_detetion
 |   |
 │   ├── spatial_analysis (TBD)
 │   │   ├── size_analysis
