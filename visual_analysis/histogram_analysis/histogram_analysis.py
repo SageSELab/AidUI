@@ -1,46 +1,41 @@
-
 import cv2
 import glob
+import utils.utils as utils
 
-import utils
-
-def analyze_histogram(file):
-    text_segments_info = []
-    f = open(file)
-
-    data = json.load(f)
-    for text_segment in data["texts"]:
-        # image creation from bbox info
-        # to do
-
-        # histogram analysis
-        hist = calculate_histogram(file)
-        hist_info = get_contrast(hist)
-
-        # populate json
-        segment_info = {}
-        segment_info["bbox_info"}] = text_segment
-        segment_info["hist_info"}] = hist_info
-        text_segments_info.append(segment_info)
-
-
-def calculate_histogram(image):
-    img = cv2.imread(image)
+def calculate_histogram(image, coordinates):
+    # utils.show_image(image)
+    img = image[coordinates[0]:coordinates[1], coordinates[2]:coordinates[3]]
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    # compute a grayscale histogram
-    hist = cv2.calcHist([img], [0], None, [256], [0, 3])
-    # plot the histogram
-    utils.plot_histogram(hist)
+    # utils.show_image(img)
+    hist = cv2.calcHist([img], [0], None, [2], [0, 256]) # compute a grayscale histogram
+    # print(hist)
+    # utils.plot_histogram(hist) # plot the histogram
     return hist
 
-def get_contrast(hist):
+def get_opacity(hist):
+    opacity = None
     hist /= hist.sum()
-    # print(hist[0], hist[85], hist[170])
-    return {"bin_info": [hist[0], hist[85], hist[170]], "intensity": None}
+    # print(hist[0][0])
+    # print(hist[1][0])
+    if hist[0][0] > .65:
+        opacity = "darker"
+    elif hist[1][0] > .65:
+        opacity = "brighter"
+    else:
+        opacity = "normal"
+    return opacity
 
-
-files = [file for file in glob.glob("/home/hasan/Downloads/sample_dp_images/data/output/ocr/*.json")]
-files.sort()
-for file in files:
-    print('----------- processing: ', file, '-------------')
-    analyze_histogram(file) # later we will input bbox
+def analyze_histogram(dictionary, image_file):
+    img = cv2.imread(image_file)
+    for key, value in dictionary.items():
+        coordinates = [
+            value["segment_info"]["row_min"] - 25
+            , value["segment_info"]["row_max"] + 25
+            , value["segment_info"]["column_min"] - 50
+            , value["segment_info"]["column_max"] + 50
+        ]
+        hist = calculate_histogram(img, coordinates)
+        opacity = get_opacity(hist)
+        visual_analysis = {"hist": hist, "opacity": opacity}
+        value["visual_analysis"] = visual_analysis
+    return dictionary

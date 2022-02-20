@@ -60,4 +60,4 @@ def match_patterns(file):
         matches = matcher(doc)
         for match_id, start, end in matches:
             on_match(doc, match_id, start, end, text_segment, segments)
-    pp.pprint(segments)
+    return segments
