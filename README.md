@@ -1,4 +1,4 @@
-This is the README file for DLDarkPatterns Project
+<!-- This is the README file for DLDarkPatterns Project -->
 
 Overall code structure:
 ```bash
