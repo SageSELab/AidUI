@@ -19,17 +19,17 @@ ocr_files.sort()
 for i in range(len(ocr_files)):
     print('###################### processing: ', ocr_files[i], '######################')
 
-    print("------------text_analysis_output-----------")
+    # print("------------text_analysis-----------")
     analysis_result = pattern_matching.match_patterns(ocr_files[i])
-
-    print("------------visual_analysis_output-----------")
+    # print("------------visual_analysis-----------")
     image_file = img_files[i]
     analysis_result = histogram_analysis.analyze_histogram(analysis_result, image_file)
-
-    print("------------proximity_analysis_output-----------")
+    # # print("------------proximity_analysis-----------")
     analysis_result = proximity_analysis.analyze_proximity(analysis_result, image_file)
-    # utils.print_dictionary(analysis_result)
-
-    print("------------size_analysis_output-----------")
+    # print("------------size_analysis-----------")
     analysis_result = size_analysis.analyze_size(analysis_result)
+
+    # print analysis result
     utils.print_dictionary(analysis_result)
+    # write analysis result
+    utils.write_json_file(analysis_result)

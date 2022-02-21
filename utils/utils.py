@@ -6,7 +6,7 @@ import pprint
 pp = pprint.PrettyPrinter()
 
 def write_json_file(dict):
-    with open('textual_ranking.json', 'w') as fp:
+    with open('analysis_result.json', 'w') as fp:
         json.dump(dict, fp)
 
 def print_dictionary(dictionary):

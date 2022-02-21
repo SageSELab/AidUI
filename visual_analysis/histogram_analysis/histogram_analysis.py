@@ -36,6 +36,6 @@ def analyze_histogram(dictionary, image_file):
         ]
         hist = calculate_histogram(img, coordinates)
         opacity = get_opacity(hist)
-        visual_analysis = {"hist": hist, "opacity": opacity}
+        visual_analysis = {"hist": [str(hist[0][0]), str(hist[1][0])], "opacity": opacity}
         value["visual_analysis"] = visual_analysis
     return dictionary

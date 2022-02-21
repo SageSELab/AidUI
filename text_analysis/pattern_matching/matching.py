@@ -37,17 +37,17 @@ def on_match(doc, match_id, start, end, text_segment, segments):
 
     # update segments object
     if id not in segments.keys():
-        segments[id] = {}
-        segments[id]["segment_info"] = text_segment
-        segments[id]["text_analysis"] = {}
-        segments[id]["text_analysis"][pattern] = {"doc": doc, "span": span.text, "span_length": len(span.text)}
+        segments[str(id)] = {}
+        segments[str(id)]["segment_info"] = text_segment
+        segments[str(id)]["text_analysis"] = {}
+        segments[str(id)]["text_analysis"][pattern] = {"doc": doc.text, "span": span.text, "span_length": len(span.text)}
     else:
-        if pattern not in segments[id]["text_analysis"].keys():
-            segments[id]["text_analysis"][pattern] = {"doc": doc, "span": span.text, "span_length": len(span.text)}
+        if pattern not in segments[str(id)]["text_analysis"].keys():
+            segments[str(id)]["text_analysis"][pattern] = {"doc": doc, "span": span.text, "span_length": len(span.text)}
         else:
-            current_span_length = segments[id]["text_analysis"][pattern]["span_length"]
+            current_span_length = segments[str(id)]["text_analysis"][pattern]["span_length"]
             if(len(span.text) > current_span_length):
-                segments[id]["text_analysis"][pattern] = {"doc": doc, "span": span.text, "span_length": len(span.text)}
+                segments[str(id)]["text_analysis"][pattern] = {"doc": doc, "span": span.text, "span_length": len(span.text)}
 
 # match patterns
 def match_patterns(file):
