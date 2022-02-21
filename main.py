@@ -2,6 +2,7 @@ import glob
 import text_analysis.pattern_matching.matching as pattern_matching
 import visual_analysis.histogram_analysis.histogram_analysis as histogram_analysis
 import spatial_analysis.proximity_analysis.proximity_analysis as proximity_analysis
+import spatial_analysis.size_analysis.size_analysis as size_analysis
 import utils.utils as utils
 
 # get input image files
@@ -27,6 +28,8 @@ for i in range(len(ocr_files)):
 
     print("------------proximity_analysis_output-----------")
     analysis_result = proximity_analysis.analyze_proximity(analysis_result, image_file)
-    utils.print_dictionary(analysis_result)
+    # utils.print_dictionary(analysis_result)
 
     print("------------size_analysis_output-----------")
+    analysis_result = size_analysis.analyze_size(analysis_result)
+    utils.print_dictionary(analysis_result)
