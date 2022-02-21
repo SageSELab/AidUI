@@ -7,11 +7,12 @@ import utils.utils as utils
 # get input image files
 img_files = [file for file in glob.glob("UIED/data/input/" + "*.*")]
 img_files.sort()
-print(len(img_files))
+# print(len(img_files))
+
 # get OCR files
 ocr_files = [file for file in glob.glob("UIED/data/output/ocr/" + "*.json")]
 ocr_files.sort()
-print(len(ocr_files))
+# print(len(ocr_files))
 
 # iterate over the OCR files
 for i in range(len(ocr_files)):
@@ -19,14 +20,13 @@ for i in range(len(ocr_files)):
 
     print("------------text_analysis_output-----------")
     analysis_result = pattern_matching.match_patterns(ocr_files[i])
-    utils.print_dictionary(analysis_result)
 
     print("------------visual_analysis_output-----------")
     image_file = img_files[i]
     analysis_result = histogram_analysis.analyze_histogram(analysis_result, image_file)
-    utils.print_dictionary(analysis_result)
 
     print("------------proximity_analysis_output-----------")
-    proximity_analysis.analyze_proximity(analysis_result, image_file)
+    analysis_result = proximity_analysis.analyze_proximity(analysis_result, image_file)
+    utils.print_dictionary(analysis_result)
 
     print("------------size_analysis_output-----------")

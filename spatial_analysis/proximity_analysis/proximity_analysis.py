@@ -1,8 +1,5 @@
 import cv2
 
-def does_intersect():
-    return True
-
 def get_neighbors(anchor_key, dictionary, neighborhood_coordinates):
     neighbors = []
     for key, value in dictionary.items():
@@ -20,13 +17,11 @@ def get_neighbors(anchor_key, dictionary, neighborhood_coordinates):
     return neighbors
 
 def get_neighborhood_area(img_coordinates, k, value):
-    print("img_coordinates", img_coordinates)
     # neighborhood row/column min/max
     neighborhood_row_min = max(value["segment_info"]["row_min"] - k, img_coordinates[0])
     neighborhood_row_max = min(value["segment_info"]["row_max"] + k, img_coordinates[1])
     neighborhood_column_min = max(value["segment_info"]["column_min"] - k, img_coordinates[2])
     neighborhood_column_max = min(value["segment_info"]["column_max"] + k, img_coordinates[3])
-
     return [neighborhood_row_min, neighborhood_row_max, neighborhood_column_min, neighborhood_column_max]
 
 def analyze_proximity(dictionary, image_file):
@@ -41,9 +36,12 @@ def analyze_proximity(dictionary, image_file):
     img_coordinates = [img_row_min, img_row_max, img_column_min, img_column_max]
 
     for key, value in dictionary.items():
-        print("key: ", key)
-        print("content:", value["segment_info"]["content"])
         neighborhood_coordinates = get_neighborhood_area(img_coordinates, k, value)
-        print("neighborhood_coordinates", neighborhood_coordinates)
         neighbors = get_neighbors(key, dictionary, neighborhood_coordinates)
-        print("neighbors: ", neighbors)
+        # print("key: ", key)
+        # print("content:", value["segment_info"]["content"])
+        # print("neighborhood_coordinates", neighborhood_coordinates)
+        # print("neighbors: ", neighbors)
+        proximity_analysis = {"neighborhood_coordinates": neighborhood_coordinates, "neighbors": neighbors}
+        value["proximity_analysis"] = proximity_analysis
+    return dictionary
