@@ -27,16 +27,26 @@ sample output after text(pattern matching), visual(histogram) and spatial(proxim
 {
   "9": {
     "segment_info": {
-      "height": 31,
-      "width": 176,
-      "column_max": 628,
       "content": "CONTINUE",
-      "column_min": 452,
-      "id": 9,
+      "column_max": 628,
       "row_max": 1290,
-      "row_min": 1259
+      "id": 9,
+      "column_min": 452,
+      "row_min": 1259,
+      "width": 176,
+      "height": 31
     },
     "text_analysis": {
+      "patterns_false_hierarchy": {
+        "doc": "CONTINUE",
+        "span": "CONTINUE",
+        "span_length": 8
+      },
+      "patterns_attention_distraction": {
+        "doc": "CONTINUE",
+        "span": "CONTINUE",
+        "span_length": 8
+      },
       "patterns_default_choice": {
         "doc": "CONTINUE",
         "span": "CONTINUE",
@@ -74,16 +84,26 @@ sample output after text(pattern matching), visual(histogram) and spatial(proxim
   },
   "10": {
     "segment_info": {
-      "height": 34,
-      "width": 161,
-      "column_max": 621,
       "content": "NOT NOW",
-      "column_min": 460,
-      "id": 10,
+      "column_max": 621,
       "row_max": 1417,
-      "row_min": 1383
+      "id": 10,
+      "column_min": 460,
+      "row_min": 1383,
+      "width": 161,
+      "height": 34
     },
     "text_analysis": {
+      "patterns_false_hierarchy": {
+        "doc": "NOT NOW",
+        "span": "NOT NOW",
+        "span_length": 7
+      },
+      "patterns_attention_distraction": {
+        "doc": "NOT NOW",
+        "span": "NOT NOW",
+        "span_length": 7
+      },
       "patterns_default_choice": {
         "doc": "NOT NOW",
         "span": "NOT NOW",
@@ -121,16 +141,26 @@ sample output after text(pattern matching), visual(histogram) and spatial(proxim
   },
   "11": {
     "segment_info": {
-      "height": 31,
-      "width": 88,
-      "column_max": 585,
       "content": "NEXT",
-      "column_min": 497,
-      "id": 11,
+      "column_max": 585,
       "row_max": 1817,
-      "row_min": 1786
+      "id": 11,
+      "column_min": 497,
+      "row_min": 1786,
+      "width": 88,
+      "height": 31
     },
     "text_analysis": {
+      "patterns_false_hierarchy": {
+        "doc": "NEXT",
+        "span": "NEXT",
+        "span_length": 4
+      },
+      "patterns_attention_distraction": {
+        "doc": "NEXT",
+        "span": "NEXT",
+        "span_length": 4
+      },
       "patterns_default_choice": {
         "doc": "NEXT",
         "span": "NEXT",
