@@ -5,6 +5,8 @@ Overall code structure:
 ├── DLDarkPatterns
 │   ├── UIED (UI area(text/non text) extraction)
 |   |
+│   ├── object_detetion (TBD)
+|   |
 │   ├── text_analysis
 │   │   ├── pattern_matching
 │   │   │   ├── matching (matching patterns)
@@ -15,7 +17,6 @@ Overall code structure:
 │   │   
 │   ├── visual_analysis
 │   │   ├── histogram_analysis
-│   │   ├── object_detetion (TBD)
 |   |
 │   ├── spatial_analysis
 │   │   ├── size_analysis
