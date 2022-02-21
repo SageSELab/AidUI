@@ -18,15 +18,15 @@ for i in range(len(ocr_files)):
     print('###################### processing: ', ocr_files[i], '######################')
 
     print("------------text_analysis_output-----------")
-    dictionary_text_analysis = pattern_matching.match_patterns(ocr_files[i])
-    utils.print_dictionary(dictionary_text_analysis)
+    analysis_result = pattern_matching.match_patterns(ocr_files[i])
+    utils.print_dictionary(analysis_result)
 
     print("------------visual_analysis_output-----------")
     image_file = img_files[i]
-    dictionary_visual_analysis = histogram_analysis.analyze_histogram(dictionary_text_analysis, image_file)
-    utils.print_dictionary(dictionary_visual_analysis)
+    analysis_result = histogram_analysis.analyze_histogram(analysis_result, image_file)
+    utils.print_dictionary(analysis_result)
 
     print("------------proximity_analysis_output-----------")
-
+    proximity_analysis.analyze_proximity(analysis_result, image_file)
 
     print("------------size_analysis_output-----------")
