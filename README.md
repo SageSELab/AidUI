@@ -10,14 +10,14 @@ Overall code structure:
 │   │   │   ├── matching (matching patterns)
 │   │   │   ├── patterns (definition of patterns)
 │   │   │   
-│   │   ├── sentiment_analysis (TBD)
+│   │   ├── sentiment_analysis (SKIP)
 |   │   │   ├── nlp_model
 │   │   
-│   ├── visual_analysis (TBD)
+│   ├── visual_analysis
 │   │   ├── histogram_analysis
-│   │   ├── object_detetion
+│   │   ├── object_detetion (TBD)
 |   |
-│   ├── spatial_analysis (TBD)
+│   ├── spatial_analysis
 │   │   ├── size_analysis
 │   │   ├── proximity_analysis
 ```
@@ -164,4 +164,3 @@ sample output after text(pattern matching), visual(histogram) and spatial(proxim
   }
 }
 ```
-
