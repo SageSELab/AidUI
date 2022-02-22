@@ -25,8 +25,11 @@ def get_neighborhood_area(img_coordinates, k, value):
     return [neighborhood_row_min, neighborhood_row_max, neighborhood_column_min, neighborhood_column_max]
 
 def analyze_proximity(dictionary, image_file):
-    k = 100 # proximity factor
     img = cv2.imread(image_file)
+    img_size = img.shape[0] * img.shape[1]
+    # print("img size: ", img_size)
+    k = int(img_size * 0.00005) # proximity factor
+    # print("k: ", k)
 
     # image row/column min/max
     img_row_min = 0
