@@ -1,6 +1,6 @@
-This is the README file for DLDarkPatterns Project
+<!-- This is the README file for DLDarkPatterns Project -->
 
-Overall code structure:
+**Overall code structure:**
 ```bash
 ├── DLDarkPatterns
 │   ├── UIED (UI area(text/non text) extraction)
@@ -23,7 +23,7 @@ Overall code structure:
 │   │   ├── proximity_analysis
 ```
 
-sample output after text(pattern matching), visual(histogram) and spatial(proximity, size) analysis:
+**sample output after text(pattern matching), visual(histogram) and spatial(proximity, size) analysis:**
 ```json
 {
   "9": {
