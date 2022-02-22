@@ -21,6 +21,8 @@
 │   ├── spatial_analysis
 │   │   ├── size_analysis
 │   │   ├── proximity_analysis
+|   |
+│   ├── dp_resolver
 ```
 
 **sample output after text(pattern matching), visual(histogram) and spatial(proximity, size) analysis:**
