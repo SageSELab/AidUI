@@ -1,2 +1,2 @@
-def resolve_dp(analysis_result, object_detection_result):
+def resolve_dp(input_to_resolver):
     print("DP resolved")

@@ -3,7 +3,7 @@ import text_analysis.pattern_matching.matching as pattern_matching
 import visual_analysis.histogram_analysis.histogram_analysis as histogram_analysis
 import spatial_analysis.proximity_analysis.proximity_analysis as proximity_analysis
 import spatial_analysis.size_analysis.size_analysis as size_analysis
-import dp_resolver.resolver as resolver
+import object_detection.object_detection as object_detection
 import utils.utils as utils
 
 # get input image files
@@ -30,13 +30,14 @@ for i in range(len(ocr_files)):
     # print("------------size_analysis-----------")
     analysis_result = size_analysis.analyze_size(analysis_result)
 
-    # print analysis result
-    utils.print_dictionary(analysis_result)
-    # write analysis result
-    utils.write_json_file(analysis_result)
+    # # print analysis result
+    # utils.print_dictionary(analysis_result)
+    # # write analysis result
+    # utils.write_json_file(analysis_result)
 
     # print("------------object_detection-----------")
-    # object_detection_result = {"label": None, "bbox_info": None}
+    object_detection_result = object_detection.get_object_detection_result()
 
     # print("------------dp_resolver-----------")
-    # resolver.resolve_dp(analysis_result, object_detection_result)
+    input_to_resolver = {"analysis_result": analysis_result, "object_detection_result": object_detection_result}
+    resolver.resolve_dp(input_to_resolver)
