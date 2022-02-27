@@ -4,6 +4,7 @@ import visual_analysis.histogram_analysis.histogram_analysis as histogram_analys
 import spatial_analysis.proximity_analysis.proximity_analysis as proximity_analysis
 import spatial_analysis.size_analysis.size_analysis as size_analysis
 import object_detection.object_detection as object_detection
+import dp_resolver.resolver as resolver
 import utils.utils as utils
 
 # get input image files
