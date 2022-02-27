@@ -41,4 +41,5 @@ for i in range(len(ocr_files)):
 
     # print("------------dp_resolver-----------")
     input_to_resolver = {"analysis_result": analysis_result, "object_detection_result": object_detection_result}
-    resolver.resolve_dp(input_to_resolver)
+    ui_dp = resolver.resolve_dp(input_to_resolver)
+    utils.print_dictionary(ui_dp)
