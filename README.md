@@ -5,7 +5,9 @@
 ├── DLDarkPatterns
 │   ├── UIED (UI area(text/non text) extraction)
 |   |
-│   ├── object_detetion (TBD)
+│   ├── object_detetion
+│   │   ├── object_detection_frcnn_mscoco_boilerplate
+│   │   ├── synthetic_data_generation
 |   |
 │   ├── text_analysis
 │   │   ├── pattern_matching
