@@ -15,7 +15,7 @@ def overlay_object_on_ui(background_img, foreground_img):
 
     # foreground img dimension processing
     foreground_prefix = basename_without_ext_foreground_img.split("_")[0]
-    if foreground_prefix in ["like", "star"]:
+    if foreground_prefix in ["like", "star", "tson", "tsoff"]:
         size = (64,64)
         img2 = img2.resize(size, Image.ANTIALIAS)
 
@@ -42,12 +42,3 @@ def generate_synthetic_dataset():
 
 if __name__ == "__main__":
     generate_synthetic_dataset()
-
-
-# to do
-# ----------------------------
-# script update: foreground image resize, random anchor posiiton calculation, check fitting into background img
-# list of objects (priority)
-# collect objects(variations)
-# collect RICO UIs
-# collect web UIs
