@@ -207,5 +207,13 @@
 }
 ```
 Resolver working procedure:
-- for each segment:
-  - fjslfjfjslf
+- segment level resolution:
+  - text: vote from the neighbors if similar patterns matched
+  - histogram: vote from neighbors if the opacity is different
+  - size: vote from neighbors if width/height difference exceeds a threshold
+- UI level resolution:
+  - counting and group votes for each potential dark pattern
+
+  Later,
+    - we might include a different weight factors for text, histogram and size resolution (variable for different DP patterns)
+    - we will also incorporate the object detection results 
