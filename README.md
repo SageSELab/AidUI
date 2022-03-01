@@ -207,4 +207,5 @@
 }
 ```
 Resolver working procedure:
-- khkhkhkj
+- for each segment:
+  - fjslfjfjslf
