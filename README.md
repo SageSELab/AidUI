@@ -11,11 +11,6 @@
 |   |
 │   ├── text_analysis
 │   │   ├── pattern_matching
-│   │   │   ├── matching (matching patterns)
-│   │   │   ├── patterns (definition of patterns)
-│   │   │   
-│   │   ├── sentiment_analysis (SKIP)
-|   │   │   ├── nlp_model
 │   │   
 │   ├── visual_analysis
 │   │   ├── histogram_analysis
