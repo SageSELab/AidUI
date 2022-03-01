@@ -37,7 +37,7 @@ for i in range(len(ocr_files)):
     # utils.write_json_file(analysis_result)
 
     # print("------------object_detection-----------")
-    object_detection_result = object_detection.get_object_detection_result()
+    # object_detection_result = object_detection.get_object_detection_result()
 
     # print("------------dp_resolver-----------")
     input_to_resolver = {"analysis_result": analysis_result, "object_detection_result": object_detection_result}
