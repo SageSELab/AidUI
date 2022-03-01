@@ -206,3 +206,5 @@
  "patterns_false_hierarchy": 8.0
 }
 ```
+Resolver working procedure:
+- khkhkhkj
