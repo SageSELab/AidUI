@@ -198,7 +198,7 @@
 }
 ```
 
-** sample DP Resolver output (to be modified) **
+**sample DP Resolver output (to be modified)**
 ```json
 {
  "patterns_attention_distraction": 8.0,
