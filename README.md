@@ -215,5 +215,5 @@ Resolver working procedure:
   - counting and group votes for each potential dark pattern
 
   Later,
-    - we might include a different weight factors for text, histogram and size resolution (variable for different DP patterns)
+    - we might include different weight factors for text, histogram and size resolution (variable for different DP patterns)
     - we will also incorporate the object detection results 
