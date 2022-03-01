@@ -8,3 +8,7 @@ UIED/data/output/
 # object detection dirs
 object_detection/synthetic_data_generation/input/
 object_detection/synthetic_data_generation/output/
+object_detection/object_detection_frcnn_mscoco_boilerplate/data/
+
+# .pth files
+*.pth
