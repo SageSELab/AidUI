@@ -2,7 +2,13 @@ from PIL import Image
 import glob
 import os
 
-def overlay_object_on_ui(background_img, foreground_img):
+import pprint
+pp = pprint.PrettyPrinter()
+import json
+
+object_classes = ["LIKE", "STAR", "TSON", "TSOFF"]
+
+def generate_image_and_annotation(background_img, foreground_img, image_id, result):
     # read images
     img1 = Image.open(background_img)
     img2 = Image.open(foreground_img).convert("RGBA")
@@ -13,32 +19,79 @@ def overlay_object_on_ui(background_img, foreground_img):
     basename_without_ext_foreground_img = os.path.splitext(os.path.basename(foreground_img))[0]
     filename = basename_without_ext_background_img + "_" + basename_without_ext_foreground_img
 
-    # foreground img dimension processing
-    foreground_prefix = basename_without_ext_foreground_img.split("_")[0]
-    if foreground_prefix in ["like", "star", "tson", "tsoff"]:
-        size = (64,64)
-        img2 = img2.resize(size, Image.ANTIALIAS)
+    # foreground img dimension processing (will be randomized later)
+    object_class = basename_without_ext_foreground_img.split("_")[0]
+    resized_width = 64
+    resized_height = 64
+    size = (resized_width, resized_height)
+    img2 = img2.resize(size, Image.ANTIALIAS)
 
-    # anchor position in the background img
-    x = img1.size[0] // 2
-    y = img1.size[1] // 2
+    # anchor position in the background img (will be randomized later)
+    background_img_width = img1.size[0]
+    background_img_height = img1.size[1]
+    x = background_img_width // 2
+    y = background_img_height // 2
     # print(x,y)
 
-    # overlay foreground img on the background img
+    # generate superimposed UI
     img1.paste(img2, (x,y), img2)
-    img1.save("output/" + filename + ".png","PNG")
+    img1.save("output/images/" + filename + ".png","PNG")
+
+    # populating result["images"]
+    image = {}
+    image["width"] = background_img_width
+    image["height"] = background_img_height
+    image["id"] = image_id
+    image["file_name"] = "images/" + filename + ".png"
+    result["images"].append(image)
+
+    # populating result["annotations"]
+    annotation = {}
+    annotation["id"] = image_id
+    annotation["image_id"] = image_id
+    annotation["category_id"] = object_classes.index(object_class)
+    annotation["segmentation"] = []
+    annotation["bbox"] = [x, y, resized_width, resized_height]
+    annotation["ignore"] = 0
+    annotation["iscrowd"] = 0
+    annotation["area"] = resized_width * resized_height
+    result["annotations"].append(annotation)
 
 def generate_synthetic_dataset():
-    object_files = [file for file in glob.glob("input/objects/" + "*.*")]
+    object_files = [file for file in glob.glob("./input/objects/" + "*.*")]
     object_files.sort()
-    print("object_files: ", object_files)
-    ui_files = [file for file in glob.glob("input/UIs/" + "*.*")]
+    # print("object_files: ", object_files)
+    ui_files = [file for file in glob.glob("./input/UIs/" + "*.*")]
     ui_files.sort()
-    print("ui_files: ", ui_files)
+    # print("ui_files: ", ui_files)
 
-    for foreground_img in object_files:
-        for background_img in ui_files:
-            overlay_object_on_ui(background_img, foreground_img)
+    # dictionary for image annotations
+    result = {
+        "images": []
+        , "categories": []
+        , "annotations": []
+        , "info": {
+            "year": 2022
+            , "version": "1.0"
+            , "contributor": "Label Studio"
+        }}
 
-if __name__ == "__main__":
-    generate_synthetic_dataset()
+    # populating result["categories"]
+    for i in range(len(object_classes)):
+        result["categories"].append({"id": i, "name": object_classes[i]})
+
+    # generate superimposed UIs and annotations
+    image_id = 0
+    for i in range(len(object_files)):
+        for j in range(len(ui_files)):
+            foreground_img = object_files[i]
+            background_img = ui_files[j]
+            generate_image_and_annotation(background_img, foreground_img, image_id, result)
+            image_id += 1
+    # print image annotation result
+    # pp.pprint(result)
+    # write image annotation result
+    with open('./output/result.json', 'w') as fp:
+        json.dump(result, fp)
+
+generate_synthetic_dataset()
