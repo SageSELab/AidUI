@@ -198,9 +198,9 @@
 **sample DP Resolver output (to be modified)**
 ```json
 {
- "patterns_attention_distraction": 8.0,
- "patterns_default_choice": 8.0,
- "patterns_false_hierarchy": 8.0
+ "patterns_attention_distraction": 3.0,
+ "patterns_default_choice": 2.0,
+ "patterns_false_hierarchy": 2.0
 }
 ```
 Resolver working procedure:
