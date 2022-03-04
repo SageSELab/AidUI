@@ -1,6 +1,7 @@
 from PIL import Image
 import glob
 import os
+import random
 
 import pprint
 pp = pprint.PrettyPrinter()
@@ -19,19 +20,20 @@ def generate_image_and_annotation(background_img, foreground_img, image_id, resu
     basename_without_ext_foreground_img = os.path.splitext(os.path.basename(foreground_img))[0]
     filename = basename_without_ext_background_img + "_" + basename_without_ext_foreground_img
 
-    # foreground img dimension processing (will be randomized later)
+    # extract class name
     object_class = basename_without_ext_foreground_img.split("_")[0]
-    resized_width = 64
-    resized_height = 64
-    size = (resized_width, resized_height)
-    img2 = img2.resize(size, Image.ANTIALIAS)
 
-    # anchor position in the background img (will be randomized later)
+    # random anchor position in background UI
     background_img_width = img1.size[0]
     background_img_height = img1.size[1]
-    x = background_img_width // 2
-    y = background_img_height // 2
-    # print(x,y)
+    x = random.randint(64, background_img_width // 2)
+    y = random.randint(64, background_img_height // 2)
+
+    # random width/height of foreground objects
+    resized_width = random.randint(64, background_img_width // 2)
+    resized_height = random.randint(64, background_img_height // 2)
+    size = (resized_width, resized_height)
+    img2 = img2.resize(size, Image.ANTIALIAS)
 
     # generate superimposed UI
     img1.paste(img2, (x,y), img2)
