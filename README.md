@@ -197,11 +197,13 @@
 
 **sample DP Resolver output (to be modified)**
 ```json
-{
- "patterns_attention_distraction": 3.0,
- "patterns_default_choice": 2.0,
- "patterns_false_hierarchy": 2.0
-}
+{"attention_distraction": 8.0,
+ "bait_and_switch": 1,
+ "default_choice": 8.0,
+ "disguised_ads": 1,
+ "false_hierarchy": 8.0,
+ "nagging": 1}
+
 ```
 Resolver working procedure:
 - segment level resolution:
