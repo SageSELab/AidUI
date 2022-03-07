@@ -195,7 +195,7 @@
 }
 ```
 
-**sample DP Resolver output (to be modified)**
+**sample DP Resolver output**
 ```json
 {"attention_distraction": 8.0,
  "bait_and_switch": 1,
