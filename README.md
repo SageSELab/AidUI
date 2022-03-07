@@ -212,7 +212,4 @@ Resolver working procedure:
   - size: vote from neighbors if width/height difference exceeds a threshold
 - UI level resolution:
   - counting and group votes for each potential dark pattern
-
-  Later,
-    - we might include different weight factors for text, histogram and size resolution (variable for different DP patterns)
-    - we will also incorporate the object detection results 
+  - considering the results from object detection
