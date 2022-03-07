@@ -1,7 +1,8 @@
 import utils.utils as utils
+from config import *
 
-high_contrast_patterns = ["patterns_false_hierarchy", "patterns_attention_distraction", "patterns_default_choice"]
-high_size_diff_patterns = ["patterns_false_hierarchy", "patterns_attention_distraction", "patterns_default_choice"]
+high_contrast_patterns = [class_dp["false_hierarchy"], class_dp["attention_distraction"], class_dp["default_choice"]]
+high_size_diff_patterns = [class_dp["false_hierarchy"], class_dp["attention_distraction"], class_dp["default_choice"]]
 
 def is_relative_height_beyond_threshold(height_diff_threshold, segment_height, neighbor_height):
     if abs(segment_height - neighbor_height) > height_diff_threshold:

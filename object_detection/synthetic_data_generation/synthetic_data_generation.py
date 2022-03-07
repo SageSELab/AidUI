@@ -7,7 +7,7 @@ import pprint
 pp = pprint.PrettyPrinter()
 import json
 
-object_classes = ["LIKE", "STAR", "TSON", "TSOFF"]
+object_classes = ["LIKE", "DISLIKE", "STAR", "TSON", "AD", "ADLOADER"]
 
 def generate_image_and_annotation(background_img, foreground_img, image_id, result):
     # read images
@@ -62,10 +62,10 @@ def generate_image_and_annotation(background_img, foreground_img, image_id, resu
 def generate_synthetic_dataset():
     object_files = [file for file in glob.glob("./input/objects/" + "*.*")]
     object_files.sort()
-    # print("object_files: ", object_files)
+    print("object_files: ", object_files)
     ui_files = [file for file in glob.glob("./input/UIs/" + "*.*")]
     ui_files.sort()
-    # print("ui_files: ", ui_files)
+    print("ui_files: ", ui_files)
 
     # dictionary for image annotations
     result = {
