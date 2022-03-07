@@ -1,6 +1,7 @@
 from config import *
+import json
 
-# TBA: Ads, intermediate currency,  checkbox selected
+# TBA: intermediate currency,  checkbox selected
 object_classes = ["LIKE", "DISLIKE", "STAR", "TSON", "AD", "ADLOADER"]
 map_obj_detection_dp = {
     "LIKE": [class_dp["nagging"]]
@@ -21,11 +22,16 @@ def get_potential_dp_classes(label):
 
 def get_object_detection_result():
     # get_inference_result(filename)
-    # get_potential_dp_classes(label)
+    inference_result_filename = "./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_result.json"
+    f = open(inference_result_filename)
+    data = json.load(f)
+    potential_dp_classes = get_potential_dp_classes(data["labels"])
     object_detection_results = {
-        "boxes": [35.015377044677734, 693.7750854492188, 1080.0, 1903.0919189453125]
-        , "labels": 1
-        , "scores": 0.11882354319095612}
+        "boxes": data["boxes"]
+        , "labels": data["labels"]
+        , "scores": data["scores"]
+        , "potential_dp_classes": potential_dp_classes
+    }
     return object_detection_results
 
 # print("================= INFERENCE ===========================")

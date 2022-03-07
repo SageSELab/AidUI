@@ -66,14 +66,21 @@ def resolve_segment_dp(analysis_result, segment_id):
         segment_dp_resolution = resolve_text(segment_dp_resolution, analysis_result, segment_id)
     return segment_dp_resolution
 
-def resolve_ui_dp(segment_dp):
+def resolve_ui_dp(segment_dp, object_detection_result):
     ui_dp = {}
+    # resolve all segments information
     for segment_dp_resolution in segment_dp.values():
         for pattern in list(segment_dp_resolution.keys()):
             if pattern in list(ui_dp.keys()):
                 ui_dp[pattern] += segment_dp_resolution[pattern]
             else:
                 ui_dp[pattern] = segment_dp_resolution[pattern]
+    # augment object detection information
+    for potential_dp in object_detection_result["potential_dp_classes"]:
+        if potential_dp in list(ui_dp.keys()):
+            ui_dp[potential_dp] += 1
+        else:
+            ui_dp[potential_dp] = 1
     return ui_dp
 
 def resolve_dp(input_to_resolver):
@@ -84,6 +91,6 @@ def resolve_dp(input_to_resolver):
         segment_dp_resolution = resolve_segment_dp(analysis_result, segment_id)
         segment_dp[segment_id] = segment_dp_resolution
     # utils.print_dictionary(segment_dp)
-    ui_dp = resolve_ui_dp(segment_dp)
+    ui_dp = resolve_ui_dp(segment_dp, object_detection_result)
     # utils.print_dictionary(ui_dp)
     return ui_dp

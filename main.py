@@ -31,13 +31,13 @@ for i in range(len(ocr_files)):
     # print("------------size_analysis-----------")
     analysis_result = size_analysis.analyze_size(analysis_result)
 
-    # # print analysis result
-    # utils.print_dictionary(analysis_result)
-    # # write analysis result
-    # utils.write_json_file(analysis_result)
-
     # print("------------object_detection-----------")
     object_detection_result = object_detection.get_object_detection_result()
+
+    # # print analysis result
+    # utils.print_dictionary(analysis_result)
+    # print object detection result
+    # utils.print_dictionary(object_detection_result)
 
     # print("------------dp_resolver-----------")
     input_to_resolver = {"analysis_result": analysis_result, "object_detection_result": object_detection_result}
