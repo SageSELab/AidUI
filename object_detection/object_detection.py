@@ -12,16 +12,11 @@ map_obj_detection_dp = {
     , "ADLOADER": [class_dp["nagging"], class_dp["gamification"]]
 }
 
-def get_inference_result(filename):
-    # read the JSON from the object detection result
-    pass
-
 def get_potential_dp_classes(label):
     object_class = object_classes[label]
     return map_obj_detection_dp[object_class]
 
 def get_object_detection_result():
-    # get_inference_result(filename)
     inference_result_filename = "./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_result.json"
     f = open(inference_result_filename)
     data = json.load(f)
