@@ -222,5 +222,4 @@ Resolver working procedure:
   - histogram: vote from neighbors if the opacity is different
   - size: vote from neighbors if width/height difference exceeds a threshold
 - UI level resolution:
-  - counting and group votes for each potential dark pattern
-  - considering the results from object detection
+  - counting and group votes (from both analysis and object detection module) for each potential dark pattern
