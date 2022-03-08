@@ -195,6 +195,17 @@
 }
 ```
 
+**sample Object Detectin Module output**
+```json
+{"boxes": [74.51097869873047,
+           1023.1127319335938,
+           1023.6506958007812,
+           1213.6737060546875],
+ "labels": 4,
+ "potential_dp_classes": ["nagging", "bait_and_switch", "disguised_ads"],
+ "scores": 0.11698809266090393}
+```
+
 **sample DP Resolver output**
 ```json
 {"attention_distraction": 8.0,
