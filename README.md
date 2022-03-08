@@ -195,7 +195,7 @@
 }
 ```
 
-**sample Object Detectin Module output**
+**sample Object Detection Module output**
 ```json
 {"boxes": [74.51097869873047,
            1023.1127319335938,
@@ -206,7 +206,7 @@
  "scores": 0.11698809266090393}
 ```
 
-**sample DP Resolver output**
+**sample DP Resolver Module output**
 ```json
 {"attention_distraction": 8.0,
  "bait_and_switch": 1,
