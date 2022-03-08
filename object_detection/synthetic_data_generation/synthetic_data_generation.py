@@ -62,10 +62,10 @@ def generate_image_and_annotation(background_img, foreground_img, image_id, resu
 def generate_synthetic_dataset():
     object_files = [file for file in glob.glob("./input/objects/" + "*.*")]
     object_files.sort()
-    print("object_files: ", object_files)
+    # print("object_files: ", object_files)
     ui_files = [file for file in glob.glob("./input/UIs/" + "*.*")]
     ui_files.sort()
-    print("ui_files: ", ui_files)
+    # print("ui_files: ", ui_files)
 
     # dictionary for image annotations
     result = {
@@ -89,6 +89,7 @@ def generate_synthetic_dataset():
             foreground_img = object_files[i]
             background_img = ui_files[j]
             generate_image_and_annotation(background_img, foreground_img, image_id, result)
+            print("done: ", image_id)
             image_id += 1
     # print image annotation result
     # pp.pprint(result)
