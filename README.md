@@ -22,7 +22,7 @@
 │   ├── dp_resolver
 ```
 
-**sample output after text(pattern matching), visual(histogram) and spatial(proximity, size) analysis:**
+**sample Analysis Module output(text[pattern matching], visual[histogram] and spatial[proximity, size]):**
 ```json
 {
   "9": {
