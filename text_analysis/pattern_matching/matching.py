@@ -13,21 +13,24 @@ nlp = spacy.load("en_core_web_trf")
 matcher = Matcher(nlp.vocab)
 
 # Define pattern class with corresponding patterns
-matcher.add(class_dp["activity_message"], patterns.patterns_activity_message)
-matcher.add(class_dp["high_demand_message"], patterns.patterns_high_demand_message)
-matcher.add(class_dp["low_stock_message"], patterns.patterns_low_stock_message)
-matcher.add(class_dp["limited_time_message"], patterns.patterns_limited_time_message)
-matcher.add(class_dp["countdown_timer"], patterns.patterns_countdown_timer)
-matcher.add(class_dp["false_hierarchy"], patterns.patterns_false_hierarchy)
-matcher.add(class_dp["attention_distraction"], patterns.patterns_attention_distraction)
-matcher.add(class_dp["default_choice"], patterns.patterns_default_choice)
-matcher.add(class_dp["friend_spam"], patterns.patterns_friend_spam)
-matcher.add(class_dp["forced_enrollment"], patterns.patterns_forced_enrollment)
-matcher.add(class_dp["disguised_ads"], patterns.patterns_disguised_ads)
-matcher.add(class_dp["social_pyramid"], patterns.patterns_social_pyramid)
-matcher.add(class_dp["privacy_zuckering"], patterns.patterns_privacy_zuckering)
-matcher.add(class_dp["intermediate_currency"], patterns.patterns_intermediate_currency)
 matcher.add(class_dp["price_comparison_prevention"], patterns.patterns_price_comparison_prevention)
+matcher.add(class_dp["intermediate_currency"], patterns.patterns_intermediate_currency)
+matcher.add(class_dp["privacy_zuckering"], patterns.patterns_privacy_zuckering)
+matcher.add(class_dp["social_pyramid"], patterns.patterns_social_pyramid)
+matcher.add(class_dp["forced_enrollment"], patterns.patterns_forced_enrollment)
+matcher.add(class_dp["default_choice"], patterns.patterns_default_choice)
+matcher.add(class_dp["attention_distraction"], patterns.patterns_attention_distraction)
+matcher.add(class_dp["disguised_ads"], patterns.patterns_disguised_ads)
+matcher.add(class_dp["friend_spam"], patterns.patterns_friend_spam)
+matcher.add(class_dp["false_hierarchy"], patterns.patterns_false_hierarchy)
+matcher.add(class_dp["countdown_timer"], patterns.patterns_countdown_timer)
+matcher.add(class_dp["limited_time_message"], patterns.patterns_limited_time_message)
+matcher.add(class_dp["low_stock_message"], patterns.patterns_low_stock_message)
+matcher.add(class_dp["high_demand_message"], patterns.patterns_high_demand_message)
+matcher.add(class_dp["activity_message"], patterns.patterns_activity_message)
+
+# new patterns
+matcher.add(class_dp["activity_message"], patterns.patterns_activity_message)
 
 # on match event handler
 def on_match(doc, match_id, start, end, text_segment, segments):

@@ -20,8 +20,8 @@ class_dp = {
     , "gamification": "gamification"
 }
 
-# object detection classed
-object_classes = ["LIKE", "STAR", "TSON", "TSOFF"]
+# # object detection classed
+# object_classes = ["LIKE", "STAR", "TSON", "TSOFF"]
 
 
 
