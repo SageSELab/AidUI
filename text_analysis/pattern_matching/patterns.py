@@ -366,3 +366,165 @@ pattern1_price_comparison_prevention = [
 ]
 
 patterns_price_comparison_prevention = [pattern1_price_comparison_prevention]
+
+# nagging
+# ==============================================================================
+# keywords: Rate, Rating, Star, Like, Upvote etc.
+
+pattern1_nagging = [
+    {"IS_ALPHA": True, "OP": "*"},
+    {"LEMMA": {"IN": ["rate", "star", "like", "upvote"]}},
+    {"IS_ALPHA": True, "OP": "*"}
+]
+
+pattern2_nagging = [
+    {"LOWER": {"IN": ["ad", "adchoices"]}},
+]
+
+pattern3_nagging = [
+    {"LOWER": {"IN": ["install", "download"]}},
+    {"LOWER": {"IN": ["now"]}, "OP": "?"}
+]
+
+pattern4_nagging = [
+    {"LOWER": {"IN": ["watch"]}},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["ad", "session"]}},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["unlock", "get", "access"]}}
+]
+
+pattern5_nagging = [
+    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain"]}},
+    {"IS_ALPHA": True, "?"},
+    {"IS_ALPHA": True, "?"},
+    {"LEMMA": {"IN": ["watch"]}},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["ad", "session"]}}
+]
+
+patterns_nagging = [pattern1_nagging, pattern2_nagging, pattern3_nagging, pattern4_nagging, pattern5_nagging]
+
+# bait and switch
+# ==============================================================================
+# keywords: free trial, auto renew, subscription, cancel anytime, skip (smaller text)
+# button text: start/continue etc. (bigger text)
+# keywords: AdChoices, Install
+
+pattern1_bait_and_switch = [
+    {"LOWER": {"IN": ["free", "auto", "cancel"]}},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["trial", "renew", "anytime"]}}
+]
+
+pattern2_bait_and_switch = [
+    {"LOWER": {"IN": ["start", "turn", "add", "yes", "next", "sign", "ok", "continue", "unlock", "subscribe", "confirm", "setup"]}},
+    {"LOWER": {"IN": ["on", "in", "up", "off"]}, "OP": "*"}
+]
+
+pattern3_bait_and_switch = [
+    {"LOWER": {"IN": ["ad", "adchoices"]}},
+]
+
+pattern4_bait_and_switch = [
+    {"LOWER": {"IN": ["install", "download"]}},
+    {"LOWER": {"IN": ["now"]}, "OP": "?"}
+]
+
+patterns_bait_and_switch = [pattern1_bait_and_switch, pattern2_bait_and_switch, pattern3_bait_and_switch, pattern4_bait_and_switch]
+
+# gamification
+# ==============================================================================
+# ask/invite/refer/signup
+# contacts/friends...to...'
+# 'unlock/earn/get/collect .... credits/rewards/points/tokens ....for....signup....
+
+pattern1_gamification = [
+    {"LOWER": {"IN": ["ask", "invite", "refer", "add", "sign"]}},
+    {"IS_ALPHA": True, "OP": "*"},
+    {"LOWER": {"IN": ["friends", "contacts", "neighbors"]}},
+    {"IS_ALPHA": True, "OP": "*"},
+    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain"]}},
+    {"IS_ALPHA": True, "OP": "*"},
+    {"LOWER": {"IN": ["credits", "rewards", "points", "tokens"]}, "OP": "*"}
+]
+
+pattern2_gamification = [
+    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain"]}},
+    {"IS_ALPHA": True, "OP": "*"},
+    {"LOWER": {"IN": ["credits", "rewards", "points", "tokens"]}}
+]
+
+pattern3_gamification = [
+    {"LOWER": {"IN": ["watch"]}},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["ad", "session"]}},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["unlock", "get", "access"]}}
+]
+
+pattern4_gamification = [
+    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain"]}},
+    {"IS_ALPHA": True, "?"},
+    {"IS_ALPHA": True, "?"},
+    {"LEMMA": {"IN": ["watch"]}},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["ad", "session"]}}
+]
+
+pattern5_gamification = [
+    {"LOWER": {"IN": ["time"]}},
+    {"IS_ALPHA": True, "?"},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["ad", "session"]}}
+]
+
+patterns_gamification = [pattern1_gamification, pattern2_gamification, pattern3_gamification, pattern4_gamification, pattern5_gamification]
+
+# roach motel
+# ==============================================================================
+# - keywords: free trial, auto renew, subscription, cancel anytime, skip (smaller text)
+# - button text: start/continue etc. (bigger text)
+# - I decline/don't want/opt out/refuse...to...
+
+pattern1_roach_motel = [
+    {"LOWER": {"IN": ["free", "auto", "cancel"]}},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["trial", "renew", "anytime"]}}
+]
+
+pattern2_roach_motel = [
+    {"LOWER": {"IN": ["start", "turn", "add", "yes", "next", "sign", "ok", "continue", "unlock", "subscribe", "confirm", "setup"]}},
+    {"LOWER": {"IN": ["on", "in", "up", "off"]}, "OP": "*"}
+]
+
+pattern3_roach_motel = [
+    {"LOWER": {"IN": ["decline", "refuse", "don't", "opt"]}},
+    {"LOWER": {"IN": ["want", "out"]}, "OP": "?"}
+]
+
+patterns_roach_motel = [pattern1_roach_motel, pattern2_roach_motel, pattern3_roach_motel]
+
+# forced continuity
+# ==============================================================================
+# - keyword/sentence pattern: 'automatically renew/renewal', 'subscription', 'cancel anytime', 'by calling'
+# - 'call us', 'call', 'phone', 'by phone only', 'contact agent', 'to unsubscribe', 'to discontinue' etc.
+
+pattern1_forced_continuity = [
+    {"LOWER": {"IN": ["cancel", "unsubscribe", "discontinue"]}},
+    {"LOWER": {"IN": ["anytime"]}, "OP": "?"},
+    {"LOWER": {"IN": ["by"]}},
+    {"LEMMA": {"IN": ["call", "give", "phone"]}},
+    {"IS_ALPHA": True, "?"},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["call", "only"]}, "OP": "?"}
+]
+
+pattern2_forced_continuity = [
+    {"LOWER": {"IN": ["call", "contact"]}},
+    {"LOWER": {"IN": ["us", "agent"]}, "OP": "?"},
+    {"LOWER": {"IN": ["to"]}},
+    {"LOWER": {"IN": ["cancel", "unsubscribe", "discontinue"]}}
+]
+
+patterns_forced_continuity = [pattern1_forced_continuity, pattern2_forced_continuity]

@@ -18,6 +18,8 @@ class_dp = {
     , "nagging": "nagging"
     , "bait_and_switch": "bait_and_switch"
     , "gamification": "gamification"
+    , "roach_motel": "roach_motel"
+    , "forced_continuity": "forced_continuity"
 }
 
 # # object detection classed
