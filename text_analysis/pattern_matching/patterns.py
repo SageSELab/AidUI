@@ -1,133 +1,386 @@
-# activity message:
+############################ nagging ###########################################
 # ==============================================================================
-# X people/person/visitors/users ordered/purchased/subscribed/viewed/booked in last 24 hours'
-# 8 people ordered in last 24 hours
-# 8 people are looking right now
-# people booked 78 times in last 24 hours
-# jack just saved 52$ on his order
-# X items sold in Y time/this hour
+# keywords: Rate, Rating, Star, Like, Upvote etc.
 
-pattern_generic_activity_message = [
-    {"POS": "NUM", "OP": "?"},
-    {"POS": {"IN": ["NOUN", "PROPN"]}},
-    {"POS": "AUX", "OP": "?"},
-    {"POS": "ADV", "OP": "?"},
-    {"POS": "VERB"},
-    {"POS": "NUM", "OP": "?"},
-    {"POS": "NOUN", "OP": "?"},
-    {"POS": "ADP", "OP": "?"},
-    {"POS": "DET", "OP": "?"},
-    {"POS": "ADJ", "OP": "?"},
-    {"POS": "ADV", "OP": "?"},
-    {"POS": "ADV", "OP": "?"},
-    {"POS": "NUM", "OP": "?"},
-    {"POS": "NOUN", "OP": "?"},
+pattern1_nagging = [
+    {"LEMMA": {"IN": ["rate", "like", "upvote"]}},
+    {"LOWER": {"IN": ["this"]}, "OP": "?"},
+    {"LOWER": {"IN": ["us", "app", "it", "now"]}},
+    {"LOWER": {"IN": ["now"]}, "OP": "?"}
 ]
 
-pattern1_activity_message = [
-    {"POS": "NUM", "OP": "?"},
-    {"POS": {"IN": ["NOUN", "PROPN"]}},
-    {"POS": "AUX", "OP": "?"},
-    {"POS": "ADV", "OP": "?"},
-    {"LEMMA": {"IN": ["order", "purchase", "subscribe", "view", "book", "visit", "sell", "save", "look"]}},
-    {"POS": "NUM", "OP": "?"},
+pattern6_nagging = [
+    {"LEMMA": {"IN": ["give"]}},
+    {"LOWER": {"IN": ["this"]}, "OP": "?"},
+    {"LOWER": {"IN": ["us", "app", "it"]}},
+    {"LOWER": {"IN": ["five", "5"]}, "OP": "?"},
+    {"LEMMA": {"IN": ["star", "rate"]}}
 ]
 
-pattern2_activity_message = [
-    {"POS": "NUM"},
-    {"POS": {"IN": ["NOUN", "PROPN"]}, "OP": "?"},
-    {"POS": "AUX", "OP": "?"},
-    {"POS": "ADV", "OP": "?"},
-    {"LEMMA": {"IN": ["order", "purchase", "subscribe", "view", "book", "visit", "sell", "save", "look"]}}
+pattern2_nagging = [
+    {"LOWER": {"IN": ["ad", "adchoices"]}}
 ]
 
-patterns_activity_message = [pattern1_activity_message, pattern2_activity_message]
+pattern3_nagging = [
+    {"LOWER": {"IN": ["install", "download"]}},
+    {"LOWER": {"IN": ["now"]}, "OP": "?"}
+]
 
+pattern4_nagging = [
+    {"LOWER": {"IN": ["watch"]}},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["ad", "session"]}},
+    {"LOWER": {"IN": ["to"]}},
+    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain", "access"]}}
+]
 
-# high demand message:
+pattern5_nagging = [
+    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain", "access"]}},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["by"]}},
+    {"LEMMA": {"IN": ["watch"]}},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["ad", "session"]}}
+]
+
+patterns_nagging = [pattern1_nagging, pattern2_nagging, pattern3_nagging, pattern4_nagging, pattern5_nagging, pattern6_nagging]
+
+############################# bait and switch ##################################
 # ==============================================================================
-# .... in high demand ....
-# .... reserved for [time] .....
+# keywords: free trial, auto renew, subscription, cancel anytime, skip (smaller text)
+# button text: start/continue etc. (bigger text)
+# keywords: AdChoices, Install
 
-pattern1_high_demand_message = [
+pattern1_bait_and_switch = [
+    {"LOWER": {"IN": ["free", "auto", "cancel"]}},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["trial", "renew", "anytime"]}}
+]
+
+pattern2_bait_and_switch = [
+    {"LOWER": {"IN": ["start", "turn", "add", "yes", "next", "sign", "ok", "continue", "unlock", "subscribe", "confirm", "setup"]}},
+    {"LOWER": {"IN": ["on", "in", "up", "off"]}, "OP": "*"}
+]
+
+pattern3_bait_and_switch = [
+    {"LOWER": {"IN": ["ad", "adchoices"]}},
+]
+
+pattern4_bait_and_switch = [
+    {"LOWER": {"IN": ["install", "download"]}},
+    {"LOWER": {"IN": ["now"]}, "OP": "?"}
+]
+
+patterns_bait_and_switch = [pattern1_bait_and_switch, pattern2_bait_and_switch, pattern3_bait_and_switch, pattern4_bait_and_switch]
+
+############################# forced continuity ################################
+# ==============================================================================
+# - keyword/sentence pattern: 'automatically renew/renewal', 'subscription', 'cancel anytime', 'by calling'
+# - 'call us', 'call', 'phone', 'by phone only', 'contact agent', 'to unsubscribe', 'to discontinue' etc.
+
+pattern1_forced_continuity = [
+    {"LOWER": {"IN": ["cancel", "unsubscribe", "discontinue"]}},
+    {"LOWER": {"IN": ["anytime"]}, "OP": "?"},
+    {"LOWER": {"IN": ["by"]}},
+    {"LEMMA": {"IN": ["call", "give", "phone", "contact"]}},
+    {"IS_ALPHA": True, "?"},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["call", "only"]}, "OP": "?"}
+]
+
+pattern2_forced_continuity = [
+    {"LOWER": {"IN": ["call", "give", "contact"]}},
+    {"LOWER": {"IN": ["us", "agent"]}, "OP": "?"},
+    {"IS_ALPHA": True, "?"},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["to"]}},
+    {"LOWER": {"IN": ["cancel", "unsubscribe", "discontinue"]}}
+]
+
+patterns_forced_continuity = [pattern1_forced_continuity, pattern2_forced_continuity]
+
+############################# roach motel ######################################
+# ==============================================================================
+# - keywords: free trial, auto renew, subscription, cancel anytime, skip (smaller text)
+# - button text: start/continue etc. (bigger text)
+# - I decline/don't want/opt out/refuse...to...
+
+pattern1_roach_motel = [
+    {"LOWER": {"IN": ["free", "auto", "cancel"]}},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["trial", "renew", "anytime"]}}
+]
+
+pattern2_roach_motel = [
+    {"LOWER": {"IN": ["start", "turn", "add", "yes", "next", "sign", "ok", "continue", "unlock", "subscribe", "confirm", "setup"]}},
+    {"LOWER": {"IN": ["on", "in", "up", "off"]}, "OP": "*"}
+]
+
+pattern3_roach_motel = [
+    {"LOWER": {"IN": ["decline", "refuse", "don't", "opt"]}},
+    {"LOWER": {"IN": ["want", "out"]}, "OP": "?"},
+    {"LOWER": {"IN": ["to"]}}
+]
+
+patterns_roach_motel = [pattern3_roach_motel]
+
+############################# price comparison prevention ######################
+# ==============================================================================
+# 'per kg', '/kg', '/ea', 'for each'
+
+pattern1_price_comparison_prevention = [
     {},
-    {"POS": "ADP", "OP": "?"},
-    {"LOWER": "high"},
-    {"LOWER": "demand"}, {}
-]
-pattern2_high_demand_message = [
-    {},
-    {"LEMMA": {"IN": ["order", "book"]}, "OP": "?"},
-    {"POS": "AUX", "OP": "?"},
-    {"LEMMA": {"IN": ["reserve"]}},
-    {"LOWER": "for"},
-    {"POS": "NUM"},
-    {}
-]
-pattern3_high_demand_message = [
-    {"LEMMA": {"IN": ["sell"]}},
-    {"LOWER": "fast"},
-    {}
+    {"LOWER": {"IN": ["unit", "kg", "each", "ea", "lb", "pound", "kilogram"]}}
 ]
 
-patterns_high_demand_message = [pattern1_high_demand_message, pattern2_high_demand_message, pattern3_high_demand_message]
+patterns_price_comparison_prevention = [pattern1_price_comparison_prevention]
 
-# low stock message:
+############################# intermediate currency ############################
 # ==============================================================================
-# only X [items] [available, left] in stock
-# limited stock/quantity/quantities/availability at this price
-pattern1_low_stock_message = [
-    {"LOWER": "limited"},
-    {"LOWER": {"IN": ["supply", "stock", "quantity", "availability"]}}
+# Buy/get/collect x credits/Badge/reward/token/points/stars'
+
+pattern1_intermediate_currency = [
+    {"LOWER": {"IN": ["buy", "get", "collect", "earn", "gain", "unlock"]}},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LEMMA": {"IN": ["credit", "reward", "point", "token", "badge", "star"]}}
 ]
 
-pattern2_low_stock_message = [
-    {"LOWER": "only", "OP": "?"},
-    {"POS": "NUM", "OP": "?"},
-    {"POS": "NOUN", "OP": "?"},
-    {"LOWER": {"IN": ["left", "available"]}},
-    {"POS": "ADP", "OP": "?"},
-    {"LEMMA": {"IN": ["stock"]}, "OP": "?"}
-]
+patterns_intermediate_currency = [pattern1_intermediate_currency]
 
-patterns_low_stock_message = [pattern1_low_stock_message, pattern2_low_stock_message]
-
-# limited time message:
+############################# privacy zuckering ################################
 # ==============================================================================
-# sale ends soon, hurry,
-# apply/order by,
-# valid/open/available for X days/hours,
-# ends in X days/hours,
-# limited time only'
+# upload/sync/share/invite/add....friends/contacts/location....'
 
-pattern1_limited_time_message = [
-    {"LOWER": {"IN": ["sale", "offer", "deal", "apply", "order"]}},
-    {"LOWER": {"IN": ["ends", "by", "valid", "open", "available"]}},
-    {"LOWER": "soon", "OP": "?"},
-    {"LOWER": {"IN": ["by", "for", "in", "on", "at", "within"]}},
-    {"POS": "PUNCT", "OP": "*"},
-    {"POS": "NUM", "OP": "*"}
+pattern1_privacy_zuckering = [
+    {"LOWER": {"IN": ["upload", "sync", "share", "add", "invite"]}},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LOWER": {"IN": ["friends", "contacts", "location"}},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LOWER": {"IN": ["to"]}, "OP": "?"}
 ]
 
-pattern2_limited_time_message = [
-    {"LOWER": "limited"},
-    {"LOWER": "time"},
-    {"LOWER": "only", "OP": "?"}
+pattern2_privacy_zuckering = [
+    {"LOWER": {"IN": ["no", "not", "later", "cancel", "skip"]}},
+    {"LOWER": {"IN": ["now", "thanks"]}, "OP": "*"}
 ]
 
-pattern3_limited_time_message = [
-    {"LOWER": {"IN": ["ends", "valid", "open", "available", "order"]}},
-    {"LOWER": {"IN": ["by", "for", "in", "on", "at", "within"]}},
-    {"POS": "PUNCT", "OP": "*"},
-    {"POS": "NUM", "OP": "*"}
+patterns_privacy_zuckering = [pattern1_privacy_zuckering, pattern2_privacy_zuckering]
+
+############################ social pyramid ####################################
+# ==============================================================================
+# ask/invite/refer/signup
+# contacts/friends...to...'
+# 'unlock/earn/get/collect .... credits/rewards/points/tokens ....for....signup....
+
+pattern1_social_pyramid = [
+    {"LOWER": {"IN": ["ask", "invite", "refer", "add", "signup"]}},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LOWER": {"IN": ["friends", "contacts", "neighbors"]}},
+    {"LOWER": {"IN": ["to"]}, "OP": "?"},
+    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain"]}},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LOWER": {"IN": ["credits", "rewards", "points", "tokens"]}, "OP": "?"}
 ]
 
-# pattern ENDS JULY 31st (TBA)
-# expires soon (TBA)
+pattern2_social_pyramid = [
+    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain"]}},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LOWER": {"IN": ["credits", "rewards", "points", "tokens"]}},
+    {"LOWER": {"IN": ["by"]}, "OP": "?"},
+    {"LEMMA": {"IN": ["ask", "invite", "refer", "add", "sign"]}},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LOWER": {"IN": ["friends", "contacts", "neighbors"]}}
+]
 
-patterns_limited_time_message = [pattern1_limited_time_message, pattern2_limited_time_message, pattern3_limited_time_message]
+patterns_social_pyramid = [pattern1_social_pyramid, pattern2_social_pyramid]
 
-# countdown timer:
+############################ gamification ######################################
+# ==============================================================================
+# ask/invite/refer/signup
+# contacts/friends...to...'
+# 'unlock/earn/get/collect .... credits/rewards/points/tokens ....for....signup....
+
+pattern1_gamification = [
+    {"LOWER": {"IN": ["ask", "invite", "refer", "add", "signup"]}},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LOWER": {"IN": ["friends", "contacts", "neighbors"]}},
+    {"LOWER": {"IN": ["to"]}, "OP": "?"},
+    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain"]}},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LOWER": {"IN": ["credits", "rewards", "points", "tokens"]}, "OP": "?"}
+]
+
+pattern2_gamification = [
+    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain"]}},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LOWER": {"IN": ["credits", "rewards", "points", "tokens"]}},
+    {"LOWER": {"IN": ["by"]}, "OP": "?"},
+    {"LEMMA": {"IN": ["ask", "invite", "refer", "add", "sign"]}},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LOWER": {"IN": ["friends", "contacts", "neighbors"]}}
+]
+
+pattern3_gamification = [
+    {"LOWER": {"IN": ["watch"]}},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["ad", "session"]}},
+    {"LOWER": {"IN": ["to"]}},
+    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain", "access"]}}
+]
+
+pattern4_gamification = [
+    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain", "access"]}},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["by"]}},
+    {"LEMMA": {"IN": ["watch"]}},
+    {"IS_ALPHA": True, "?"},
+    {"LOWER": {"IN": ["ad", "session"]}}
+]
+
+pattern5_gamification = [
+    {"LOWER": {"IN": ["time"]}},
+    {"LOWER": {"IN": ["for"]}},
+    {"LOWER": {"IN": ["short", "sponsored"]}, "OP": "?"},
+    {"LOWER": {"IN": ["short", "sponsored"]}, "OP": "?"},
+    {"LOWER": {"IN": ["ad", "session"]}}
+]
+
+patterns_gamification = [pattern1_gamification, pattern2_gamification, pattern3_gamification, pattern4_gamification, pattern5_gamification]
+
+############################# forced enrollment ################################
+# ==============================================================================
+# want/like to join/subscribe to ... and ..... terms and conditions ... [usually appears inline]
+
+pattern1_forced_enrollment = [
+    {"LOWER": {"IN": ["want", "like", "would"]}},
+    {"LOWER": {"IN": ["like"]}, "OP": "?"},
+    {"LOWER": {"IN": ["to"]}, "OP": "?"},
+    {"LOWER": {"IN": ["join", "subscribe"]}}
+    {"IS_ALPHA": True, "OP": "*"},
+    {"LOWER": {"IN": ["terms", "policies"]}},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LOWER": {"IN": ["conditions", "policies"]}}
+]
+
+pattern2_forced_enrollment = [
+    {"LOWER": {"IN": ["terms", "policies"]}},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LOWER": {"IN": ["conditions", "policies"]}}
+]
+
+patterns_forced_enrollment = [pattern1_forced_enrollment, pattern2_forced_enrollment]
+
+############################# default choice ###################################
+# ==============================================================================
+# - keywords (bigger size): start, turn, add, yes,next, sign in/up, ok, continue, unlock, subscribe, confirm,setup etc.
+# - keywords (smaller size):  no, not now, later, cancel, skip, exit etc.
+
+#  notify/notification
+
+# I agree/consent to ...', 'I give permission to ...'
+# by giving us permission/consent ...'
+# by clicking/pressing .....agree/consent to ....'
+# by subscribing ....agree/consent to ....
+
+pattern1_default_choice = [
+    {"LOWER": {"IN": ["start", "turn", "add", "yes", "next", "sign", "ok", "continue", "unlock", "subscribe", "confirm", "setup"]}},
+    {"LOWER": {"IN": ["on", "in", "up", "off"]}, "OP": "?"}
+]
+
+pattern2_default_choice = [
+    {"LOWER": {"IN": ["no", "not", "later", "cancel", "skip", "exit"]}},
+    {"LOWER": {"IN": ["now", "thanks", "up", "later", "anytime"]}, "OP": "?"}
+]
+
+pattern3_default_choice = [
+    {"LOWER": {"IN": ["notify", "notification"]}}
+]
+
+pattern4_default_choice = [
+    {"LEMMA": {"IN": ["click", "press", "subscribe", "use"]}, "OP": "?"},
+    {"IS_ALPHA": True, "OP": "*"},
+    {"LEMMA": {"IN": ["agree", "consent", "give"]}},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LOWER": {"IN": ["permission", "consent"]}, "OP": "?"},
+    {"LOWER": {"IN": ["to"]}, "OP": "?"}
+]
+
+patterns_default_choice = [
+    pattern1_default_choice, pattern2_default_choice,
+    pattern3_default_choice, pattern4_default_choice
+]
+
+############################# attention distraction ############################
+# ==============================================================================
+# - keywords (bigger size): start, turn, add, yes,next, sign in/up, ok, continue, unlock, subscribe, confirm,setup etc.
+# - keywords (smaller size):  no, not now, later, cancel, skip, exit etc.
+# - I decline/don't want/opt out/refuse...to...
+
+pattern1_attention_distraction = [
+    {"LOWER": {"IN": ["start", "turn", "add", "yes", "next", "sign", "ok", "continue", "unlock", "subscribe", "confirm", "setup"]}},
+    {"LOWER": {"IN": ["on", "in", "up", "off"]}, "OP": "?"}
+]
+
+pattern2_attention_distraction = [
+    {"LOWER": {"IN": ["no", "not", "later", "cancel", "skip", "exit"]}},
+    {"LOWER": {"IN": ["now", "thanks", "up", "later", "anytime"]}, "OP": "?"}
+]
+
+pattern3_attention_distraction = [
+    {"LOWER": {"IN": ["decline", "refuse", "don't", "opt"]}},
+    {"LOWER": {"IN": ["want", "out"]}, "OP": "?"},
+    {"LOWER": {"IN": ["to"]}}
+]
+
+patterns_attention_distraction = [pattern1_attention_distraction, pattern2_attention_distraction, pattern3_attention_distraction]
+
+############################# disguised ads ####################################
+# ==============================================================================
+# AdChoices, ad
+
+pattern1_disguised_ads = [
+    {"LOWER": {"IN": ["ad", "adchoices"]}},
+]
+
+patterns_disguised_ads = [pattern1_disguised_ads]
+
+############################# friend spam ######################################
+# ==============================================================================
+# upload/sync/share....contacts....',
+# invite/add friends...
+
+pattern1_friend_spam = [
+    {"LOWER": {"IN": ["upload", "sync", "share", "add", "invite"]}},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LOWER": {"IN": ["friends", "contacts"}},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LOWER": {"IN": ["to"]}, "OP": "?"}
+]
+
+patterns_friend_spam = [pattern1_friend_spam]
+
+############################# false hierarchy ##################################
+# ==============================================================================
+# - keywords (bigger size): start, turn, add, yes,next, sign in/up, ok, continue, unlock, subscribe, confirm,setup etc.
+# - keywords (smaller size):  no, not now, later, cancel, skip, exit etc.
+
+pattern1_false_hierarchy = [
+    {"LOWER": {"IN": ["start", "turn", "add", "yes", "next", "sign", "ok", "continue", "unlock", "subscribe", "confirm", "setup"]}},
+    {"LOWER": {"IN": ["on", "in", "up", "off"]}, "OP": "?"}
+]
+
+pattern2_false_hierarchy = [
+    {"LOWER": {"IN": ["no", "not", "later", "cancel", "skip", "exit"]}},
+    {"LOWER": {"IN": ["now", "thanks", "up", "later", "anytime"]}, "OP": "?"}
+]
+
+patterns_false_hierarchy = [pattern1_false_hierarchy, pattern2_false_hierarchy]
+
+############################# countdown timer ##################################
 # ==============================================================================
 # sale ends, deal ends
 # shop now, clearance, order within
@@ -173,358 +426,132 @@ pattern4_countdown_timer = [
 
 patterns_countdown_timer = [pattern1_countdown_timer, pattern2_countdown_timer, pattern3_countdown_timer, pattern4_countdown_timer]
 
-# false hierarchy
+############################# limited time message #############################
 # ==============================================================================
-# - keywords (bigger size): start, turn, add, yes,next, sign in/up, ok, continue, unlock, subscribe, confirm,setup etc.
-# - keywords (smaller size):  no, not now, later, cancel, skip, exit etc.
+# sale ends soon, hurry,
+# apply/order by,
+# valid/open/available for X days/hours,
+# ends in X days/hours,
+# limited time only'
 
-pattern1_false_hierarchy = [
-    {"LOWER": {"IN": ["start", "turn", "add", "yes", "next", "sign", "ok", "continue", "unlock", "subscribe", "confirm", "setup"]}},
-    {"LOWER": {"IN": ["on", "in", "up", "off"]}, "OP": "*"}
+pattern1_limited_time_message = [
+    {"LOWER": {"IN": ["sale", "offer", "deal", "apply", "order"]}},
+    {"LOWER": {"IN": ["ends", "by", "valid", "open", "available"]}},
+    {"LOWER": "soon", "OP": "?"},
+    {"LOWER": {"IN": ["by", "for", "in", "on", "at", "within"]}},
+    {"POS": "PUNCT", "OP": "*"},
+    {"POS": "NUM", "OP": "*"}
 ]
 
-pattern2_false_hierarchy = [
-    {"LOWER": {"IN": ["no", "not", "later", "cancel", "skip", "exit"]}},
-    {"LOWER": {"IN": ["now", "thanks", "up", "later", "anytime"]}, "OP": "*"}
+pattern2_limited_time_message = [
+    {"LOWER": "limited"},
+    {"LOWER": "time"},
+    {"LOWER": "only", "OP": "?"}
 ]
 
-patterns_false_hierarchy = [pattern1_false_hierarchy, pattern2_false_hierarchy]
+pattern3_limited_time_message = [
+    {"LOWER": {"IN": ["ends", "valid", "open", "available", "order"]}},
+    {"LOWER": {"IN": ["by", "for", "in", "on", "at", "within"]}},
+    {"POS": "PUNCT", "OP": "*"},
+    {"POS": "NUM", "OP": "*"}
+]
 
+# pattern ENDS JULY 31st (TBA)
+# expires soon (TBA)
 
-# attention distraction
+patterns_limited_time_message = [pattern1_limited_time_message, pattern2_limited_time_message, pattern3_limited_time_message]
+
+############################# low stock message ################################
 # ==============================================================================
-# - keywords (bigger size): start, turn, add, yes,next, sign in/up, ok, continue, unlock, subscribe, confirm,setup etc.
-# - keywords (smaller size):  no, not now, later, cancel, skip, exit etc.
-# - I decline/don't want/opt out/refuse...to...
-
-pattern1_attention_distraction = [
-    {"LOWER": {"IN": ["start", "turn", "add", "yes", "next", "sign", "ok", "continue", "unlock", "subscribe", "confirm", "setup"]}},
-    {"LOWER": {"IN": ["on", "in", "up", "off"]}, "OP": "*"}
+# only X [items] [available, left] in stock
+# limited stock/quantity/quantities/availability at this price
+pattern1_low_stock_message = [
+    {"LOWER": "limited"},
+    {"LOWER": {"IN": ["supply", "stock", "quantity", "availability"]}}
 ]
 
-pattern2_attention_distraction = [
-    {"LOWER": {"IN": ["no", "not", "later", "cancel", "skip", "exit"]}},
-    {"LOWER": {"IN": ["now", "thanks", "up", "later", "anytime"]}, "OP": "*"}
+pattern2_low_stock_message = [
+    {"LOWER": "only", "OP": "?"},
+    {"POS": "NUM", "OP": "?"},
+    {"POS": "NOUN", "OP": "?"},
+    {"LOWER": {"IN": ["left", "available"]}},
+    {"POS": "ADP", "OP": "?"},
+    {"LEMMA": {"IN": ["stock"]}, "OP": "?"}
 ]
 
-pattern3_attention_distraction = [
-    {"LOWER": {"IN": ["decline", "refuse", "don't", "opt"]}},
-    {"LOWER": {"IN": ["want", "out"]}, "OP": "?"}
-]
+patterns_low_stock_message = [pattern1_low_stock_message, pattern2_low_stock_message]
 
-patterns_attention_distraction = [pattern1_attention_distraction, pattern2_attention_distraction, pattern3_attention_distraction]
-
-# default choice
+############################# high demand message ##############################
 # ==============================================================================
-# - keywords (bigger size): start, turn, add, yes,next, sign in/up, ok, continue, unlock, subscribe, confirm,setup etc.
-# - keywords (smaller size):  no, not now, later, cancel, skip, exit etc.
+# .... in high demand ....
+# .... reserved for [time] .....
 
-#  notify/notification
-
-# I agree/consent to ...', 'I give permission to ...'
-# by giving us permission/consent ...'
-# by clicking/pressing .....agree/consent to ....'
-# by subscribing ....agree/consent to ....
-
-pattern1_default_choice = [
-    {"LOWER": {"IN": ["start", "turn", "add", "yes", "next", "sign", "ok", "continue", "unlock", "subscribe", "confirm", "setup"]}},
-    {"LOWER": {"IN": ["on", "in", "up", "off"]}, "OP": "*"}
-]
-
-pattern2_default_choice = [
-    {"LOWER": {"IN": ["no", "not", "later", "cancel", "skip", "exit"]}},
-    {"LOWER": {"IN": ["now", "thanks", "up", "later", "anytime"]}, "OP": "*"}
-]
-
-pattern3_default_choice = [
-    {"LOWER": {"IN": ["notify", "notification"]}}
-]
-
-pattern4_default_choice = [
-    {"LOWER": {"IN": ["agree", "consent"]}},
-    {"LOWER": {"IN": ["permission", "consent"]}, "OP": "?"}
-]
-
-pattern5_default_choice = [
-    {"LEMMA": {"IN": ["give"]}},
-    {"IS_ALPHA": True, "OP": "*"},
-    {"LEMMA": {"IN": ["permission", "consent"]}}
-]
-
-pattern6_default_choice = [
-    {"LEMMA": {"IN": ["click", "press", "subscribe", "use"]}},
-    {"IS_ALPHA": True, "OP": "*"},
-    {"LEMMA": {"IN": ["agree", "consent", "give"]}},
-    {"IS_ALPHA": True, "OP": "*"},
-    {"LEMMA": {"IN": ["permission", "consent"]}, "OP": "?"}
-]
-
-patterns_default_choice = [
-    pattern1_default_choice, pattern2_default_choice, pattern3_default_choice,
-    pattern4_default_choice, pattern5_default_choice, pattern6_default_choice
-]
-
-# friend spam
-# ==============================================================================
-# upload/sync/share....contacts....',
-# invite/add friends...
-
-pattern1_friend_spam = [
-    {"LOWER": {"IN": ["upload", "sync", "share", "add", "invite"]}},
-    {"LOWER": {"IN": ["friends", "contacts"]}}
-]
-
-patterns_friend_spam = [pattern1_friend_spam]
-
-# forced enrollment
-# ==============================================================================
-# want/like to join/subscribe to ... and ..... terms and conditions ... [usually appears inline]
-
-pattern1_forced_enrollment = [
-    {"LOWER": {"IN": ["want", "like", "would"]}},
-    {"IS_ALPHA": True, "OP": "*"},
-    {"LOWER": {"IN": ["join", "subscribe"]}}
-]
-
-pattern2_forced_enrollment = [
-    {"LOWER": {"IN": ["terms"]}},
-    {"IS_ALPHA": True, "OP": "*"},
-    {"LOWER": {"IN": ["conditions"]}}
-]
-
-patterns_forced_enrollment = [pattern1_forced_enrollment, pattern2_forced_enrollment]
-
-# disguised ads
-# ==============================================================================
-# AdChoices, Install now, Download now
-
-pattern1_disguised_ads = [
-    {"LOWER": {"IN": ["ad", "adchoices"]}},
-]
-
-pattern2_disguised_ads = [
-    {"LOWER": {"IN": ["install", "download"]}},
-    {"LOWER": {"IN": ["now"]}},
-]
-
-patterns_disguised_ads = [pattern1_disguised_ads, pattern2_disguised_ads]
-
-# # social pyramid
-# # ==============================================================================
-# ask/invite/refer/signup
-# contacts/friends...to...'
-# 'unlock/earn/get/collect .... credits/rewards/points/tokens ....for....signup....
-
-pattern1_social_pyramid = [
-    {"LOWER": {"IN": ["ask", "invite", "refer", "add", "sign"]}},
-    {"IS_ALPHA": True, "OP": "*"},
-    {"LOWER": {"IN": ["friends", "contacts", "neighbors"]}},
-    {"IS_ALPHA": True, "OP": "*"},
-    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain"]}},
-    {"IS_ALPHA": True, "OP": "*"},
-    {"LOWER": {"IN": ["credits", "rewards", "points", "tokens"]}, "OP": "*"}
-]
-
-pattern2_social_pyramid = [
-    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain"]}},
-    {"IS_ALPHA": True, "OP": "*"},
-    {"LOWER": {"IN": ["credits", "rewards", "points", "tokens"]}}
-]
-
-patterns_social_pyramid = [pattern1_social_pyramid, pattern2_social_pyramid]
-
-# privacy zuckering
-# ==============================================================================
-# upload/sync/share/invite/add....friends/contacts/location....'
-
-pattern1_privacy_zuckering = [
-    {"LOWER": {"IN": ["upload", "sync", "share", "add", "invite"]}, "OP": "?"},
-    {"LOWER": {"IN": ["friends", "contacts", "location"]}, "OP": "?"}
-]
-
-patterns_privacy_zuckering = [pattern1_privacy_zuckering]
-
-# intermediate currency
-# ==============================================================================
-# Buy/get/collect x credits/Badge/reward/token/points/stars'
-
-pattern1_intermediate_currency = [
-    {"LOWER": {"IN": ["buy", "get", "collect", "earn", "gain", "unlock"]}},
-    {"IS_ALPHA": True, "OP": "*"},
-    {"LEMMA": {"IN": ["credit", "reward", "point", "token", "badge", "star"]}}
-]
-
-patterns_intermediate_currency = [pattern1_intermediate_currency]
-
-# price comparison prevention
-# ==============================================================================
-# 'per kg', '/kg', '/ea', 'for each'
-
-pattern1_price_comparison_prevention = [
+pattern1_high_demand_message = [
     {},
-    {"LOWER": {"IN": ["unit", "kg", "each", "ea", "lb", "pound", "kilogram"]}}
+    {"POS": "ADP", "OP": "?"},
+    {"LOWER": "high"},
+    {"LOWER": "demand"}, {}
+]
+pattern2_high_demand_message = [
+    {},
+    {"LEMMA": {"IN": ["order", "book"]}, "OP": "?"},
+    {"POS": "AUX", "OP": "?"},
+    {"LEMMA": {"IN": ["reserve"]}},
+    {"LOWER": "for"},
+    {"POS": "NUM"},
+    {}
+]
+pattern3_high_demand_message = [
+    {"LEMMA": {"IN": ["sell"]}},
+    {"LOWER": "fast"},
+    {}
 ]
 
-patterns_price_comparison_prevention = [pattern1_price_comparison_prevention]
+patterns_high_demand_message = [pattern1_high_demand_message, pattern2_high_demand_message, pattern3_high_demand_message]
 
-# nagging
+############################# activity message #################################
 # ==============================================================================
-# keywords: Rate, Rating, Star, Like, Upvote etc.
+# X people/person/visitors/users ordered/purchased/subscribed/viewed/booked in last 24 hours'
+# 8 people ordered in last 24 hours
+# 8 people are looking right now
+# people booked 78 times in last 24 hours
+# jack just saved 52$ on his order
+# X items sold in Y time/this hour
 
-pattern1_nagging = [
-    {"IS_ALPHA": True, "OP": "*"},
-    {"LEMMA": {"IN": ["rate", "star", "like", "upvote"]}},
-    {"IS_ALPHA": True, "OP": "*"}
+pattern_generic_activity_message = [
+    {"POS": "NUM", "OP": "?"},
+    {"POS": {"IN": ["NOUN", "PROPN"]}},
+    {"POS": "AUX", "OP": "?"},
+    {"POS": "ADV", "OP": "?"},
+    {"POS": "VERB"},
+    {"POS": "NUM", "OP": "?"},
+    {"POS": "NOUN", "OP": "?"},
+    {"POS": "ADP", "OP": "?"},
+    {"POS": "DET", "OP": "?"},
+    {"POS": "ADJ", "OP": "?"},
+    {"POS": "ADV", "OP": "?"},
+    {"POS": "ADV", "OP": "?"},
+    {"POS": "NUM", "OP": "?"},
+    {"POS": "NOUN", "OP": "?"},
 ]
 
-pattern2_nagging = [
-    {"LOWER": {"IN": ["ad", "adchoices"]}},
+pattern1_activity_message = [
+    {"POS": "NUM", "OP": "?"},
+    {"POS": {"IN": ["NOUN", "PROPN"]}},
+    {"POS": "AUX", "OP": "?"},
+    {"POS": "ADV", "OP": "?"},
+    {"LEMMA": {"IN": ["order", "purchase", "subscribe", "view", "book", "visit", "sell", "save", "look"]}},
+    {"POS": "ADP", "OP": "?"},
+    {"POS": "ADJ", "OP": "?"},
+    {"POS": "NUM", "OP": "?"}
 ]
 
-pattern3_nagging = [
-    {"LOWER": {"IN": ["install", "download"]}},
-    {"LOWER": {"IN": ["now"]}, "OP": "?"}
+pattern2_activity_message = [
+    {"POS": "NUM"},
+    {"POS": {"IN": ["NOUN", "PROPN"]}},
+    {"POS": "AUX", "OP": "?"},
+    {"POS": "ADV", "OP": "?"},
+    {"LEMMA": {"IN": ["order", "purchase", "subscribe", "view", "book", "visit", "sell", "save", "look"]}}
 ]
 
-pattern4_nagging = [
-    {"LOWER": {"IN": ["watch"]}},
-    {"IS_ALPHA": True, "?"},
-    {"LOWER": {"IN": ["ad", "session"]}},
-    {"IS_ALPHA": True, "?"},
-    {"LOWER": {"IN": ["unlock", "get", "access"]}}
-]
-
-pattern5_nagging = [
-    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain"]}},
-    {"IS_ALPHA": True, "?"},
-    {"IS_ALPHA": True, "?"},
-    {"LEMMA": {"IN": ["watch"]}},
-    {"IS_ALPHA": True, "?"},
-    {"LOWER": {"IN": ["ad", "session"]}}
-]
-
-patterns_nagging = [pattern1_nagging, pattern2_nagging, pattern3_nagging, pattern4_nagging, pattern5_nagging]
-
-# bait and switch
-# ==============================================================================
-# keywords: free trial, auto renew, subscription, cancel anytime, skip (smaller text)
-# button text: start/continue etc. (bigger text)
-# keywords: AdChoices, Install
-
-pattern1_bait_and_switch = [
-    {"LOWER": {"IN": ["free", "auto", "cancel"]}},
-    {"IS_ALPHA": True, "?"},
-    {"LOWER": {"IN": ["trial", "renew", "anytime"]}}
-]
-
-pattern2_bait_and_switch = [
-    {"LOWER": {"IN": ["start", "turn", "add", "yes", "next", "sign", "ok", "continue", "unlock", "subscribe", "confirm", "setup"]}},
-    {"LOWER": {"IN": ["on", "in", "up", "off"]}, "OP": "*"}
-]
-
-pattern3_bait_and_switch = [
-    {"LOWER": {"IN": ["ad", "adchoices"]}},
-]
-
-pattern4_bait_and_switch = [
-    {"LOWER": {"IN": ["install", "download"]}},
-    {"LOWER": {"IN": ["now"]}, "OP": "?"}
-]
-
-patterns_bait_and_switch = [pattern1_bait_and_switch, pattern2_bait_and_switch, pattern3_bait_and_switch, pattern4_bait_and_switch]
-
-# gamification
-# ==============================================================================
-# ask/invite/refer/signup
-# contacts/friends...to...'
-# 'unlock/earn/get/collect .... credits/rewards/points/tokens ....for....signup....
-
-pattern1_gamification = [
-    {"LOWER": {"IN": ["ask", "invite", "refer", "add", "sign"]}},
-    {"IS_ALPHA": True, "OP": "*"},
-    {"LOWER": {"IN": ["friends", "contacts", "neighbors"]}},
-    {"IS_ALPHA": True, "OP": "*"},
-    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain"]}},
-    {"IS_ALPHA": True, "OP": "*"},
-    {"LOWER": {"IN": ["credits", "rewards", "points", "tokens"]}, "OP": "*"}
-]
-
-pattern2_gamification = [
-    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain"]}},
-    {"IS_ALPHA": True, "OP": "*"},
-    {"LOWER": {"IN": ["credits", "rewards", "points", "tokens"]}}
-]
-
-pattern3_gamification = [
-    {"LOWER": {"IN": ["watch"]}},
-    {"IS_ALPHA": True, "?"},
-    {"LOWER": {"IN": ["ad", "session"]}},
-    {"IS_ALPHA": True, "?"},
-    {"LOWER": {"IN": ["unlock", "get", "access"]}}
-]
-
-pattern4_gamification = [
-    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain"]}},
-    {"IS_ALPHA": True, "?"},
-    {"IS_ALPHA": True, "?"},
-    {"LEMMA": {"IN": ["watch"]}},
-    {"IS_ALPHA": True, "?"},
-    {"LOWER": {"IN": ["ad", "session"]}}
-]
-
-pattern5_gamification = [
-    {"LOWER": {"IN": ["time"]}},
-    {"IS_ALPHA": True, "?"},
-    {"IS_ALPHA": True, "?"},
-    {"LOWER": {"IN": ["ad", "session"]}}
-]
-
-patterns_gamification = [pattern1_gamification, pattern2_gamification, pattern3_gamification, pattern4_gamification, pattern5_gamification]
-
-# roach motel
-# ==============================================================================
-# - keywords: free trial, auto renew, subscription, cancel anytime, skip (smaller text)
-# - button text: start/continue etc. (bigger text)
-# - I decline/don't want/opt out/refuse...to...
-
-pattern1_roach_motel = [
-    {"LOWER": {"IN": ["free", "auto", "cancel"]}},
-    {"IS_ALPHA": True, "?"},
-    {"LOWER": {"IN": ["trial", "renew", "anytime"]}}
-]
-
-pattern2_roach_motel = [
-    {"LOWER": {"IN": ["start", "turn", "add", "yes", "next", "sign", "ok", "continue", "unlock", "subscribe", "confirm", "setup"]}},
-    {"LOWER": {"IN": ["on", "in", "up", "off"]}, "OP": "*"}
-]
-
-pattern3_roach_motel = [
-    {"LOWER": {"IN": ["decline", "refuse", "don't", "opt"]}},
-    {"LOWER": {"IN": ["want", "out"]}, "OP": "?"}
-]
-
-patterns_roach_motel = [pattern1_roach_motel, pattern2_roach_motel, pattern3_roach_motel]
-
-# forced continuity
-# ==============================================================================
-# - keyword/sentence pattern: 'automatically renew/renewal', 'subscription', 'cancel anytime', 'by calling'
-# - 'call us', 'call', 'phone', 'by phone only', 'contact agent', 'to unsubscribe', 'to discontinue' etc.
-
-pattern1_forced_continuity = [
-    {"LOWER": {"IN": ["cancel", "unsubscribe", "discontinue"]}},
-    {"LOWER": {"IN": ["anytime"]}, "OP": "?"},
-    {"LOWER": {"IN": ["by"]}},
-    {"LEMMA": {"IN": ["call", "give", "phone"]}},
-    {"IS_ALPHA": True, "?"},
-    {"IS_ALPHA": True, "?"},
-    {"LOWER": {"IN": ["call", "only"]}, "OP": "?"}
-]
-
-pattern2_forced_continuity = [
-    {"LOWER": {"IN": ["call", "contact"]}},
-    {"LOWER": {"IN": ["us", "agent"]}, "OP": "?"},
-    {"LOWER": {"IN": ["to"]}},
-    {"LOWER": {"IN": ["cancel", "unsubscribe", "discontinue"]}}
-]
-
-patterns_forced_continuity = [pattern1_forced_continuity, pattern2_forced_continuity]
+patterns_activity_message = [pattern1_activity_message]
