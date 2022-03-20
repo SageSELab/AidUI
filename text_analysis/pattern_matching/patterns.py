@@ -28,7 +28,7 @@ pattern3_nagging = [
 
 pattern4_nagging = [
     {"LOWER": {"IN": ["watch"]}},
-    {"IS_ALPHA": True, "?"},
+    {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["ad", "session"]}},
     {"LOWER": {"IN": ["to"]}},
     {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain", "access"]}}
@@ -36,10 +36,10 @@ pattern4_nagging = [
 
 pattern5_nagging = [
     {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain", "access"]}},
-    {"IS_ALPHA": True, "?"},
+    {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["by"]}},
     {"LEMMA": {"IN": ["watch"]}},
-    {"IS_ALPHA": True, "?"},
+    {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["ad", "session"]}}
 ]
 
@@ -53,7 +53,7 @@ patterns_nagging = [pattern1_nagging, pattern2_nagging, pattern3_nagging, patter
 
 pattern1_bait_and_switch = [
     {"LOWER": {"IN": ["free", "auto", "cancel"]}},
-    {"IS_ALPHA": True, "?"},
+    {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["trial", "renew", "anytime"]}}
 ]
 
@@ -83,16 +83,16 @@ pattern1_forced_continuity = [
     {"LOWER": {"IN": ["anytime"]}, "OP": "?"},
     {"LOWER": {"IN": ["by"]}},
     {"LEMMA": {"IN": ["call", "give", "phone", "contact"]}},
-    {"IS_ALPHA": True, "?"},
-    {"IS_ALPHA": True, "?"},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["call", "only"]}, "OP": "?"}
 ]
 
 pattern2_forced_continuity = [
     {"LOWER": {"IN": ["call", "give", "contact"]}},
     {"LOWER": {"IN": ["us", "agent"]}, "OP": "?"},
-    {"IS_ALPHA": True, "?"},
-    {"IS_ALPHA": True, "?"},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["to"]}},
     {"LOWER": {"IN": ["cancel", "unsubscribe", "discontinue"]}}
 ]
@@ -107,7 +107,7 @@ patterns_forced_continuity = [pattern1_forced_continuity, pattern2_forced_contin
 
 pattern1_roach_motel = [
     {"LOWER": {"IN": ["free", "auto", "cancel"]}},
-    {"IS_ALPHA": True, "?"},
+    {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["trial", "renew", "anytime"]}}
 ]
 
@@ -154,7 +154,7 @@ patterns_intermediate_currency = [pattern1_intermediate_currency]
 pattern1_privacy_zuckering = [
     {"LOWER": {"IN": ["upload", "sync", "share", "add", "invite"]}},
     {"IS_ALPHA": True, "OP": "?"},
-    {"LOWER": {"IN": ["friends", "contacts", "location"}},
+    {"LOWER": {"IN": ["friends", "contacts", "location"]}},
     {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["to"]}, "OP": "?"}
 ]
@@ -226,7 +226,7 @@ pattern2_gamification = [
 
 pattern3_gamification = [
     {"LOWER": {"IN": ["watch"]}},
-    {"IS_ALPHA": True, "?"},
+    {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["ad", "session"]}},
     {"LOWER": {"IN": ["to"]}},
     {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain", "access"]}}
@@ -234,10 +234,10 @@ pattern3_gamification = [
 
 pattern4_gamification = [
     {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain", "access"]}},
-    {"IS_ALPHA": True, "?"},
+    {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["by"]}},
     {"LEMMA": {"IN": ["watch"]}},
-    {"IS_ALPHA": True, "?"},
+    {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["ad", "session"]}}
 ]
 
@@ -259,7 +259,7 @@ pattern1_forced_enrollment = [
     {"LOWER": {"IN": ["want", "like", "would"]}},
     {"LOWER": {"IN": ["like"]}, "OP": "?"},
     {"LOWER": {"IN": ["to"]}, "OP": "?"},
-    {"LOWER": {"IN": ["join", "subscribe"]}}
+    {"LOWER": {"IN": ["join", "subscribe"]}},
     {"IS_ALPHA": True, "OP": "*"},
     {"LOWER": {"IN": ["terms", "policies"]}},
     {"IS_ALPHA": True, "OP": "?"},
@@ -356,7 +356,7 @@ patterns_disguised_ads = [pattern1_disguised_ads]
 pattern1_friend_spam = [
     {"LOWER": {"IN": ["upload", "sync", "share", "add", "invite"]}},
     {"IS_ALPHA": True, "OP": "?"},
-    {"LOWER": {"IN": ["friends", "contacts"}},
+    {"LOWER": {"IN": ["friends", "contacts"]}},
     {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["to"]}, "OP": "?"}
 ]
