@@ -8,7 +8,7 @@ map_obj_detection_dp = {
     , "DISLIKE": [class_dp["nagging"]]
     , "STAR": [class_dp["nagging"]]
     , "TSON": [class_dp["default_choice"]]
-    , "AD": [class_dp["nagging"], class_dp["bait_and_switch"], class_dp["disguised_ads"]]
+    , "AD": [class_dp["nagging"], class_dp["disguised_ads"]]
     , "ADLOADER": [class_dp["nagging"], class_dp["gamification"]]
 }
 
