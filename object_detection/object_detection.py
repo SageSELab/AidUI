@@ -18,16 +18,20 @@ def get_potential_dp_classes(label):
 
 def get_object_detection_result():
     inference_result_filename = "./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_result.json"
-    f = open(inference_result_filename)
-    data = json.load(f)
-    potential_dp_classes = get_potential_dp_classes(data["labels"])
-    object_detection_results = {
-        "boxes": data["boxes"]
-        , "labels": data["labels"]
-        , "scores": data["scores"]
-        , "potential_dp_classes": potential_dp_classes
-    }
-    return object_detection_results
+    try:
+        f = open(inference_result_filename)
+        data = json.load(f)
+        potential_dp_classes = get_potential_dp_classes(data["labels"])
+        object_detection_results = {
+            "boxes": data["boxes"]
+            , "labels": data["labels"]
+            , "scores": data["scores"]
+            , "potential_dp_classes": potential_dp_classes
+        }
+        return object_detection_results
+    except Exception as e:
+        print("exception occurred: ", e)
+        return None
 
 # print("================= INFERENCE ===========================")
 # with torch.no_grad():
