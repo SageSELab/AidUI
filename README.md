@@ -202,24 +202,14 @@
            1023.6506958007812,
            1213.6737060546875],
  "labels": 4,
- "potential_dp_classes": ["nagging", "bait_and_switch", "disguised_ads"],
+ "potential_dp_classes": ["nagging", "disguised_ads"],
  "scores": 0.11698809266090393}
 ```
 
 **sample DP Resolver Module output**
 ```json
-{"attention_distraction": 8.0,
- "bait_and_switch": 1,
- "default_choice": 8.0,
- "disguised_ads": 1,
- "false_hierarchy": 8.0,
- "nagging": 1}
+{"attention_distraction": {"confidence": 1.0, "votes": 7.0},
+ "default_choice": {"confidence": 0.8421672761440278, "votes": 8.0},
+ "privacy_zuckering": {"confidence": 0.5, "votes": 1}}
 
 ```
-Resolver working procedure:
-- segment level resolution:
-  - text: vote from the neighbors if similar patterns matched
-  - histogram: vote from neighbors if the opacity is different
-  - size: vote from neighbors if width/height difference exceeds a threshold
-- UI level resolution:
-  - counting and group votes (from both analysis and object detection module) for each potential dark pattern
