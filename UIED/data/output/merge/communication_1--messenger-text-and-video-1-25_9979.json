@@ -1,0 +1,181 @@
+{
+    "img_shape": [
+        800,
+        450,
+        3
+    ],
+    "compos": [
+        {
+            "position": {
+                "column_min": 185,
+                "row_min": 94,
+                "column_max": 264,
+                "row_max": 258
+            },
+            "children": [
+                1,
+                2,
+                3,
+                5
+            ],
+            "width": 79,
+            "id": 0,
+            "height": 164,
+            "class": "Compo"
+        },
+        {
+            "position": {
+                "column_min": 221,
+                "row_min": 94,
+                "column_max": 266,
+                "row_max": 254
+            },
+            "width": 45,
+            "id": 1,
+            "height": 160,
+            "class": "Compo",
+            "parent": 0
+        },
+        {
+            "position": {
+                "column_min": 195,
+                "row_min": 116,
+                "column_max": 215,
+                "row_max": 138
+            },
+            "width": 20,
+            "id": 2,
+            "height": 22,
+            "class": "Compo",
+            "parent": 0
+        },
+        {
+            "position": {
+                "column_min": 196,
+                "row_min": 165,
+                "column_max": 215,
+                "row_max": 187
+            },
+            "width": 19,
+            "id": 3,
+            "height": 22,
+            "class": "Compo",
+            "parent": 0
+        },
+        {
+            "height": 32,
+            "position": {
+                "column_min": 419,
+                "row_min": 163,
+                "column_max": 449,
+                "row_max": 195
+            },
+            "class": "Compo",
+            "id": 4,
+            "width": 30
+        },
+        {
+            "position": {
+                "column_min": 194,
+                "row_min": 214,
+                "column_max": 215,
+                "row_max": 236
+            },
+            "width": 21,
+            "id": 5,
+            "height": 22,
+            "class": "Compo",
+            "parent": 0
+        },
+        {
+            "height": 53,
+            "position": {
+                "column_min": 21,
+                "row_min": 677,
+                "column_max": 427,
+                "row_max": 730
+            },
+            "class": "Compo",
+            "id": 6,
+            "width": 406
+        },
+        {
+            "position": {
+                "column_min": 30,
+                "row_min": 310,
+                "column_max": 418,
+                "row_max": 344
+            },
+            "width": 388,
+            "id": 7,
+            "text_content": "Find your phone contacts on",
+            "height": 34,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 150,
+                "row_min": 346,
+                "column_max": 301,
+                "row_max": 379
+            },
+            "width": 151,
+            "id": 8,
+            "text_content": "Messenger",
+            "height": 33,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 40,
+                "row_min": 394,
+                "column_max": 409,
+                "row_max": 413
+            },
+            "width": 369,
+            "id": 9,
+            "text_content": "Continuously uploading your contacts helps you",
+            "height": 19,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 50,
+                "row_min": 413,
+                "column_max": 399,
+                "row_max": 434
+            },
+            "width": 349,
+            "id": 10,
+            "text_content": "find people to talk to and helps Facebook and",
+            "height": 21,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 41,
+                "row_min": 433,
+                "column_max": 407,
+                "row_max": 454
+            },
+            "width": 366,
+            "id": 11,
+            "text_content": "Messenger provide a better service . Learn More",
+            "height": 21,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 191,
+                "row_min": 750,
+                "column_max": 258,
+                "row_max": 764
+            },
+            "width": 67,
+            "id": 12,
+            "text_content": "NOT NOW",
+            "height": 14,
+            "class": "Text"
+        }
+    ]
+}

@@ -2,8 +2,8 @@
 __pycache__/
 
 # UIED dirs
-UIED/data/input/
-UIED/data/output/
+# UIED/data/input/
+# UIED/data/output/
 
 # object detection dirs
 object_detection/synthetic_data_generation/input/

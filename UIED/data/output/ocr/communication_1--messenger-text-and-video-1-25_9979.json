@@ -1,0 +1,99 @@
+{
+    "img_shape": [
+        1920,
+        1080,
+        3
+    ],
+    "texts": [
+        {
+            "height": 35,
+            "width": 87,
+            "id": 0,
+            "row_max": 49,
+            "column_min": 28,
+            "row_min": 14,
+            "column_max": 115,
+            "content": "18:15"
+        },
+        {
+            "height": 21,
+            "width": 55,
+            "id": 1,
+            "row_max": 440,
+            "column_min": 1017,
+            "row_min": 419,
+            "column_max": 1072,
+            "content": "01:24"
+        },
+        {
+            "height": 81,
+            "width": 931,
+            "id": 2,
+            "row_max": 826,
+            "column_min": 73,
+            "row_min": 745,
+            "column_max": 1004,
+            "content": "Find your phone contacts on"
+        },
+        {
+            "height": 79,
+            "width": 363,
+            "id": 3,
+            "row_max": 911,
+            "column_min": 360,
+            "row_min": 832,
+            "column_max": 723,
+            "content": "Messenger"
+        },
+        {
+            "height": 46,
+            "width": 885,
+            "id": 4,
+            "row_max": 993,
+            "column_min": 97,
+            "row_min": 947,
+            "column_max": 982,
+            "content": "Continuously uploading your contacts helps you"
+        },
+        {
+            "height": 49,
+            "width": 838,
+            "id": 5,
+            "row_max": 1042,
+            "column_min": 120,
+            "row_min": 993,
+            "column_max": 958,
+            "content": "find people to talk to and helps Facebook and"
+        },
+        {
+            "height": 51,
+            "width": 879,
+            "id": 6,
+            "row_max": 1091,
+            "column_min": 100,
+            "row_min": 1040,
+            "column_max": 979,
+            "content": "Messenger provide a better service . Learn More"
+        },
+        {
+            "height": 32,
+            "width": 152,
+            "id": 7,
+            "row_max": 1702,
+            "column_min": 463,
+            "row_min": 1670,
+            "column_max": 615,
+            "content": "TURN ON"
+        },
+        {
+            "height": 32,
+            "width": 161,
+            "id": 8,
+            "row_max": 1834,
+            "column_min": 460,
+            "row_min": 1802,
+            "column_max": 621,
+            "content": "NOT NOW"
+        }
+    ]
+}

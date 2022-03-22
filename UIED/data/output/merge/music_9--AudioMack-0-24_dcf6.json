@@ -1,0 +1,304 @@
+{
+    "img_shape": [
+        800,
+        450,
+        3
+    ],
+    "compos": [
+        {
+            "height": 22,
+            "position": {
+                "column_min": 413,
+                "row_min": 14,
+                "column_max": 435,
+                "row_max": 36
+            },
+            "class": "Compo",
+            "id": 0,
+            "width": 22
+        },
+        {
+            "height": 22,
+            "position": {
+                "column_min": 21,
+                "row_min": 72,
+                "column_max": 120,
+                "row_max": 94
+            },
+            "class": "Compo",
+            "id": 1,
+            "width": 99
+        },
+        {
+            "height": 33,
+            "position": {
+                "column_min": 419,
+                "row_min": 261,
+                "column_max": 449,
+                "row_max": 294
+            },
+            "class": "Compo",
+            "id": 2,
+            "width": 30
+        },
+        {
+            "height": 68,
+            "position": {
+                "column_min": 83,
+                "row_min": 524,
+                "column_max": 366,
+                "row_max": 592
+            },
+            "class": "Compo",
+            "id": 3,
+            "width": 283
+        },
+        {
+            "position": {
+                "column_min": 87,
+                "row_min": 20,
+                "column_max": 363,
+                "row_max": 47
+            },
+            "width": 276,
+            "id": 4,
+            "text_content": "Personalize Your Experience",
+            "height": 27,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 22,
+                "row_min": 115,
+                "column_max": 420,
+                "row_max": 136
+            },
+            "width": 398,
+            "id": 5,
+            "text_content": "This app personalizes your advertising experience",
+            "height": 21,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 22,
+                "row_min": 137,
+                "column_max": 415,
+                "row_max": 158
+            },
+            "width": 393,
+            "id": 6,
+            "text_content": "through MoPub , a division of Twitter International",
+            "height": 21,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 22,
+                "row_min": 162,
+                "column_max": 353,
+                "row_max": 186
+            },
+            "width": 331,
+            "id": 7,
+            "text_content": "company . By consenting to this enhanced",
+            "height": 24,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 359,
+                "row_min": 162,
+                "column_max": 377,
+                "row_max": 181
+            },
+            "width": 18,
+            "id": 8,
+            "text_content": "ad",
+            "height": 19,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 22,
+                "row_min": 188,
+                "column_max": 379,
+                "row_max": 210
+            },
+            "width": 357,
+            "id": 9,
+            "text_content": "experience , you'll see ads that MoPub and its",
+            "height": 22,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 23,
+                "row_min": 216,
+                "column_max": 354,
+                "row_max": 235
+            },
+            "width": 331,
+            "id": 10,
+            "text_content": "partners believe are more relevant to you .",
+            "height": 19,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 23,
+                "row_min": 238,
+                "column_max": 425,
+                "row_max": 259
+            },
+            "width": 402,
+            "id": 11,
+            "text_content": "Depending on your privacy settings , MoPub and its",
+            "height": 21,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 22,
+                "row_min": 264,
+                "column_max": 400,
+                "row_max": 285
+            },
+            "width": 378,
+            "id": 12,
+            "text_content": "partners may collect and process personal data",
+            "height": 21,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 23,
+                "row_min": 290,
+                "column_max": 421,
+                "row_max": 309
+            },
+            "width": 398,
+            "id": 13,
+            "text_content": "such as device identifiers , location data , and other",
+            "height": 19,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 23,
+                "row_min": 315,
+                "column_max": 370,
+                "row_max": 334
+            },
+            "width": 347,
+            "id": 14,
+            "text_content": "demographic and interest data about you to",
+            "height": 19,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 23,
+                "row_min": 340,
+                "column_max": 410,
+                "row_max": 359
+            },
+            "width": 387,
+            "id": 15,
+            "text_content": "provide this personalized advertising experience .",
+            "height": 19,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 22,
+                "row_min": 366,
+                "column_max": 119,
+                "row_max": 384
+            },
+            "width": 97,
+            "id": 16,
+            "text_content": "Learn more .",
+            "height": 18,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 24,
+                "row_min": 408,
+                "column_max": 410,
+                "row_max": 427
+            },
+            "width": 386,
+            "id": 17,
+            "text_content": "By agreeing , you are confirming that you are over",
+            "height": 19,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 22,
+                "row_min": 432,
+                "column_max": 390,
+                "row_max": 454
+            },
+            "width": 368,
+            "id": 18,
+            "text_content": "the age of 16 and would like a personalized ad",
+            "height": 22,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 23,
+                "row_min": 459,
+                "column_max": 112,
+                "row_max": 477
+            },
+            "width": 89,
+            "id": 19,
+            "text_content": "experience .",
+            "height": 18,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 157,
+                "row_min": 635,
+                "column_max": 295,
+                "row_max": 663
+            },
+            "width": 138,
+            "id": 20,
+            "text_content": "No , thank you .",
+            "height": 28,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 58,
+                "row_min": 672,
+                "column_max": 401,
+                "row_max": 693
+            },
+            "width": 343,
+            "id": 21,
+            "text_content": "understand that will see ads , but they may",
+            "height": 21,
+            "class": "Text"
+        },
+        {
+            "position": {
+                "column_min": 91,
+                "row_min": 699,
+                "column_max": 358,
+                "row_max": 718
+            },
+            "width": 267,
+            "id": 22,
+            "text_content": "not be as relevant to my interests .",
+            "height": 19,
+            "class": "Text"
+        }
+    ]
+}
