@@ -16,10 +16,13 @@ def get_potential_dp_classes(label):
     object_class = object_classes[label]
     return map_obj_detection_dp[object_class]
 
-def get_object_detection_result():
-    inference_result_filename = "./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_result.json"
+def get_object_detection_result(ocr_filename):
+    inference_output_dir = "./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_output/"
+    inference_output_filename = inference_output_dir + ocr_filename.split("/")[4]
+    # inference_result_filename = "./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_result.json"
     try:
-        f = open(inference_result_filename)
+        # print(inference_output_filename)
+        f = open(inference_output_filename)
         data = json.load(f)
         potential_dp_classes = get_potential_dp_classes(data["labels"])
         object_detection_results = {
@@ -30,8 +33,9 @@ def get_object_detection_result():
         }
         return object_detection_results
     except Exception as e:
-        print("exception occurred: ", e)
-        return None
+        # print("exception occurred: ", e)
+        object_detection_results = None
+        return object_detection_results
 
 # print("================= INFERENCE ===========================")
 # with torch.no_grad():

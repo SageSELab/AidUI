@@ -9,6 +9,8 @@ UIED/data/output/
 object_detection/synthetic_data_generation/input/
 object_detection/synthetic_data_generation/output/
 object_detection/object_detection_frcnn_mscoco_boilerplate/data/
+object_detection/object_detection_frcnn_mscoco_boilerplate/inference_data/
+object_detection/object_detection_frcnn_mscoco_boilerplate/inference_output/
 
 # .pth files
 *.pth

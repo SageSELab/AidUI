@@ -9,7 +9,8 @@ def write_json_file(dict):
     with open('analysis_result.json', 'w') as fp:
         json.dump(dict, fp)
 
-def print_dictionary(dictionary):
+def print_dictionary(dictionary, title):
+    print("\n----------------------------", title, "----------------------------")
     pp.pprint(dictionary)
 
 def show_image(img):

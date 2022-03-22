@@ -131,7 +131,7 @@ def resolve_dp(input_to_resolver):
     for segment_id in analysis_result.keys():
         segment_dp_resolution = resolve_segment_dp(analysis_result, segment_id)
         segment_dp[segment_id] = segment_dp_resolution
-    # utils.print_dictionary(segment_dp)
+    utils.print_dictionary(segment_dp, "segment_dp")
     ui_dp = resolve_ui_dp(segment_dp, object_detection_result)
-    # utils.print_dictionary(ui_dp)
+    utils.print_dictionary(ui_dp, "ui_dp")
     return ui_dp
