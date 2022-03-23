@@ -14,7 +14,7 @@ object_detection/object_detection_frcnn_mscoco_boilerplate/inference_output/
 object_detection/object_detection_frcnn_mscoco_boilerplate/.ipynb_checkpoints/
 
 # input UI
-input_ui/
+# input_ui/
 
 # .pth files
 *.pth

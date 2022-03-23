@@ -10,6 +10,12 @@
 # jupyter nbconvert --to notebook --execute mynotebook.ipynb
 # -------------------sample commands-----------------------
 
+# create directories if necessary
+mkdir ./UIED/data/input/
+mkdir ./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_data/
+mkdir ./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_data/test
+mkdir ./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_output/
+
 # copy input files to object detection module
 cp ./input_ui/* ./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_data/test
 echo "--------------------------------------input UIs copied to object detection module----------------------------------------------------------------"
