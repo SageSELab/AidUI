@@ -8,6 +8,8 @@
 # source ~/anaconda3/etc/profile.d/conda.sh
 # conda activate my_env
 # jupyter nbconvert --to notebook --execute mynotebook.ipynb
+
+# https://stackoverflow.com/questions/2119702/calling-a-python-function-from-bash-script
 # -------------------sample commands-----------------------
 
 # create directories if necessary

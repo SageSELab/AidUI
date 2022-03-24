@@ -5,6 +5,17 @@ from config import *
 high_contrast_patterns = [class_dp["attention_distraction"], class_dp["default_choice"]]
 high_size_diff_patterns = [class_dp["attention_distraction"], class_dp["default_choice"]]
 
+def predict_dp(ui_dp):
+    confidence_threshold = .70
+    dp = None
+    votes = 0
+    for key, value in ui_dp.items():
+        if value["confidence"] > confidence_threshold and value["votes"] > votes:
+            votes = value["votes"]
+            dp = key
+    return dp
+
+
 def is_relative_height_beyond_threshold(height_diff_threshold, segment_height, neighbor_height):
     if abs(segment_height - neighbor_height) > height_diff_threshold:
         return True
@@ -131,7 +142,9 @@ def resolve_dp(input_to_resolver):
     for segment_id in analysis_result.keys():
         segment_dp_resolution = resolve_segment_dp(analysis_result, segment_id)
         segment_dp[segment_id] = segment_dp_resolution
-    utils.print_dictionary(segment_dp, "segment_dp")
+    # utils.print_dictionary(segment_dp, "segment_dp")
     ui_dp = resolve_ui_dp(segment_dp, object_detection_result)
-    utils.print_dictionary(ui_dp, "ui_dp")
-    return ui_dp
+    # utils.print_dictionary(ui_dp, "ui_dp")
+    dp = predict_dp(ui_dp)
+    print(dp)
+    return dp

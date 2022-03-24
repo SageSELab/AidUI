@@ -33,8 +33,8 @@ for i in range(len(ocr_files)):
 
     # print("------------object_detection-----------")
     object_detection_result = object_detection.get_object_detection_result(ocr_files[i])
-    utils.print_dictionary(object_detection_result, "object_detection_result")
+    # utils.print_dictionary(object_detection_result, "object_detection_result")
 
     # # print("------------dp_resolver-----------")
     input_to_resolver = {"analysis_result": analysis_result, "object_detection_result": object_detection_result}
-    ui_dp = resolver.resolve_dp(input_to_resolver)
+    dp = resolver.resolve_dp(input_to_resolver)
