@@ -26,6 +26,7 @@ fi
 if [[ $EVAL_MODE = "on" ]]
 then
   echo "EVAL MODE is ON"
+  python -c "import utils.utils as utils; utils.copy_from_mscoco_dataset_to_input_folder()"
   echo "--------------------------------------input UIs copied to input_ui folder----------------------------------------------------------------"
 else
   echo "EVAL MODE is OFF"

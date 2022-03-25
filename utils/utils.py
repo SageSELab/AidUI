@@ -27,3 +27,6 @@ def plot_histogram(hist):
     plt.plot(hist)
     plt.xlim([0, 256])
     plt.show()
+
+def copy_from_mscoco_dataset_to_input_folder():
+    print("copy mscoco to input folder")

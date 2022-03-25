@@ -5,20 +5,19 @@ import spatial_analysis.proximity_analysis.proximity_analysis as proximity_analy
 import spatial_analysis.size_analysis.size_analysis as size_analysis
 import object_detection.object_detection as object_detection
 import dp_resolver.resolver as resolver
+import evaluation.evaluation as evaluation
+from config import *
 import utils.utils as utils
 
 # get input image files
 img_files = [file for file in glob.glob("UIED/data/input/" + "*.*")]
 img_files.sort()
-# print(len(img_files))
+# print(img_files)
 
 # get OCR files
 ocr_files = [file for file in glob.glob("UIED/data/output/ocr/" + "*.json")]
 ocr_files.sort()
-# print(len(ocr_files))
-
-# DP result
-dp_detection_results = {}
+# print(ocr_files)
 
 # iterate over the OCR files
 for i in range(len(ocr_files)):
@@ -39,11 +38,6 @@ for i in range(len(ocr_files)):
 
     # print("------------dp_resolver-----------")
     input_to_resolver = {"analysis_result": analysis_result, "object_detection_result": object_detection_result}
-    dp = resolver.resolve_dp(input_to_resolver)
-    dp_detection_results[image_file] = dp
+    dp_predicted = resolver.resolve_dp(input_to_resolver)
 
-# print DP detection results
-utils.print_dictionary(dp_detection_results, "dp_detection_results")
-
-# write DP detection results in JSON format
-utils.write_json_file(dp_detection_results, "dp_detection_results.json")
+    # print("------------evaluation-----------")
