@@ -39,11 +39,11 @@ mkdir ./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_dat
 mkdir ./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_output/
 
 # copy input files to object detection module
-cp ./input/* ./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_data/test
+cp ./input/*.* ./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_data/test
 echo "--------------------------------------input UIs copied to object detection module----------------------------------------------------------------"
 
 # copy input files to UIED module
-cp ./input/* ./UIED/data/input
+cp ./input/*.* ./UIED/data/input
 echo "--------------------------------------input UIs copied to UIED module----------------------------------------------------------------------------"
 
 # activate UIED env (dp_uied3) & execute text content area extraction
