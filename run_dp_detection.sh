@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # -------------------sample commands-----------------------
 # echo "What is your name?"
@@ -12,6 +12,25 @@
 # https://stackoverflow.com/questions/2119702/calling-a-python-function-from-bash-script
 # -------------------sample commands-----------------------
 
+# input to turn on evaluation mode
+EVAL_MODE="off"
+echo "turn on evaluation mode? answer with y/n"
+read answer
+echo "answer: $answer"
+
+if [[ $answer = "y" ]]
+then
+  EVAL_MODE="on"
+fi
+
+if [[ $EVAL_MODE = "on" ]]
+then
+  echo "EVAL MODE is ON"
+  echo "--------------------------------------input UIs copied to input_ui folder----------------------------------------------------------------"
+else
+  echo "EVAL MODE is OFF"
+fi
+
 # create directories if necessary
 mkdir ./UIED/data/input/
 mkdir ./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_data/
@@ -19,11 +38,11 @@ mkdir ./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_dat
 mkdir ./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_output/
 
 # copy input files to object detection module
-cp ./input_ui/* ./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_data/test
+cp ./input/* ./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_data/test
 echo "--------------------------------------input UIs copied to object detection module----------------------------------------------------------------"
 
 # copy input files to UIED module
-cp ./input_ui/* ./UIED/data/input
+cp ./input/* ./UIED/data/input
 echo "--------------------------------------input UIs copied to UIED module----------------------------------------------------------------------------"
 
 # activate UIED env (dp_uied3) & execute text content area extraction

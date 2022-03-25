@@ -17,6 +17,9 @@ ocr_files = [file for file in glob.glob("UIED/data/output/ocr/" + "*.json")]
 ocr_files.sort()
 # print(len(ocr_files))
 
+# DP result
+dp_detection_results = {}
+
 # iterate over the OCR files
 for i in range(len(ocr_files)):
     print('###################### processing: ', ocr_files[i], '######################')
@@ -26,15 +29,21 @@ for i in range(len(ocr_files)):
     # print("------------visual_analysis-----------")
     image_file = img_files[i]
     analysis_result = histogram_analysis.analyze_histogram(analysis_result, image_file)
-    # # print("------------proximity_analysis-----------")
+    # print("------------proximity_analysis-----------")
     analysis_result = proximity_analysis.analyze_proximity(analysis_result, image_file)
     # print("------------size_analysis-----------")
     analysis_result = size_analysis.analyze_size(analysis_result)
-
     # print("------------object_detection-----------")
     object_detection_result = object_detection.get_object_detection_result(ocr_files[i])
     # utils.print_dictionary(object_detection_result, "object_detection_result")
 
-    # # print("------------dp_resolver-----------")
+    # print("------------dp_resolver-----------")
     input_to_resolver = {"analysis_result": analysis_result, "object_detection_result": object_detection_result}
     dp = resolver.resolve_dp(input_to_resolver)
+    dp_detection_results[image_file] = dp
+
+# print DP detection results
+utils.print_dictionary(dp_detection_results, "dp_detection_results")
+
+# write DP detection results in JSON format
+utils.write_json_file(dp_detection_results, "dp_detection_results.json")

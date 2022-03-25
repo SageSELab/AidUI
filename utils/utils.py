@@ -5,8 +5,9 @@ from matplotlib import pyplot as plt
 import pprint
 pp = pprint.PrettyPrinter()
 
-def write_json_file(dict):
-    with open('analysis_result.json', 'w') as fp:
+def write_json_file(dict, filename):
+    file = "./output/" + filename
+    with open(file, 'w') as fp:
         json.dump(dict, fp)
 
 def print_dictionary(dictionary, title):
