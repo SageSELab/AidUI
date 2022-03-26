@@ -45,26 +45,44 @@ def get_dp_ground_truth(image_file):
     ground_truth_filename = "./output/ground_truth_info.json"
     f = open(ground_truth_filename)
     data = json.load(f)
-    ground_truth = None
+    dp_ground_truth = None
     for filename in data.keys():
         if filename == img_filename:
-            ground_truth = data[filename]
+            dp_ground_truth = data[filename]
     # label binarization
-    dps = ground_truth["labels"]
-    print(dps)
-    dp_ground_truth = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    dps = dp_ground_truth["labels"]
+    # print(dps)
+    labels_binarization = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     if len(dps) != 0:
         for dp in dps:
             index = class_dp_bin_index[dp]
-            dp_ground_truth[index] = 1
-    print(dp_ground_truth)
+            labels_binarization[index] = 1
+    # print(labels_binarization)
+    dp_ground_truth["labels_binarization"] = labels_binarization
     return dp_ground_truth
 
-def test_confusion_matrix():
-    y_gt = np.array([[0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
-    y_predicted = np.array([[0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
-    confusion_matrix = multilabel_confusion_matrix(y_gt, y_predicted)
-    # print(confusion_matrix)
-    # print(len(confusion_matrix))
-    print(confusion_matrix[5])
-    print(confusion_matrix[6])
+def get_evaluation_data(dp_predictions, dp_expectations, types):
+    # y_gt = np.array([[0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+    # y_predicted = np.array([[0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+    # confusion_matrix = multilabel_confusion_matrix(y_gt, y_predicted)
+    # # print(confusion_matrix)
+    # # print(len(confusion_matrix))
+    # print(confusion_matrix[5])
+    # print(confusion_matrix[6])
+
+    overall_evaluation_data = {"num_total_dp_instances": None, "category_info": None}
+
+    # calculate num of instances and confusion matrix for all dp categories
+    num_dp_instances = np.array(dp_expectations).sum(0)
+    conf_mat = multilabel_confusion_matrix(np.array(dp_expectations), np.array(dp_predictions))
+
+    # populate category_info
+    category_info = {}
+    for i in range(len(conf_mat)):
+        category_info[class_bin_index_to_dp[str(i)]] = {"num_instances": num_dp_instances[i], "conf_mat": conf_mat[i]}
+
+    # populate overall_evaluation_data
+    overall_evaluation_data["num_total_dp_instances"] = sum(num_dp_instances)
+    overall_evaluation_data["category_info"] = category_info
+
+    utils.print_dictionary(overall_evaluation_data, "overall_evaluation_data")

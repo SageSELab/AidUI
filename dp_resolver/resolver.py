@@ -174,7 +174,7 @@ def resolve_dp(input_to_resolver):
     ui_dp = resolve_ui_dp(segment_dp, object_detection_result)
     # utils.print_dictionary(ui_dp, "ui_dp")
     dps = predict_dp_multi_class(ui_dp)
-    print(dps)
+    # print(dps)
     dp_predicted = get_dp_predicted(dps)
-    print(dp_predicted)
+    # print(dp_predicted)
     return dp_predicted

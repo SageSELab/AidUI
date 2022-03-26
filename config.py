@@ -40,3 +40,24 @@ class_dp_bin_index = {
     , "ROACH MOTEL": 16
     , "FORCED CONTINUITY": 17
 }
+
+class_bin_index_to_dp = {
+    "0": "ACTIVITY MESSAGE"
+    , "1": "HIGH DEMAND MESSAGE"
+    , "2": "LOW STOCK MESSAGE"
+    , "3": "LIMITED TIME MESSAGE"
+    , "4": "COUNTDOWN TIMER"
+    , "5": "ATTENTION DISTRACTION"
+    , "6": "DEFAULT CHOICE"
+    , "7": "FRIEND SPAM"
+    , "8": "FORCED ENROLLMENT"
+    , "9": "DISGUISED ADS"
+    , "10": "SOCIAL PYRAMID"
+    , "11": "PRIVACY ZUCKERING"
+    , "12": "INTERMEDIATE CURRENCY"
+    , "13": "PRICE COMPARISON PREVENTION"
+    , "14": "NAGGING"
+    , "15": "GAMIFICATION"
+    , "16": "ROACH MOTEL"
+    , "17": "FORCED CONTINUITY"
+}
