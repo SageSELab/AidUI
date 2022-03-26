@@ -27,6 +27,7 @@ for i in range(len(ocr_files)):
     analysis_result = pattern_matching.match_patterns(ocr_files[i])
     # print("------------visual_analysis-----------")
     image_file = img_files[i]
+    print(image_file)
     analysis_result = histogram_analysis.analyze_histogram(analysis_result, image_file)
     # print("------------proximity_analysis-----------")
     analysis_result = proximity_analysis.analyze_proximity(analysis_result, image_file)
@@ -36,8 +37,10 @@ for i in range(len(ocr_files)):
     object_detection_result = object_detection.get_object_detection_result(ocr_files[i])
     # utils.print_dictionary(object_detection_result, "object_detection_result")
 
-    # print("------------dp_resolver-----------")
+    print("------------dp_resolver-----------")
     input_to_resolver = {"analysis_result": analysis_result, "object_detection_result": object_detection_result}
     dp_predicted = resolver.resolve_dp(input_to_resolver)
 
-    # print("------------evaluation-----------")
+    print("------------evaluation-----------")
+    dp_ground_truth = evaluation.get_dp_ground_truth(image_file)
+    break

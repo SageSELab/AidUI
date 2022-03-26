@@ -6,7 +6,7 @@ import pprint
 pp = pprint.PrettyPrinter()
 
 def write_json_file(dict, filename):
-    file = "./output/" + filename
+    file = "./output/" + filename + ".json"
     with open(file, 'w') as fp:
         json.dump(dict, fp)
 
@@ -27,6 +27,3 @@ def plot_histogram(hist):
     plt.plot(hist)
     plt.xlim([0, 256])
     plt.show()
-
-def copy_from_mscoco_dataset_to_input_folder():
-    print("copy mscoco to input folder")
