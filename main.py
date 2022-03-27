@@ -52,10 +52,5 @@ for i in range(len(ocr_files)):
     dp_expectations.append(dp_ground_truth["labels_binarization"])
     types.append(dp_ground_truth["type"])
 
-# print("######################input for confusion matrix calculation######################")
-# print("dp_predictions", dp_predictions)
-# print("dp_expectations", dp_expectations)
-# print("types", types)
-
-print("######################output of confusion matrix calculation######################")
+# evaluation
 evaluation.get_evaluation_data(dp_predictions, dp_expectations, types)

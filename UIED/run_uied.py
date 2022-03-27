@@ -91,6 +91,7 @@ def run_single(file):
                     is_remove_bar=key_params['remove-bar'], is_paragraph=key_params['merge-line-to-paragraph'], show=True)
 
 if __name__ == '__main__':
+    # print("run UIED")
     files = [file for file in glob.glob("data/input/" + "*")]
     files.sort()
 
