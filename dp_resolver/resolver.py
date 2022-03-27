@@ -6,25 +6,15 @@ high_contrast_patterns = [class_dp["attention_distraction"], class_dp["default_c
 high_size_diff_patterns = [class_dp["attention_distraction"], class_dp["default_choice"]]
 
 def get_dp_predicted(dps):
-    dp_predicted = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    dp_predicted = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     if len(dps) != 0:
         for dp in dps:
             index = class_dp_bin_index[dp]
             dp_predicted[index] = 1
     return dp_predicted
 
-def predict_dp_single_class(ui_dp):
-    confidence_threshold = .70
-    dp = None
-    votes = 0
-    for key, value in ui_dp.items():
-        if value["confidence"] > confidence_threshold and value["votes"] > votes:
-            votes = value["votes"]
-            dp = key
-    return dp
-
 def predict_dp_multi_class(ui_dp):
-    confidence_threshold = .50
+    confidence_threshold = .80
     dp = []
     votes = []
     dps = []
@@ -55,8 +45,8 @@ def is_relative_width_beyond_threshold(width_diff_threshold, segment_width, neig
     return False
 
 def resolve_size(segment_dp_resolution, analysis_result, segment_id, neighbor):
-    height_diff_threshold = 0.1
-    width_diff_threshold = 0.0
+    height_diff_threshold = 0.10
+    width_diff_threshold = 0.10
     detected_patterns = list(analysis_result[segment_id]["text_analysis"].keys())
     relative_height = analysis_result[segment_id]["size_analysis"]["relative_height"]
     relative_width = analysis_result[segment_id]["size_analysis"]["relative_width"]
@@ -64,13 +54,17 @@ def resolve_size(segment_dp_resolution, analysis_result, segment_id, neighbor):
         if id != segment_id and is_relative_height_beyond_threshold(height_diff_threshold, relative_height[segment_id], relative_height[id]):
             for pattern in detected_patterns:
                 if pattern in high_size_diff_patterns:
-                    segment_dp_resolution[pattern]["votes"] += 0.5
+                    # segment_dp_resolution[pattern]["votes"] += 0.5
+                    if(segment_dp_resolution[pattern]["votes"] < 4):
+                        segment_dp_resolution[pattern]["votes"] += 0.5
                     segment_dp_resolution[pattern]["vote_from"][3] = 1
     for id in relative_width.keys():
         if id != segment_id and is_relative_width_beyond_threshold(width_diff_threshold, relative_width[segment_id], relative_width[id]):
             for pattern in detected_patterns:
                 if pattern in high_size_diff_patterns:
-                    segment_dp_resolution[pattern]["votes"] += 0.5
+                    # segment_dp_resolution[pattern]["votes"] += 0.5
+                    if(segment_dp_resolution[pattern]["votes"] < 4):
+                        segment_dp_resolution[pattern]["votes"] += 0.5
                     segment_dp_resolution[pattern]["vote_from"][3] = 1
     return segment_dp_resolution
 
@@ -79,10 +73,13 @@ def resolve_visual(segment_dp_resolution, analysis_result, segment_id, neighbor)
     opacity = analysis_result[segment_id]["visual_analysis"]["opacity"]
     if neighbor:
         opacity_neighbor = analysis_result[neighbor]["visual_analysis"]["opacity"]
-        if opacity != opacity_neighbor:
+        # if opacity != opacity_neighbor:
+        if((opacity == "darker" and opacity_neighbor == "brighter") or (opacity == "brighter" and opacity_neighbor == "darker")):
             for pattern in detected_patterns:
                 if pattern in high_contrast_patterns:
-                    segment_dp_resolution[pattern]["votes"] += 1
+                    # segment_dp_resolution[pattern]["votes"] += 1
+                    if(segment_dp_resolution[pattern]["votes"] < 4):
+                        segment_dp_resolution[pattern]["votes"] += 1
                     segment_dp_resolution[pattern]["vote_from"][2] = 1
     return segment_dp_resolution
 
@@ -97,7 +94,9 @@ def resolve_text(segment_dp_resolution, analysis_result, segment_id, neighbor=Fa
             segment_dp_resolution[pattern] = {"votes": 1, "vote_from": [1, 0, 0, 0]}
         if len(detected_patterns_neighbor) != 0:
             if pattern in detected_patterns_neighbor:
-                segment_dp_resolution[pattern]["votes"] += 1
+                # segment_dp_resolution[pattern]["votes"] += 1
+                if(segment_dp_resolution[pattern]["votes"] < 4):
+                    segment_dp_resolution[pattern]["votes"] += 1
                 segment_dp_resolution[pattern]["vote_from"][1] = 1
     return segment_dp_resolution
 
@@ -139,28 +138,23 @@ def resolve_ui_dp(segment_dp, object_detection_result):
     for segment_dp_resolution in segment_dp.values():
         for pattern in list(segment_dp_resolution.keys()):
             if pattern in list(ui_dp.keys()):
-                ui_dp[pattern]["votes"] += segment_dp_resolution[pattern]["votes"]
+                # ui_dp[pattern]["votes"] += segment_dp_resolution[pattern]["votes"]
+                ui_dp[pattern]["votes"] = max(ui_dp[pattern]["votes"], segment_dp_resolution[pattern]["votes"])
                 ui_dp[pattern]["confidence"] = max(ui_dp[pattern]["confidence"], segment_dp_resolution[pattern]["confidence"])
-                # ui_dp[pattern]["confidence"] += segment_dp_resolution[pattern]["confidence"]
-                # ui_dp[pattern]["avg_confidence"] = ui_dp[pattern]["confidence"] / ui_dp[pattern]["votes"]
             else:
                 ui_dp[pattern] = {}
                 ui_dp[pattern]["votes"] = segment_dp_resolution[pattern]["votes"]
                 ui_dp[pattern]["confidence"] = segment_dp_resolution[pattern]["confidence"]
-                # ui_dp[pattern]["confidence"] = segment_dp_resolution[pattern]["confidence"]
-                # ui_dp[pattern]["avg_confidence"] = ui_dp[pattern]["confidence"] / ui_dp[pattern]["votes"]
     # augment object detection information
     if object_detection_result is not None:
         for potential_dp in object_detection_result["potential_dp_classes"]:
             if potential_dp in list(ui_dp.keys()):
                 ui_dp[potential_dp]["votes"] += 1
                 ui_dp[potential_dp]["confidence"] = (.80 * ui_dp[potential_dp]["confidence"]) + (.20 * object_detection_result["scores"])
-                # ui_dp[potential_dp]["avg_confidence"] = ui_dp[potential_dp]["confidence"] / ui_dp[potential_dp]["votes"]
-            else:
-                ui_dp[potential_dp] = {}
-                ui_dp[potential_dp]["votes"] = 1
-                ui_dp[potential_dp]["confidence"] = object_detection_result["scores"]
-                # ui_dp[potential_dp]["avg_confidence"] = ui_dp[potential_dp]["confidence"] / ui_dp[potential_dp]["votes"]
+            # else:
+            #     ui_dp[potential_dp] = {}
+            #     ui_dp[potential_dp]["votes"] = 1
+            #     ui_dp[potential_dp]["confidence"] = object_detection_result["scores"]
     return ui_dp
 
 def resolve_dp(input_to_resolver):
@@ -172,9 +166,10 @@ def resolve_dp(input_to_resolver):
         segment_dp[segment_id] = segment_dp_resolution
     # utils.print_dictionary(segment_dp, "segment_dp")
     ui_dp = resolve_ui_dp(segment_dp, object_detection_result)
-    # utils.print_dictionary(ui_dp, "ui_dp")
+    utils.print_dictionary(ui_dp, "ui_dp")
     dps = predict_dp_multi_class(ui_dp)
-    print(dps)
-    dp_predicted = get_dp_predicted(dps)
+    # print(dps)
+    # dp_predicted = get_dp_predicted(dps)
     # print(dp_predicted)
+    dp_predicted = {"labels": dps, "labels_binarization": get_dp_predicted(dps)}
     return dp_predicted

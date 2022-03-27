@@ -13,7 +13,6 @@ class_dp = {
     , "social_pyramid": "SOCIAL PYRAMID"
     , "privacy_zuckering": "PRIVACY ZUCKERING"
     , "intermediate_currency": "INTERMEDIATE CURRENCY"
-    , "price_comparison_prevention": "PRICE COMPARISON PREVENTION"
     , "nagging": "NAGGING"
     , "gamification": "GAMIFICATION"
     , "roach_motel": "ROACH MOTEL"
@@ -34,11 +33,10 @@ class_dp_bin_index = {
     , "SOCIAL PYRAMID": 10
     , "PRIVACY ZUCKERING": 11
     , "INTERMEDIATE CURRENCY": 12
-    , "PRICE COMPARISON PREVENTION": 13
-    , "NAGGING": 14
-    , "GAMIFICATION": 15
-    , "ROACH MOTEL": 16
-    , "FORCED CONTINUITY": 17
+    , "NAGGING": 13
+    , "GAMIFICATION": 14
+    , "ROACH MOTEL": 15
+    , "FORCED CONTINUITY": 16
 }
 
 class_bin_index_to_dp = {
@@ -55,9 +53,8 @@ class_bin_index_to_dp = {
     , "10": "SOCIAL PYRAMID"
     , "11": "PRIVACY ZUCKERING"
     , "12": "INTERMEDIATE CURRENCY"
-    , "13": "PRICE COMPARISON PREVENTION"
-    , "14": "NAGGING"
-    , "15": "GAMIFICATION"
-    , "16": "ROACH MOTEL"
-    , "17": "FORCED CONTINUITY"
+    , "13": "NAGGING"
+    , "14": "GAMIFICATION"
+    , "15": "ROACH MOTEL"
+    , "16": "FORCED CONTINUITY"
 }

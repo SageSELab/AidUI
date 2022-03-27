@@ -159,12 +159,12 @@ pattern1_privacy_zuckering = [
     {"LOWER": {"IN": ["to"]}, "OP": "?"}
 ]
 
-pattern2_privacy_zuckering = [
-    {"LOWER": {"IN": ["no", "not", "later", "cancel", "skip"]}},
-    {"LOWER": {"IN": ["now", "thanks"]}, "OP": "*"}
-]
+# pattern2_privacy_zuckering = [
+#     {"LOWER": {"IN": ["no", "not", "later", "cancel", "skip"]}},
+#     {"LOWER": {"IN": ["now", "thanks"]}, "OP": "*"}
+# ]
 
-patterns_privacy_zuckering = [pattern1_privacy_zuckering, pattern2_privacy_zuckering]
+patterns_privacy_zuckering = [pattern1_privacy_zuckering]
 
 ############################ social pyramid ####################################
 # ==============================================================================
@@ -518,22 +518,22 @@ patterns_high_demand_message = [pattern1_high_demand_message, pattern2_high_dema
 # jack just saved 52$ on his order
 # X items sold in Y time/this hour
 
-pattern_generic_activity_message = [
-    {"POS": "NUM", "OP": "?"},
-    {"POS": {"IN": ["NOUN", "PROPN"]}},
-    {"POS": "AUX", "OP": "?"},
-    {"POS": "ADV", "OP": "?"},
-    {"POS": "VERB"},
-    {"POS": "NUM", "OP": "?"},
-    {"POS": "NOUN", "OP": "?"},
-    {"POS": "ADP", "OP": "?"},
-    {"POS": "DET", "OP": "?"},
-    {"POS": "ADJ", "OP": "?"},
-    {"POS": "ADV", "OP": "?"},
-    {"POS": "ADV", "OP": "?"},
-    {"POS": "NUM", "OP": "?"},
-    {"POS": "NOUN", "OP": "?"},
-]
+# pattern_generic_activity_message = [
+#     {"POS": "NUM", "OP": "?"},
+#     {"POS": {"IN": ["NOUN", "PROPN"]}},
+#     {"POS": "AUX", "OP": "?"},
+#     {"POS": "ADV", "OP": "?"},
+#     {"POS": "VERB"},
+#     {"POS": "NUM", "OP": "?"},
+#     {"POS": "NOUN", "OP": "?"},
+#     {"POS": "ADP", "OP": "?"},
+#     {"POS": "DET", "OP": "?"},
+#     {"POS": "ADJ", "OP": "?"},
+#     {"POS": "ADV", "OP": "?"},
+#     {"POS": "ADV", "OP": "?"},
+#     {"POS": "NUM", "OP": "?"},
+#     {"POS": "NOUN", "OP": "?"},
+# ]
 
 pattern1_activity_message = [
     {"POS": "NUM", "OP": "?"},
@@ -548,10 +548,10 @@ pattern1_activity_message = [
 
 pattern2_activity_message = [
     {"POS": "NUM"},
-    {"POS": {"IN": ["NOUN", "PROPN"]}},
+    {"POS": {"IN": ["NOUN", "PROPN"]}, "OP": "?"},
     {"POS": "AUX", "OP": "?"},
     {"POS": "ADV", "OP": "?"},
     {"LEMMA": {"IN": ["order", "purchase", "subscribe", "view", "book", "visit", "sell", "save", "look"]}}
 ]
 
-patterns_activity_message = [pattern1_activity_message]
+patterns_activity_message = [pattern1_activity_message, pattern2_activity_message]
