@@ -60,7 +60,7 @@ for i in range(len(ocr_files)):
     #     utils.print_dictionary(ui_dp, "ui_dp")
     #     break
 
-    if("INTERMEDIATE CURRENCY" in dp_ground_truth["labels"]):
+    if("INTERMEDIATE CURRENCY" in dp_predicted["labels"]):
         # if(image_file.split("/")[-1] == "(688)www.chicwish.com_4cb6.jpg"):
         print("########################################## filename: ", image_file.split("/")[-1], "####################################")
         print("dp_ground_truth: ", dp_ground_truth["labels"])

@@ -82,7 +82,7 @@ def get_evaluation_data(dp_predictions, dp_expectations, types):
 
     overall_evaluation_data = {"num_total_dp_instances": None, "category_info": None}
 
-    # calculate num of instances, confusion matrix, precision for all dp categories
+    # calculate num of instances, confusion matrix, precision, recall for all dp categories
     num_dp_instances = np.array(dp_expectations).sum(0)
     conf_mat = multilabel_confusion_matrix(np.array(dp_expectations), np.array(dp_predictions))
     precision = precision_score(dp_expectations, dp_predictions, average=None)
@@ -103,5 +103,7 @@ def get_evaluation_data(dp_predictions, dp_expectations, types):
     overall_evaluation_data["category_info"] = category_info
     overall_evaluation_data["macro_avg_precision"] = precision_score(dp_expectations, dp_predictions, average="macro")
     overall_evaluation_data["macro_avg_recall"] = recall_score(dp_expectations, dp_predictions, average="macro")
+    overall_evaluation_data["weighted_avg_precision"] = precision_score(dp_expectations, dp_predictions, average="weighted")
+    overall_evaluation_data["weighted_avg_recall"] = recall_score(dp_expectations, dp_predictions, average="weighted")
 
     utils.print_dictionary(overall_evaluation_data, "overall_evaluation_data")

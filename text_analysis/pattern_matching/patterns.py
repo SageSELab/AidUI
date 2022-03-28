@@ -140,10 +140,12 @@ patterns_price_comparison_prevention = [pattern1_price_comparison_prevention]
 # Buy/get/collect x credits/Badge/reward/token/points/stars'
 
 pattern1_intermediate_currency = [
-    {"LOWER": {"IN": ["buy", "get", "collect", "earn", "gain", "unlock"]}},
-    {"POS": "NUM", "OP": "?"},
+    # {"LOWER": {"IN": ["buy", "get", "collect", "earn", "gain", "unlock"]}},
+    {"LOWER": {"IN": ["buy", "get", "collect"]}},
+    {"POS": "NUM"},
     {"IS_ALPHA": True, "OP": "?"},
-    {"LEMMA": {"IN": ["credit", "reward", "point", "token", "badge", "star"]}}
+    # {"LEMMA": {"IN": ["credit", "reward", "point", "token", "badge", "star"]}}
+    {"LEMMA": {"IN": ["credit", "badge", "star"]}}
 ]
 
 patterns_intermediate_currency = [pattern1_intermediate_currency]
@@ -209,17 +211,17 @@ pattern1_gamification = [
     {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["friends", "contacts", "neighbors"]}},
     {"LOWER": {"IN": ["to"]}, "OP": "?"},
-    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain"]}},
+    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain", "access"]}},
     {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["credits", "rewards", "points", "tokens"]}, "OP": "?"}
 ]
 
 pattern2_gamification = [
-    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain"]}},
+    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain", "access"]}},
     {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["credits", "rewards", "points", "tokens"]}},
-    {"LOWER": {"IN": ["by"]}, "OP": "?"},
-    {"LEMMA": {"IN": ["ask", "invite", "refer", "add", "sign"]}},
+    {"LOWER": {"IN": ["by", "for"]}, "OP": "?"},
+    {"LEMMA": {"IN": ["ask", "invite", "refer", "add", "signup"]}},
     {"IS_ALPHA": True, "OP": "?"},
     {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["friends", "contacts", "neighbors"]}}
@@ -236,7 +238,7 @@ pattern3_gamification = [
 pattern4_gamification = [
     {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain", "access"]}},
     {"IS_ALPHA": True, "OP": "?"},
-    {"LOWER": {"IN": ["by"]}},
+    {"LOWER": {"IN": ["by", "for"]}},
     {"LEMMA": {"IN": ["watch"]}},
     {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["ad", "session"]}}
