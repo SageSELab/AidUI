@@ -141,6 +141,7 @@ patterns_price_comparison_prevention = [pattern1_price_comparison_prevention]
 
 pattern1_intermediate_currency = [
     {"LOWER": {"IN": ["buy", "get", "collect", "earn", "gain", "unlock"]}},
+    {"POS": "NUM", "OP": "?"},
     {"IS_ALPHA": True, "OP": "?"},
     {"LEMMA": {"IN": ["credit", "reward", "point", "token", "badge", "star"]}}
 ]
@@ -411,10 +412,27 @@ pattern3_countdown_timer = [
     {"POS": "NUM"}
 ]
 
-pattern4_countdown_timer = [
-    {"POS": "NUM", "OP": "*"},
-    {"LOWER": {"IN": ["remaining", "left"]}}
+# pattern4_countdown_timer = [
+#     {"POS": "NUM"},
+#     {"LOWER": {"IN": ["remaining", "left"]}}
+# ]
+
+pattern5_countdown_timer = [
+    {"POS": "NUM"},
+    {"LOWER": {"IN": [":"]}},
+    {"POS": "NUM"},
+    {"LOWER": {"IN": [":"]}},
+    {"POS": "NUM"},
+    {"LOWER": {"IN": [":"]}, "OP": "?"},
+    {"POS": "NUM", "OP": "?"}
 ]
+
+pattern6_countdown_timer = [
+    {"LOWER": {"IN": ["hrs", "mins", "secs"]}}
+]
+
+pattern7_countdown_timer = [{"TEXT": {"REGEX": "([0-9]+(:[0-9]+)+)"}}]
+
 
 # tba: only timer
 # - time remaing in one ocr, counter in anther ocr
@@ -424,7 +442,8 @@ pattern4_countdown_timer = [
 # tba: days/hrs/mins/secs
 # tba: time remaining
 
-patterns_countdown_timer = [pattern1_countdown_timer, pattern2_countdown_timer, pattern3_countdown_timer, pattern4_countdown_timer]
+patterns_countdown_timer = [pattern1_countdown_timer, pattern2_countdown_timer, pattern3_countdown_timer,
+pattern5_countdown_timer, pattern6_countdown_timer]
 
 ############################# limited time message #############################
 # ==============================================================================
@@ -472,14 +491,20 @@ pattern1_low_stock_message = [
 
 pattern2_low_stock_message = [
     {"LOWER": "only", "OP": "?"},
-    {"POS": "NUM", "OP": "?"},
+    {"POS": "NUM"},
     {"POS": "NOUN", "OP": "?"},
     {"LOWER": {"IN": ["left", "available"]}},
     {"POS": "ADP", "OP": "?"},
     {"LEMMA": {"IN": ["stock"]}, "OP": "?"}
 ]
 
-patterns_low_stock_message = [pattern1_low_stock_message, pattern2_low_stock_message]
+pattern3_low_stock_message = [
+    {"LOWER": {"IN": ["left", "available"]}},
+    {"POS": "ADP", "OP": "?"},
+    {"LEMMA": {"IN": ["stock"]}}
+]
+
+patterns_low_stock_message = [pattern1_low_stock_message, pattern2_low_stock_message, pattern3_low_stock_message]
 
 ############################# high demand message ##############################
 # ==============================================================================

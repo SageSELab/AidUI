@@ -11,6 +11,7 @@ text_pattern_candidates = [
     , class_dp["low_stock_message"]
     , class_dp["limited_time_message"]
     , class_dp["countdown_timer"]
+    , class_dp["intermediate_currency"]
 ]
 
 def get_dp_predicted(dps):
@@ -22,7 +23,7 @@ def get_dp_predicted(dps):
     return dp_predicted
 
 def predict_dp_multi_class(ui_dp):
-    confidence_threshold = .24
+    confidence_threshold = .74
     dp = []
     votes = []
     dps = []
@@ -38,7 +39,7 @@ def predict_dp_multi_class(ui_dp):
     if(len(top_votes) != 0):
         for vote in top_votes:
             for key, value in ui_dp.items():
-                if value["votes"] == vote and key not in dps:
+                if value["votes"] == vote and value["confidence"] >= confidence_threshold and key not in dps:
                     dps.append(key)
     return dps
 
@@ -137,7 +138,7 @@ def resolve_segment_dp(analysis_result, segment_id):
                 confidence = sum(value["vote_from"]) / 3
         else:
             if pattern in text_pattern_candidates:
-                confidence = sum(value["vote_from"]) / 1
+                confidence = value["vote_from"][0] / 1
             else:
                 confidence = sum(value["vote_from"]) / 2
         value["confidence"] = confidence
@@ -192,6 +193,6 @@ def get_ui_dp(input_to_resolver):
     for segment_id in analysis_result.keys():
         segment_dp_resolution = resolve_segment_dp(analysis_result, segment_id)
         segment_dp[segment_id] = segment_dp_resolution
-    # utils.print_dictionary(segment_dp, "segment_dp")
+    utils.print_dictionary(segment_dp, "segment_dp")
     ui_dp = resolve_ui_dp(segment_dp, object_detection_result)
     return ui_dp

@@ -51,22 +51,25 @@ for i in range(len(ocr_files)):
     dp_expectations.append(dp_ground_truth["labels_binarization"])
     types.append(dp_ground_truth["type"])
 
-    # if("ACTIVITY MESSAGE" in dp_ground_truth["labels"]):
-    #     print("###### filename: ", image_file.split("/")[-1])
+    # if(image_file.split("/")[-1] == "(159)www.victorianplumbing.co.uk_62cc.jpg"):
+    #     print("\n####################################  filename: ", image_file.split("/")[-1], "######################################################")
     #     print("dp_ground_truth: ", dp_ground_truth["labels"])
     #     print("dp_predicted: ", dp_predicted["labels"])
+    #     utils.print_dictionary(analysis_result, "analysis_result")
+    #     ui_dp = resolver.get_ui_dp(input_to_resolver)
+    #     utils.print_dictionary(ui_dp, "ui_dp")
     #     break
 
-    if(len(dp_predicted["labels"])) == 0:
-        num_failed_cases += 1
-        print("\n####################################  filename: ", image_file.split("/")[-1], "######################################################")
+    if("INTERMEDIATE CURRENCY" in dp_ground_truth["labels"]):
+        # if(image_file.split("/")[-1] == "(688)www.chicwish.com_4cb6.jpg"):
+        print("########################################## filename: ", image_file.split("/")[-1], "####################################")
         print("dp_ground_truth: ", dp_ground_truth["labels"])
         print("dp_predicted: ", dp_predicted["labels"])
         utils.print_dictionary(analysis_result, "analysis_result")
         ui_dp = resolver.get_ui_dp(input_to_resolver)
         utils.print_dictionary(ui_dp, "ui_dp")
 
-print("num_failed_cases: ", num_failed_cases)
+# print("num_failed_cases: ", num_failed_cases)
 
 # evaluation
 evaluation.get_evaluation_data(dp_predictions, dp_expectations, types)
