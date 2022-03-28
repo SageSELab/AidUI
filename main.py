@@ -24,6 +24,7 @@ dp_predictions = []
 dp_expectations = []
 types = []
 
+num_failed_cases = 0
 # iterate over the OCR files
 for i in range(len(ocr_files)):
     # print('###################### processing: ', ocr_files[i], '######################')
@@ -37,7 +38,7 @@ for i in range(len(ocr_files)):
     analysis_result = proximity_analysis.analyze_proximity(analysis_result, image_file)
     # print("------------size_analysis-----------")
     analysis_result = size_analysis.analyze_size(analysis_result)
-    utils.print_dictionary(analysis_result, "analysis_result")
+    # utils.print_dictionary(analysis_result, "analysis_result")
     # print("------------object_detection-----------")
     object_detection_result = object_detection.get_object_detection_result(ocr_files[i])
     # utils.print_dictionary(object_detection_result, "object_detection_result")
@@ -55,6 +56,17 @@ for i in range(len(ocr_files)):
     #     print("dp_ground_truth: ", dp_ground_truth["labels"])
     #     print("dp_predicted: ", dp_predicted["labels"])
     #     break
+
+    if(len(dp_predicted["labels"])) == 0:
+        num_failed_cases += 1
+        print("\n####################################  filename: ", image_file.split("/")[-1], "######################################################")
+        print("dp_ground_truth: ", dp_ground_truth["labels"])
+        print("dp_predicted: ", dp_predicted["labels"])
+        utils.print_dictionary(analysis_result, "analysis_result")
+        ui_dp = resolver.get_ui_dp(input_to_resolver)
+        utils.print_dictionary(ui_dp, "ui_dp")
+
+print("num_failed_cases: ", num_failed_cases)
 
 # evaluation
 evaluation.get_evaluation_data(dp_predictions, dp_expectations, types)

@@ -5,6 +5,14 @@ from config import *
 high_contrast_patterns = [class_dp["attention_distraction"], class_dp["default_choice"]]
 high_size_diff_patterns = [class_dp["attention_distraction"], class_dp["default_choice"]]
 
+text_pattern_candidates = [
+    class_dp["activity_message"]
+    , class_dp["high_demand_message"]
+    , class_dp["low_stock_message"]
+    , class_dp["limited_time_message"]
+    , class_dp["countdown_timer"]
+]
+
 def get_dp_predicted(dps):
     dp_predicted = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     if len(dps) != 0:
@@ -14,7 +22,7 @@ def get_dp_predicted(dps):
     return dp_predicted
 
 def predict_dp_multi_class(ui_dp):
-    confidence_threshold = .80
+    confidence_threshold = .24
     dp = []
     votes = []
     dps = []
@@ -128,7 +136,10 @@ def resolve_segment_dp(analysis_result, segment_id):
             else:
                 confidence = sum(value["vote_from"]) / 3
         else:
-            confidence = sum(value["vote_from"]) / 2
+            if pattern in text_pattern_candidates:
+                confidence = sum(value["vote_from"]) / 1
+            else:
+                confidence = sum(value["vote_from"]) / 2
         value["confidence"] = confidence
     return segment_dp_resolution
 
@@ -166,10 +177,21 @@ def resolve_dp(input_to_resolver):
         segment_dp[segment_id] = segment_dp_resolution
     # utils.print_dictionary(segment_dp, "segment_dp")
     ui_dp = resolve_ui_dp(segment_dp, object_detection_result)
-    utils.print_dictionary(ui_dp, "ui_dp")
+    # utils.print_dictionary(ui_dp, "ui_dp")
     dps = predict_dp_multi_class(ui_dp)
     # print(dps)
     # dp_predicted = get_dp_predicted(dps)
     # print(dp_predicted)
     dp_predicted = {"labels": dps, "labels_binarization": get_dp_predicted(dps)}
     return dp_predicted
+
+def get_ui_dp(input_to_resolver):
+    analysis_result = input_to_resolver["analysis_result"]
+    object_detection_result = input_to_resolver["object_detection_result"]
+    segment_dp = {}
+    for segment_id in analysis_result.keys():
+        segment_dp_resolution = resolve_segment_dp(analysis_result, segment_id)
+        segment_dp[segment_id] = segment_dp_resolution
+    # utils.print_dictionary(segment_dp, "segment_dp")
+    ui_dp = resolve_ui_dp(segment_dp, object_detection_result)
+    return ui_dp
