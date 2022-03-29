@@ -9,14 +9,6 @@ pattern1_nagging = [
     {"LOWER": {"IN": ["now"]}, "OP": "?"}
 ]
 
-pattern6_nagging = [
-    {"LEMMA": {"IN": ["give"]}},
-    {"LOWER": {"IN": ["this"]}, "OP": "?"},
-    {"LOWER": {"IN": ["us", "app", "it"]}},
-    {"LOWER": {"IN": ["five", "5"]}, "OP": "?"},
-    {"LEMMA": {"IN": ["star", "rate"]}}
-]
-
 pattern2_nagging = [
     {"LOWER": {"IN": ["ad", "adchoices"]}}
 ]
@@ -31,7 +23,7 @@ pattern4_nagging = [
     {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["ad", "session"]}},
     {"LOWER": {"IN": ["to"]}},
-    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain", "access"]}}
+    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain", "access"]}, "OP": "?"}
 ]
 
 pattern5_nagging = [
@@ -43,7 +35,35 @@ pattern5_nagging = [
     {"LOWER": {"IN": ["ad", "session"]}}
 ]
 
-patterns_nagging = [pattern1_nagging, pattern2_nagging, pattern3_nagging, pattern4_nagging, pattern5_nagging, pattern6_nagging]
+pattern6_nagging = [
+    {"LEMMA": {"IN": ["give"]}},
+    {"LOWER": {"IN": ["this"]}, "OP": "?"},
+    {"LOWER": {"IN": ["us", "app", "it"]}},
+    {"LOWER": {"IN": ["five", "5"]}, "OP": "?"},
+    {"LEMMA": {"IN": ["star"]}},
+    {"LOWER": {"IN": ["rate", "review"]}}
+]
+
+pattern7_nagging = [
+    {"LEMMA": {"IN": ["star"]}},
+    {"LEMMA": {"IN": ["rate", "review"]}}
+]
+
+pattern8_nagging = [
+    {"POS": "ADJ", "OP": "?"},
+    {"LOWER": {"IN": ["sponsored"]}},
+    {"LOWER": {"IN": ["session"]}}
+]
+
+pattern9_nagging = [
+    {"LOWER": {"IN": ["do"]}},
+    {"LOWER": {"IN": ["you"]}},
+    {"LOWER": {"IN": ["like", "love"]}}
+]
+
+patterns_nagging = [pattern1_nagging, pattern2_nagging, pattern3_nagging
+, pattern4_nagging, pattern5_nagging, pattern6_nagging, pattern7_nagging
+, pattern8_nagging, pattern9_nagging]
 
 ############################# bait and switch ##################################
 # ==============================================================================
@@ -232,7 +252,7 @@ pattern3_gamification = [
     {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["ad", "session"]}},
     {"LOWER": {"IN": ["to"]}},
-    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain", "access"]}}
+    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain", "access"]}, "OP": "?"}
 ]
 
 pattern4_gamification = [
@@ -245,14 +265,20 @@ pattern4_gamification = [
 ]
 
 pattern5_gamification = [
-    {"LOWER": {"IN": ["time"]}},
-    {"LOWER": {"IN": ["for"]}},
-    {"LOWER": {"IN": ["short", "sponsored"]}, "OP": "?"},
-    {"LOWER": {"IN": ["short", "sponsored"]}, "OP": "?"},
-    {"LOWER": {"IN": ["ad", "session"]}}
+    {"POS": "ADJ", "OP": "?"},
+    {"LOWER": {"IN": ["sponsored"]}},
+    {"LOWER": {"IN": ["session"]}}
 ]
 
-patterns_gamification = [pattern1_gamification, pattern2_gamification, pattern3_gamification, pattern4_gamification, pattern5_gamification]
+pattern6_gamification = [
+    {"LOWER": {"IN": ["unlock", "earn", "get", "collect", "gain", "access"]}},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LOWER": {"IN": ["credits", "rewards", "points", "tokens"]}},
+    {"LOWER": {"IN": ["by", "for"]}}
+]
+
+patterns_gamification = [pattern1_gamification, pattern2_gamification
+, pattern3_gamification, pattern4_gamification, pattern5_gamification, pattern6_gamification]
 
 ############################# forced enrollment ################################
 # ==============================================================================
@@ -391,27 +417,27 @@ patterns_false_hierarchy = [pattern1_false_hierarchy, pattern2_false_hierarchy]
 # number in the counter
 # day/hour/min/sec
 
-pattern1_countdown_timer = [
-    {"LOWER": {"IN": ["sale", "offer", "deal", "apply", "order"]}},
-    {"LOWER": {"IN": ["ends", "by", "valid", "open", "available"]}},
-    {"LOWER": "soon", "OP": "?"},
-    {"LOWER": {"IN": ["by", "for", "in", "on", "at", "within"]}},
-    {"POS": "PUNCT", "OP": "*"},
-    {"POS": "NUM", "OP": "*"}
-]
+# pattern1_countdown_timer = [
+#     {"LOWER": {"IN": ["sale", "offer", "deal", "apply", "order"]}},
+#     {"LOWER": {"IN": ["ends", "by", "valid", "open", "available"]}},
+#     {"LOWER": "soon", "OP": "?"},
+#     {"LOWER": {"IN": ["by", "for", "in", "on", "at", "within"]}},
+#     {"POS": "PUNCT", "OP": "*"},
+#     {"POS": "NUM", "OP": "*"}
+# ]
 
-pattern2_countdown_timer = [
-    {"LOWER": {"IN": ["ends", "valid", "open", "available", "order"]}},
-    {"LOWER": {"IN": ["by", "for", "in", "on", "at", "within"]}},
-    {"POS": "PUNCT", "OP": "*"},
-    {"POS": "NUM", "OP": "*"}
-]
+# pattern2_countdown_timer = [
+#     {"LOWER": {"IN": ["ends", "valid", "open", "available", "order"]}},
+#     {"LOWER": {"IN": ["by", "for", "in", "on", "at", "within"]}},
+#     {"POS": "PUNCT", "OP": "*"},
+#     {"POS": "NUM", "OP": "*"}
+# ]
 
 pattern3_countdown_timer = [
     {"LOWER": {"IN": ['shop', "order", "time", "sale"]}},
     {"LOWER": {"IN": ["by", "within", "remaining", "countdown"]}},
     {"POS": "PUNCT", "OP": "*"},
-    {"POS": "NUM"}
+    {"POS": "NUM", "OP": "*"}
 ]
 
 # pattern4_countdown_timer = [
@@ -433,7 +459,7 @@ pattern6_countdown_timer = [
     {"LOWER": {"IN": ["hrs", "mins", "secs"]}}
 ]
 
-pattern7_countdown_timer = [{"TEXT": {"REGEX": "([0-9]+(:[0-9]+)+)"}}]
+pattern7_countdown_timer = [{"TEXT": {"REGEX": "[0-9]{2}:[0-9]{2}:[0-9]{2}"}}]
 
 
 # tba: only timer
@@ -444,8 +470,7 @@ pattern7_countdown_timer = [{"TEXT": {"REGEX": "([0-9]+(:[0-9]+)+)"}}]
 # tba: days/hrs/mins/secs
 # tba: time remaining
 
-patterns_countdown_timer = [pattern1_countdown_timer, pattern2_countdown_timer, pattern3_countdown_timer,
-pattern5_countdown_timer, pattern6_countdown_timer]
+patterns_countdown_timer = [pattern3_countdown_timer, pattern5_countdown_timer, pattern6_countdown_timer]
 
 ############################# limited time message #############################
 # ==============================================================================
@@ -562,9 +587,30 @@ patterns_high_demand_message = [pattern1_high_demand_message, pattern2_high_dema
 #     {"POS": "NOUN", "OP": "?"},
 # ]
 
-pattern1_activity_message = [
+# pattern1_activity_message = [
+#     {"POS": "NUM", "OP": "?"},
+#     {"POS": {"IN": ["NOUN", "PROPN"]}},
+#     {"POS": "AUX", "OP": "?"},
+#     {"POS": "ADV", "OP": "?"},
+#     {"LEMMA": {"IN": ["order", "purchase", "subscribe", "view", "book", "visit", "sell", "save", "look"]}},
+#     {"POS": "ADP", "OP": "?"},
+#     {"POS": "ADJ", "OP": "?"},
+#     {"POS": "NUM", "OP": "?"}
+# ]
+
+pattern2_activity_message = [
+    {"POS": "NUM"},
+    # {"POS": {"IN": ["NOUN", "PROPN"]}, "OP": "?"},
+    {"LOWER": {"IN": ["items"]}, "OP": "?"},
+    {"POS": "AUX", "OP": "?"},
+    {"POS": "ADV", "OP": "?"},
+    {"LEMMA": {"IN": ["order", "purchase", "subscribe", "view", "book", "visit", "sell", "save", "look"]}},
+    {"LOWER": {"IN": ["by", "in"]}}
+]
+
+pattern3_activity_message = [
     {"POS": "NUM", "OP": "?"},
-    {"POS": {"IN": ["NOUN", "PROPN"]}},
+    {"LEMMA": {"IN": ["people", "person", "visitor", "user"]}},
     {"POS": "AUX", "OP": "?"},
     {"POS": "ADV", "OP": "?"},
     {"LEMMA": {"IN": ["order", "purchase", "subscribe", "view", "book", "visit", "sell", "save", "look"]}},
@@ -573,12 +619,4 @@ pattern1_activity_message = [
     {"POS": "NUM", "OP": "?"}
 ]
 
-pattern2_activity_message = [
-    {"POS": "NUM"},
-    {"POS": {"IN": ["NOUN", "PROPN"]}, "OP": "?"},
-    {"POS": "AUX", "OP": "?"},
-    {"POS": "ADV", "OP": "?"},
-    {"LEMMA": {"IN": ["order", "purchase", "subscribe", "view", "book", "visit", "sell", "save", "look"]}}
-]
-
-patterns_activity_message = [pattern1_activity_message, pattern2_activity_message]
+patterns_activity_message = [pattern2_activity_message, pattern3_activity_message]

@@ -1,4 +1,4 @@
-{'category_info': {'ACTIVITY MESSAGE': {'conf_mat': array([[170,   4],
+{'category_info': {'ACTIVITY MESSAGE': {'conf_mat': array([[174,   0],
        [  1,   0]]),
                                         'num_instances': 1,
                                         'precision': 0.0,
@@ -8,21 +8,21 @@
                                              'num_instances': 9,
                                              'precision': 0.10810810810810811,
                                              'recall': 0.4444444444444444},
-                   'COUNTDOWN TIMER': {'conf_mat': array([[159,   4],
-       [  8,   4]]),
+                   'COUNTDOWN TIMER': {'conf_mat': array([[161,   2],
+       [  5,   7]]),
                                        'num_instances': 12,
-                                       'precision': 0.5,
-                                       'recall': 0.3333333333333333},
+                                       'precision': 0.7777777777777778,
+                                       'recall': 0.5833333333333334},
                    'DEFAULT CHOICE': {'conf_mat': array([[85, 12],
-       [50, 28]]),
+       [49, 29]]),
                                       'num_instances': 78,
-                                      'precision': 0.7,
-                                      'recall': 0.358974358974359},
-                   'DISGUISED ADS': {'conf_mat': array([[164,   0],
-       [ 11,   0]]),
+                                      'precision': 0.7073170731707317,
+                                      'recall': 0.3717948717948718},
+                   'DISGUISED ADS': {'conf_mat': array([[155,   9],
+       [  6,   5]]),
                                      'num_instances': 11,
-                                     'precision': 0.0,
-                                     'recall': 0.0},
+                                     'precision': 0.35714285714285715,
+                                     'recall': 0.45454545454545453},
                    'FORCED CONTINUITY': {'conf_mat': array([[175,   0],
        [  0,   0]]),
                                          'num_instances': 0,
@@ -39,10 +39,10 @@
                                    'precision': 0.0,
                                    'recall': 0.0},
                    'GAMIFICATION': {'conf_mat': array([[163,   0],
-       [ 12,   0]]),
+       [  9,   3]]),
                                     'num_instances': 12,
-                                    'precision': 0.0,
-                                    'recall': 0.0},
+                                    'precision': 1.0,
+                                    'recall': 0.25},
                    'HIGH DEMAND MESSAGE': {'conf_mat': array([[175,   0],
        [  0,   0]]),
                                            'num_instances': 0,
@@ -63,11 +63,11 @@
                                          'num_instances': 10,
                                          'precision': 0.8,
                                          'recall': 0.8},
-                   'NAGGING': {'conf_mat': array([[131,   1],
-       [ 42,   1]]),
+                   'NAGGING': {'conf_mat': array([[114,  18],
+       [ 16,  27]]),
                                'num_instances': 43,
-                               'precision': 0.5,
-                               'recall': 0.023255813953488372},
+                               'precision': 0.6,
+                               'recall': 0.627906976744186},
                    'PRIVACY ZUCKERING': {'conf_mat': array([[175,   0],
        [  0,   0]]),
                                          'num_instances': 0,
@@ -83,23 +83,19 @@
                                       'num_instances': 0,
                                       'precision': 0.0,
                                       'recall': 0.0}},
- 'macro_avg_precision': 0.265717589247001,
- 'macro_avg_recall': 0.20872019087195717,
- 'num_total_dp_instances': 194}
-
-
-Categories (> .50)
-------------------
-LOW STOCK MESSAGE 'precision': 0.8, 'recall': 0.8
-INTERMEDIATE CURRENCY 'precision': 1.0, 'recall': 1.0
-
-NO instances
---------------
-FORCED CONTINUITY
-FORCED ENROLLMENT
-FRIEND SPAM
-HIGH DEMAND MESSAGE
-PRIVACY ZUCKERING
-ROACH MOTEL
-SOCIAL PYRAMID
-HIGH DEMAND MESSAGE
+ 'macro_avg_precision': 0.368202160311199,
+ 'macro_avg_recall': 0.3011917867635257,
+ 'num_total_dp_instances': 194,
+ 'weighted_avg_precision': 0.6786605922512385,
+ 'weighted_avg_recall': 0.4845360824742268}
+================================================================================ntu
+COUNTDOWN TIMER 'precision': 0.6666666666666666,'recall': 0.3333333333333333
+LIMITED TIME MESSAGE 'precision': 0.8666666666666667,'recall': 0.7647058823529411
+LOW STOCK MESSAGE 'precision': 0.7272727272727273,'recall': 0.8
+INTERMEDIATE CURRENCY 'precision': 1.0,'recall': 1.0
+ACTIVITY MESSAGE 'precision': 0.16666666666666666,'recall': 1.0
+ATTENTION DISTRACTION 'precision': 0.0,'recall': 0.0
+DEFAULT CHOICE 'precision': 0.8181818181818182,'recall': 0.11538461538461539
+DISGUISED ADS 'precision': 0.0,'recall': 0.0
+GAMIFICATION 'precision': 0.0,'recall': 0.0
+NAGGING 'precision': 0.6666666666666666,'recall': 0.046511627906976744

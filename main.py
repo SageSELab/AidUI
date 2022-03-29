@@ -60,14 +60,14 @@ for i in range(len(ocr_files)):
     #     utils.print_dictionary(ui_dp, "ui_dp")
     #     break
 
-    if("INTERMEDIATE CURRENCY" in dp_predicted["labels"]):
-        # if(image_file.split("/")[-1] == "(688)www.chicwish.com_4cb6.jpg"):
-        print("########################################## filename: ", image_file.split("/")[-1], "####################################")
-        print("dp_ground_truth: ", dp_ground_truth["labels"])
-        print("dp_predicted: ", dp_predicted["labels"])
-        utils.print_dictionary(analysis_result, "analysis_result")
-        ui_dp = resolver.get_ui_dp(input_to_resolver)
-        utils.print_dictionary(ui_dp, "ui_dp")
+    # if("DISGUISED ADS" in dp_ground_truth["labels"]):
+    #     # if(image_file.split("/")[-1] == "(688)www.chicwish.com_4cb6.jpg"):
+    #     print("########################################## filename: ", image_file.split("/")[-1], "####################################")
+    #     print("dp_ground_truth: ", dp_ground_truth["labels"])
+    #     print("dp_predicted: ", dp_predicted["labels"])
+    #     utils.print_dictionary(analysis_result, "analysis_result")
+    #     ui_dp = resolver.get_ui_dp(input_to_resolver)
+    #     utils.print_dictionary(ui_dp, "ui_dp")
 
 # print("num_failed_cases: ", num_failed_cases)
 

@@ -14,6 +14,12 @@ text_pattern_candidates = [
     , class_dp["intermediate_currency"]
 ]
 
+object_detection_candidates = [
+    class_dp["nagging"]
+    , class_dp["gamification"]
+    , class_dp["disguised_ads"]
+]
+
 def get_dp_predicted(dps):
     dp_predicted = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     if len(dps) != 0:
@@ -23,12 +29,12 @@ def get_dp_predicted(dps):
     return dp_predicted
 
 def predict_dp_multi_class(ui_dp):
-    confidence_threshold = .74
+    score_threshold = .75
     dp = []
     votes = []
     dps = []
     for key, value in ui_dp.items():
-        if value["confidence"] >= confidence_threshold:
+        if value["score"] >= score_threshold:
             votes.append(value["votes"])
     votes.sort()
     top_votes = []
@@ -39,7 +45,7 @@ def predict_dp_multi_class(ui_dp):
     if(len(top_votes) != 0):
         for vote in top_votes:
             for key, value in ui_dp.items():
-                if value["votes"] == vote and value["confidence"] >= confidence_threshold and key not in dps:
+                if value["votes"] == vote and value["score"] >= score_threshold and key not in dps:
                     dps.append(key)
     return dps
 
@@ -120,9 +126,9 @@ def resolve_segment_dp(analysis_result, segment_id):
     # text resolve if there is no neighbor
     if len(neighbors) == 0:
         segment_dp_resolution = resolve_text(segment_dp_resolution, analysis_result, segment_id)
-    # confidence calculation for each pattern
+    # score calculation for each pattern
     for pattern, value in segment_dp_resolution.items():
-        confidence = 0
+        score = 0
         visual_vote = False
         spatial_vote = False
         # check if there is visual and/or spatial vote
@@ -130,18 +136,20 @@ def resolve_segment_dp(analysis_result, segment_id):
             visual_vote = True
         if pattern in high_size_diff_patterns:
             spatial_vote = True
-        # calculate confidence
+        # calculate score
         if visual_vote or spatial_vote:
             if visual_vote and spatial_vote:
-                confidence = sum(value["vote_from"]) / len(value["vote_from"])
+                score = sum(value["vote_from"]) / len(value["vote_from"])
             else:
-                confidence = sum(value["vote_from"]) / 3
+                score = sum(value["vote_from"]) / 3
         else:
             if pattern in text_pattern_candidates:
-                confidence = value["vote_from"][0] / 1
+                score = value["vote_from"][0] / 1
+            elif pattern in object_detection_candidates:
+                score = (.80 * value["vote_from"][0]) / 1
             else:
-                confidence = sum(value["vote_from"]) / 2
-        value["confidence"] = confidence
+                score = sum(value["vote_from"]) / 2
+        value["score"] = score
     return segment_dp_resolution
 
 def resolve_ui_dp(segment_dp, object_detection_result):
@@ -152,21 +160,22 @@ def resolve_ui_dp(segment_dp, object_detection_result):
             if pattern in list(ui_dp.keys()):
                 # ui_dp[pattern]["votes"] += segment_dp_resolution[pattern]["votes"]
                 ui_dp[pattern]["votes"] = max(ui_dp[pattern]["votes"], segment_dp_resolution[pattern]["votes"])
-                ui_dp[pattern]["confidence"] = max(ui_dp[pattern]["confidence"], segment_dp_resolution[pattern]["confidence"])
+                ui_dp[pattern]["score"] = max(ui_dp[pattern]["score"], segment_dp_resolution[pattern]["score"])
             else:
                 ui_dp[pattern] = {}
                 ui_dp[pattern]["votes"] = segment_dp_resolution[pattern]["votes"]
-                ui_dp[pattern]["confidence"] = segment_dp_resolution[pattern]["confidence"]
+                ui_dp[pattern]["score"] = segment_dp_resolution[pattern]["score"]
     # augment object detection information
     if object_detection_result is not None:
         for potential_dp in object_detection_result["potential_dp_classes"]:
             if potential_dp in list(ui_dp.keys()):
                 ui_dp[potential_dp]["votes"] += 1
-                ui_dp[potential_dp]["confidence"] = (.80 * ui_dp[potential_dp]["confidence"]) + (.20 * object_detection_result["scores"])
+                # ui_dp[potential_dp]["score"] = (.80 * ui_dp[potential_dp]["score"]) + (.20 * object_detection_result["scores"])
+                ui_dp[potential_dp]["score"] = ui_dp[potential_dp]["score"] + (.20 * object_detection_result["scores"])
             # else:
             #     ui_dp[potential_dp] = {}
             #     ui_dp[potential_dp]["votes"] = 1
-            #     ui_dp[potential_dp]["confidence"] = object_detection_result["scores"]
+            #     ui_dp[potential_dp]["score"] = object_detection_result["scores"]
     return ui_dp
 
 def resolve_dp(input_to_resolver):
