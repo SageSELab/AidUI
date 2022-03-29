@@ -17,7 +17,7 @@ object_detection/object_detection_frcnn_mscoco_boilerplate/.ipynb_checkpoints/
 input/
 
 # output dir
-output/
+# output/
 
 # .pth files
 *.pth
