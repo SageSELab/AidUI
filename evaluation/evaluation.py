@@ -54,7 +54,7 @@ def get_dp_ground_truth(image_file):
     # label binarization
     dps = dp_ground_truth["labels"]
     # print(dps)
-    labels_binarization = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    labels_binarization = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     if len(dps) != 0:
         for dp in dps:
             index = class_dp_bin_index[dp]

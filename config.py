@@ -8,7 +8,7 @@ class_dp = {
     , "attention_distraction": "ATTENTION DISTRACTION"
     , "default_choice": "DEFAULT CHOICE"
     , "friend_spam": "FRIEND SPAM"
-    , "forced_enrollment": "FORCED ENROLLMENT"
+    # , "forced_enrollment": "FORCED ENROLLMENT"
     , "disguised_ads": "DISGUISED ADS"
     , "social_pyramid": "SOCIAL PYRAMID"
     , "privacy_zuckering": "PRIVACY ZUCKERING"
@@ -28,15 +28,15 @@ class_dp_bin_index = {
     , "ATTENTION DISTRACTION": 5
     , "DEFAULT CHOICE": 6
     , "FRIEND SPAM": 7
-    , "FORCED ENROLLMENT": 8
-    , "DISGUISED ADS": 9
-    , "SOCIAL PYRAMID": 10
-    , "PRIVACY ZUCKERING": 11
-    , "INTERMEDIATE CURRENCY": 12
-    , "NAGGING": 13
-    , "GAMIFICATION": 14
-    , "ROACH MOTEL": 15
-    , "FORCED CONTINUITY": 16
+    # , "FORCED ENROLLMENT": 8
+    , "DISGUISED ADS": 8
+    , "SOCIAL PYRAMID": 9
+    , "PRIVACY ZUCKERING": 10
+    , "INTERMEDIATE CURRENCY": 11
+    , "NAGGING": 12
+    , "GAMIFICATION": 13
+    , "ROACH MOTEL": 14
+    , "FORCED CONTINUITY": 15
 }
 
 class_bin_index_to_dp = {
@@ -48,13 +48,13 @@ class_bin_index_to_dp = {
     , "5": "ATTENTION DISTRACTION"
     , "6": "DEFAULT CHOICE"
     , "7": "FRIEND SPAM"
-    , "8": "FORCED ENROLLMENT"
-    , "9": "DISGUISED ADS"
-    , "10": "SOCIAL PYRAMID"
-    , "11": "PRIVACY ZUCKERING"
-    , "12": "INTERMEDIATE CURRENCY"
-    , "13": "NAGGING"
-    , "14": "GAMIFICATION"
-    , "15": "ROACH MOTEL"
-    , "16": "FORCED CONTINUITY"
+    # , "8": "FORCED ENROLLMENT"
+    , "8": "DISGUISED ADS"
+    , "9": "SOCIAL PYRAMID"
+    , "10": "PRIVACY ZUCKERING"
+    , "11": "INTERMEDIATE CURRENCY"
+    , "12": "NAGGING"
+    , "13": "GAMIFICATION"
+    , "14": "ROACH MOTEL"
+    , "15": "FORCED CONTINUITY"
 }

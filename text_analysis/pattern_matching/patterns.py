@@ -559,7 +559,7 @@ pattern3_high_demand_message = [
     {}
 ]
 
-patterns_high_demand_message = [pattern1_high_demand_message, pattern2_high_demand_message, pattern3_high_demand_message]
+patterns_high_demand_message = [pattern1_high_demand_message, pattern2_high_demand_message]
 
 ############################# activity message #################################
 # ==============================================================================

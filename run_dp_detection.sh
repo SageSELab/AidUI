@@ -60,7 +60,7 @@ then
   cp ./input/*.* $destdir
   cd $destdir
   counter=1
-  while [ $counter -le 12 ]
+  while [ $counter -le 13 ]
     do
       echo $counter
       find . -maxdepth 1 -type f |head -15|xargs cp -t "../UIED/data/input"

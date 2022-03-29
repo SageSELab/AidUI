@@ -2,8 +2,8 @@ import dp_resolver.resolver_rules as resolver_rules
 import utils.utils as utils
 from config import *
 
-high_contrast_patterns = [class_dp["attention_distraction"], class_dp["default_choice"]]
-high_size_diff_patterns = [class_dp["attention_distraction"], class_dp["default_choice"]]
+high_contrast_patterns = [class_dp["attention_distraction"], class_dp["default_choice"], class_dp["roach_motel"]]
+high_size_diff_patterns = [class_dp["attention_distraction"], class_dp["default_choice"], class_dp["roach_motel"]]
 
 text_pattern_candidates = [
     class_dp["activity_message"]
@@ -21,7 +21,7 @@ object_detection_candidates = [
 ]
 
 def get_dp_predicted(dps):
-    dp_predicted = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    dp_predicted = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     if len(dps) != 0:
         for dp in dps:
             index = class_dp_bin_index[dp]
@@ -29,7 +29,7 @@ def get_dp_predicted(dps):
     return dp_predicted
 
 def predict_dp_multi_class(ui_dp):
-    score_threshold = .75
+    score_threshold = .50
     dp = []
     votes = []
     dps = []

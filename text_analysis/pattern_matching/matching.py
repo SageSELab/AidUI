@@ -21,7 +21,7 @@ matcher.add(class_dp["intermediate_currency"], patterns.patterns_intermediate_cu
 matcher.add(class_dp["privacy_zuckering"], patterns.patterns_privacy_zuckering)
 matcher.add(class_dp["social_pyramid"], patterns.patterns_social_pyramid)
 matcher.add(class_dp["gamification"], patterns.patterns_gamification)
-matcher.add(class_dp["forced_enrollment"], patterns.patterns_forced_enrollment)
+# matcher.add(class_dp["forced_enrollment"], patterns.patterns_forced_enrollment)
 matcher.add(class_dp["default_choice"], patterns.patterns_default_choice)
 matcher.add(class_dp["attention_distraction"], patterns.patterns_attention_distraction)
 matcher.add(class_dp["disguised_ads"], patterns.patterns_disguised_ads)
