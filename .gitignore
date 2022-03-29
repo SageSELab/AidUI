@@ -21,3 +21,6 @@ input/
 
 # .pth files
 *.pth
+
+# txt files
+no_instances_dps.txt
