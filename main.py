@@ -24,7 +24,9 @@ dp_predictions = []
 dp_expectations = []
 types = []
 
-num_failed_cases = 0
+# threshold value for score
+score_threshold_value = .50
+
 # iterate over the OCR files
 for i in range(len(ocr_files)):
     # print('###################### processing: ', ocr_files[i], '######################')
@@ -44,7 +46,7 @@ for i in range(len(ocr_files)):
     # utils.print_dictionary(object_detection_result, "object_detection_result")
 
     input_to_resolver = {"analysis_result": analysis_result, "object_detection_result": object_detection_result}
-    dp_predicted = resolver.resolve_dp(input_to_resolver)
+    dp_predicted = resolver.resolve_dp(input_to_resolver, score_threshold_value)
     dp_predictions.append(dp_predicted["labels_binarization"])
 
     dp_ground_truth = evaluation.get_dp_ground_truth(image_file)
@@ -69,7 +71,5 @@ for i in range(len(ocr_files)):
     #     ui_dp = resolver.get_ui_dp(input_to_resolver)
     #     utils.print_dictionary(ui_dp, "ui_dp")
 
-# print("num_failed_cases: ", num_failed_cases)
-
 # evaluation
-evaluation.get_evaluation_data(dp_predictions, dp_expectations, types)
+evaluation.evaluate(dp_predictions, dp_expectations, types, score_threshold_value)

@@ -28,8 +28,9 @@ def get_dp_predicted(dps):
             dp_predicted[index] = 1
     return dp_predicted
 
-def predict_dp_multi_class(ui_dp):
-    score_threshold = .50
+def predict_dp_multi_class(ui_dp, score_threshold_value):
+    # score_threshold = .50
+    score_threshold = score_threshold_value
     dp = []
     votes = []
     dps = []
@@ -178,7 +179,7 @@ def resolve_ui_dp(segment_dp, object_detection_result):
             #     ui_dp[potential_dp]["score"] = object_detection_result["scores"]
     return ui_dp
 
-def resolve_dp(input_to_resolver):
+def resolve_dp(input_to_resolver, score_threshold_value):
     analysis_result = input_to_resolver["analysis_result"]
     object_detection_result = input_to_resolver["object_detection_result"]
     segment_dp = {}
@@ -188,7 +189,7 @@ def resolve_dp(input_to_resolver):
     # utils.print_dictionary(segment_dp, "segment_dp")
     ui_dp = resolve_ui_dp(segment_dp, object_detection_result)
     # utils.print_dictionary(ui_dp, "ui_dp")
-    dps = predict_dp_multi_class(ui_dp)
+    dps = predict_dp_multi_class(ui_dp, score_threshold_value)
     # print(dps)
     # dp_predicted = get_dp_predicted(dps)
     # print(dp_predicted)

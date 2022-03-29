@@ -63,7 +63,36 @@ def get_dp_ground_truth(image_file):
     dp_ground_truth["labels_binarization"] = labels_binarization
     return dp_ground_truth
 
-def get_evaluation_data(dp_predictions, dp_expectations, types):
+def get_evaluation_data(dp_predictions, dp_expectations):
+    # calculate num of instances, confusion matrix, precision, recall for all dp categories
+    num_data_points = len(dp_expectations)
+    num_dp_instances = np.array(dp_expectations).sum(0)
+    conf_mat = multilabel_confusion_matrix(np.array(dp_expectations), np.array(dp_predictions))
+    precision = precision_score(dp_expectations, dp_predictions, average=None)
+    recall = recall_score(dp_expectations, dp_predictions, average=None)
+
+    # populate category_info
+    category_info = {}
+    for i in range(len(conf_mat)):
+        category_info[class_bin_index_to_dp[str(i)]] = {
+        "num_instances": str(num_dp_instances[i])
+        , "conf_mat": conf_mat[i].tolist()
+        , "precision": str(precision[i])
+        , "recall": str(recall[i])
+    }
+
+    # populate evaluation_data
+    evaluation_data = {}
+    evaluation_data["num_data_points"] = str(num_data_points)
+    evaluation_data["num_total_dp_instances"] = str(sum(num_dp_instances))
+    evaluation_data["category_info"] = category_info
+    evaluation_data["macro_avg_precision"] = str(precision_score(dp_expectations, dp_predictions, average="macro"))
+    evaluation_data["macro_avg_recall"] = str(recall_score(dp_expectations, dp_predictions, average="macro"))
+    evaluation_data["weighted_avg_precision"] = str(precision_score(dp_expectations, dp_predictions, average="weighted"))
+    evaluation_data["weighted_avg_recall"] = str(recall_score(dp_expectations, dp_predictions, average="weighted"))
+    return evaluation_data
+
+def evaluate(dp_predictions, dp_expectations, types, score_threshold_value):
     # sample code
     # -----------
     # y_gt = np.array([[0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
@@ -80,30 +109,29 @@ def get_evaluation_data(dp_predictions, dp_expectations, types):
     # Precision = TP / (TP + FP)
     # Recall = TP / (TP + FN)
 
-    overall_evaluation_data = {"num_total_dp_instances": None, "category_info": None}
-
-    # calculate num of instances, confusion matrix, precision, recall for all dp categories
-    num_dp_instances = np.array(dp_expectations).sum(0)
-    conf_mat = multilabel_confusion_matrix(np.array(dp_expectations), np.array(dp_predictions))
-    precision = precision_score(dp_expectations, dp_predictions, average=None)
-    recall = recall_score(dp_expectations, dp_predictions, average=None)
-
-    # populate category_info
-    category_info = {}
-    for i in range(len(conf_mat)):
-        category_info[class_bin_index_to_dp[str(i)]] = {
-        "num_instances": num_dp_instances[i]
-        , "conf_mat": conf_mat[i]
-        , "precision": precision[i]
-        , "recall": recall[i]
-    }
-
-    # populate overall_evaluation_data
-    overall_evaluation_data["num_total_dp_instances"] = sum(num_dp_instances)
-    overall_evaluation_data["category_info"] = category_info
-    overall_evaluation_data["macro_avg_precision"] = precision_score(dp_expectations, dp_predictions, average="macro")
-    overall_evaluation_data["macro_avg_recall"] = recall_score(dp_expectations, dp_predictions, average="macro")
-    overall_evaluation_data["weighted_avg_precision"] = precision_score(dp_expectations, dp_predictions, average="weighted")
-    overall_evaluation_data["weighted_avg_recall"] = recall_score(dp_expectations, dp_predictions, average="weighted")
-
+    # for all datapoints
+    overall_evaluation_data = get_evaluation_data(dp_predictions, dp_expectations)
     utils.print_dictionary(overall_evaluation_data, "overall_evaluation_data")
+    utils.write_json_file(overall_evaluation_data, "overall_evaluation_data_" + str(score_threshold_value))
+
+    # for web datapoints
+    web_dp_predictions = []
+    web_dp_expectations = []
+    for i in range(len(types)):
+        if types[i] == "web":
+            web_dp_predictions.append(dp_predictions[i])
+            web_dp_expectations.append(dp_expectations[i])
+    web_evaluation_data = get_evaluation_data(web_dp_predictions, web_dp_expectations)
+    utils.print_dictionary(web_evaluation_data, "web_evaluation_data")
+    utils.write_json_file(web_evaluation_data, "web_evaluation_data_" + str(score_threshold_value))
+
+    # for mobile datapoints
+    mobile_dp_predictions = []
+    mobile_dp_expectations = []
+    for i in range(len(types)):
+        if types[i] == "mobile":
+            mobile_dp_predictions.append(dp_predictions[i])
+            mobile_dp_expectations.append(dp_expectations[i])
+    mobile_evaluation_data = get_evaluation_data(mobile_dp_predictions, mobile_dp_expectations)
+    utils.print_dictionary(mobile_evaluation_data, "mobile_evaluation_data")
+    utils.write_json_file(mobile_evaluation_data, "mobile_evaluation_data_" + str(score_threshold_value))
