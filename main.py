@@ -25,7 +25,7 @@ dp_expectations = []
 types = []
 
 # threshold value for score
-score_threshold_value = .50
+score_threshold_value = .75
 
 # iterate over the OCR files
 for i in range(len(ocr_files)):
