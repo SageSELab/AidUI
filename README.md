@@ -1,5 +1,5 @@
 
-### AidUI (Automatically Identifying Dark Patterns in UI)
+## AidUI (Automatically Identifying Dark Patterns in UI)
 
 **Overall code structure:**
 ```bash
