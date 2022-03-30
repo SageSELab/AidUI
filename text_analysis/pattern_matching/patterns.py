@@ -99,7 +99,8 @@ patterns_bait_and_switch = [pattern1_bait_and_switch, pattern2_bait_and_switch, 
 # - 'call us', 'call', 'phone', 'by phone only', 'contact agent', 'to unsubscribe', 'to discontinue' etc.
 
 pattern1_forced_continuity = [
-    {"LOWER": {"IN": ["cancel", "unsubscribe", "discontinue"]}},
+    {"LOWER": {"IN": ["cancel", "unsubscribe", "discontinue"]}, "OP": "?"},
+    # {"LEMMA": {"IN": ["cancel", "unsubscribe", "discontinue"]}, "OP": "?"},
     {"LOWER": {"IN": ["anytime"]}, "OP": "?"},
     {"LOWER": {"IN": ["by"]}},
     {"LEMMA": {"IN": ["call", "give", "phone", "contact"]}},
@@ -115,6 +116,16 @@ pattern2_forced_continuity = [
     {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["to"]}},
     {"LOWER": {"IN": ["cancel", "unsubscribe", "discontinue"]}}
+]
+
+pattern3_forced_continuity = [
+    {"LEMMA": {"IN": ["cancel", "unsubscribe", "discontinue"]}},
+    {"IS_ALPHA": True, "OP": "*"},
+    {"LOWER": {"IN": ["by"]}},
+    {"LEMMA": {"IN": ["call", "give", "phone", "contact"]}},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LOWER": {"IN": ["call", "only"]}, "OP": "?"}
 ]
 
 patterns_forced_continuity = [pattern1_forced_continuity, pattern2_forced_continuity]
@@ -387,7 +398,7 @@ pattern1_friend_spam = [
     {"IS_ALPHA": True, "OP": "?"},
     {"LOWER": {"IN": ["friends", "contacts"]}},
     {"IS_ALPHA": True, "OP": "?"},
-    {"LOWER": {"IN": ["to"]}, "OP": "?"}
+    {"LOWER": {"IN": ["to"]}}
 ]
 
 patterns_friend_spam = [pattern1_friend_spam]

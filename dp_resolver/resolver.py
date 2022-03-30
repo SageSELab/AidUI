@@ -12,6 +12,7 @@ text_pattern_candidates = [
     , class_dp["limited_time_message"]
     , class_dp["countdown_timer"]
     , class_dp["intermediate_currency"]
+    , class_dp["forced_continuity"]
 ]
 
 object_detection_candidates = [

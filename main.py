@@ -62,14 +62,14 @@ for i in range(len(ocr_files)):
     #     utils.print_dictionary(ui_dp, "ui_dp")
     #     break
 
-    # if("DISGUISED ADS" in dp_ground_truth["labels"]):
-    #     # if(image_file.split("/")[-1] == "(688)www.chicwish.com_4cb6.jpg"):
-    #     print("########################################## filename: ", image_file.split("/")[-1], "####################################")
-    #     print("dp_ground_truth: ", dp_ground_truth["labels"])
-    #     print("dp_predicted: ", dp_predicted["labels"])
-    #     utils.print_dictionary(analysis_result, "analysis_result")
-    #     ui_dp = resolver.get_ui_dp(input_to_resolver)
-    #     utils.print_dictionary(ui_dp, "ui_dp")
+    if("FRIEND SPAM" in dp_ground_truth["labels"]):
+        # if(image_file.split("/")[-1] == "(688)www.chicwish.com_4cb6.jpg"):
+        print("########################################## filename: ", image_file.split("/")[-1], "####################################")
+        print("dp_ground_truth: ", dp_ground_truth["labels"])
+        print("dp_predicted: ", dp_predicted["labels"])
+        utils.print_dictionary(analysis_result, "analysis_result")
+        ui_dp = resolver.get_ui_dp(input_to_resolver)
+        utils.print_dictionary(ui_dp, "ui_dp")
 
 # evaluation
 evaluation.evaluate(dp_predictions, dp_expectations, types, score_threshold_value)
