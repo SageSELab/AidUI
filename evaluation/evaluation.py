@@ -3,6 +3,7 @@ import json
 import shutil
 import numpy as np
 from sklearn.metrics import multilabel_confusion_matrix
+from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 from config import *
@@ -68,6 +69,7 @@ def get_evaluation_data(dp_predictions, dp_expectations):
     num_data_points = len(dp_expectations)
     num_dp_instances = np.array(dp_expectations).sum(0)
     conf_mat = multilabel_confusion_matrix(np.array(dp_expectations), np.array(dp_predictions))
+    accuracy = accuracy_score(dp_expectations, dp_predictions)
     precision = precision_score(dp_expectations, dp_predictions, average=None)
     recall = recall_score(dp_expectations, dp_predictions, average=None)
 
@@ -90,6 +92,7 @@ def get_evaluation_data(dp_predictions, dp_expectations):
     evaluation_data["macro_avg_recall"] = str(recall_score(dp_expectations, dp_predictions, average="macro"))
     evaluation_data["weighted_avg_precision"] = str(precision_score(dp_expectations, dp_predictions, average="weighted"))
     evaluation_data["weighted_avg_recall"] = str(recall_score(dp_expectations, dp_predictions, average="weighted"))
+    evaluation_data["accuracy"] = accuracy
     return evaluation_data
 
 def evaluate(dp_predictions, dp_expectations, types, score_threshold_value):
