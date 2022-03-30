@@ -142,10 +142,10 @@ pattern1_roach_motel = [
     {"LOWER": {"IN": ["trial", "renew", "anytime"]}}
 ]
 
-pattern2_roach_motel = [
-    {"LOWER": {"IN": ["start", "turn", "add", "yes", "next", "sign", "ok", "continue", "unlock", "subscribe", "confirm", "setup"]}},
-    {"LOWER": {"IN": ["on", "in", "up", "off"]}, "OP": "*"}
-]
+# pattern2_roach_motel = [
+#     {"LOWER": {"IN": ["start", "turn", "add", "yes", "next", "sign", "ok", "continue", "unlock", "subscribe", "confirm", "setup"]}},
+#     {"LOWER": {"IN": ["on", "in", "up", "off"]}, "OP": "*"}
+# ]
 
 pattern3_roach_motel = [
     {"LOWER": {"IN": ["decline", "refuse", "don't", "opt"]}},
@@ -153,7 +153,7 @@ pattern3_roach_motel = [
     {"LOWER": {"IN": ["to"]}}
 ]
 
-patterns_roach_motel = [pattern3_roach_motel]
+patterns_roach_motel = [pattern1_roach_motel, pattern3_roach_motel]
 
 ############################# price comparison prevention ######################
 # ==============================================================================

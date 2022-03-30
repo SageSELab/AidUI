@@ -13,6 +13,9 @@ text_pattern_candidates = [
     , class_dp["countdown_timer"]
     , class_dp["intermediate_currency"]
     , class_dp["forced_continuity"]
+    , class_dp["social_pyramid"]
+    , class_dp["friend_spam"]
+    , class_dp["privacy_zuckering"]
 ]
 
 object_detection_candidates = [
