@@ -360,23 +360,32 @@ patterns_default_choice = [
 # - keywords (smaller size):  no, not now, later, cancel, skip, exit etc.
 # - I decline/don't want/opt out/refuse...to...
 
+# pattern1_attention_distraction = [
+#     {"LOWER": {"IN": ["start", "turn", "add", "yes", "next", "sign", "ok", "continue", "unlock", "subscribe", "confirm", "setup"]}},
+#     {"LOWER": {"IN": ["on", "in", "up", "off"]}, "OP": "?"}
+# ]
+#
+# pattern2_attention_distraction = [
+#     {"LOWER": {"IN": ["no", "not", "later", "cancel", "skip", "exit"]}},
+#     {"LOWER": {"IN": ["now", "thanks", "up", "later", "anytime"]}, "OP": "?"}
+# ]
+#
+# pattern3_attention_distraction = [
+#     {"LOWER": {"IN": ["decline", "refuse", "don't", "opt"]}},
+#     {"LOWER": {"IN": ["want", "out"]}, "OP": "?"},
+#     {"LOWER": {"IN": ["to"]}}
+# ]
+
+# patterns_attention_distraction = [pattern1_attention_distraction, pattern2_attention_distraction, pattern3_attention_distraction]
+
 pattern1_attention_distraction = [
-    {"LOWER": {"IN": ["start", "turn", "add", "yes", "next", "sign", "ok", "continue", "unlock", "subscribe", "confirm", "setup"]}},
-    {"LOWER": {"IN": ["on", "in", "up", "off"]}, "OP": "?"}
+    {"LOWER": {"IN": ["yes", "no", "maybe", "may"]}},
+    {"POS": "PUNCT", "OP": "?"},
+    {"IS_ALPHA": True, "OP": "?"},
+    {"LOWER": {"IN": ["agree", "thank", "thanks", "later"]}}
 ]
 
-pattern2_attention_distraction = [
-    {"LOWER": {"IN": ["no", "not", "later", "cancel", "skip", "exit"]}},
-    {"LOWER": {"IN": ["now", "thanks", "up", "later", "anytime"]}, "OP": "?"}
-]
-
-pattern3_attention_distraction = [
-    {"LOWER": {"IN": ["decline", "refuse", "don't", "opt"]}},
-    {"LOWER": {"IN": ["want", "out"]}, "OP": "?"},
-    {"LOWER": {"IN": ["to"]}}
-]
-
-patterns_attention_distraction = [pattern1_attention_distraction, pattern2_attention_distraction, pattern3_attention_distraction]
+patterns_attention_distraction = [pattern1_attention_distraction]
 
 ############################# disguised ads ####################################
 # ==============================================================================

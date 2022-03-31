@@ -21,7 +21,7 @@ text_pattern_candidates = [
 object_detection_candidates = [
     class_dp["nagging"]
     , class_dp["gamification"]
-    , class_dp["disguised_ads"]
+    # , class_dp["disguised_ads"]
 ]
 
 def get_dp_predicted(dps):
