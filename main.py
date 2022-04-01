@@ -9,6 +9,9 @@ import evaluation.evaluation as evaluation
 from config import *
 import utils.utils as utils
 
+import warnings
+warnings.filterwarnings('ignore')
+
 # get input image files
 img_files = [file for file in glob.glob("UIED/data/input/" + "*.*")]
 img_files.sort()
@@ -29,7 +32,7 @@ score_threshold_value = .75
 
 # iterate over the OCR files
 for i in range(len(ocr_files)):
-    print(i, ". processing: ", img_files[i], "######################")
+    print(i, ". processing: ", img_files[i])
 
     # print("------------text_analysis-----------")
     analysis_result = pattern_matching.match_patterns(ocr_files[i])
@@ -62,14 +65,14 @@ for i in range(len(ocr_files)):
     #     utils.print_dictionary(ui_dp, "ui_dp")
     #     break
 
-    if("DEFAULT CHOICE" in dp_predicted["labels"]):
-        # if(image_file == "UIED/data/input/music_30--Music-Bass-Equalizer-0-6_6cef.jpg"):
-        print("########################################## filename: ", image_file.split("/")[-1], "####################################")
-        print("dp_ground_truth: ", dp_ground_truth["labels"])
-        print("dp_predicted: ", dp_predicted["labels"])
-        utils.print_dictionary(analysis_result, "analysis_result")
-        ui_dp = resolver.get_ui_dp(input_to_resolver)
-        utils.print_dictionary(ui_dp, "ui_dp")
+    # if("DEFAULT CHOICE" in dp_predicted["labels"]):
+    #     # if(image_file == "UIED/data/input/music_30--Music-Bass-Equalizer-0-6_6cef.jpg"):
+    #     print("########################################## filename: ", image_file.split("/")[-1], "####################################")
+    #     print("dp_ground_truth: ", dp_ground_truth["labels"])
+    #     print("dp_predicted: ", dp_predicted["labels"])
+    #     utils.print_dictionary(analysis_result, "analysis_result")
+    #     ui_dp = resolver.get_ui_dp(input_to_resolver)
+    #     utils.print_dictionary(ui_dp, "ui_dp")
 
 # evaluation
 evaluation.evaluate(dp_predictions, dp_expectations, types, score_threshold_value)

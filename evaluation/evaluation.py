@@ -64,7 +64,7 @@ def get_dp_ground_truth(image_file):
     dp_ground_truth["labels_binarization"] = labels_binarization
     return dp_ground_truth
 
-def get_evaluation_data(dp_predictions, dp_expectations):
+def get_classification_evaluation_data(dp_predictions, dp_expectations):
     # calculate num of instances, confusion matrix, precision, recall for all dp categories
     num_data_points = len(dp_expectations)
     num_dp_instances = np.array(dp_expectations).sum(0)
@@ -92,7 +92,7 @@ def get_evaluation_data(dp_predictions, dp_expectations):
     evaluation_data["macro_avg_recall"] = str(recall_score(dp_expectations, dp_predictions, average="macro"))
     evaluation_data["weighted_avg_precision"] = str(precision_score(dp_expectations, dp_predictions, average="weighted"))
     evaluation_data["weighted_avg_recall"] = str(recall_score(dp_expectations, dp_predictions, average="weighted"))
-    evaluation_data["accuracy"] = accuracy
+    evaluation_data["accuracy"] = str(accuracy)
     return evaluation_data
 
 def evaluate(dp_predictions, dp_expectations, types, score_threshold_value):
@@ -113,9 +113,10 @@ def evaluate(dp_predictions, dp_expectations, types, score_threshold_value):
     # Recall = TP / (TP + FN)
 
     # for all datapoints
-    overall_evaluation_data = get_evaluation_data(dp_predictions, dp_expectations)
-    utils.print_dictionary(overall_evaluation_data, "overall_evaluation_data")
-    utils.write_json_file(overall_evaluation_data, "overall_evaluation_data_" + str(score_threshold_value))
+    overall_classification_evaluation_data = get_classification_evaluation_data(dp_predictions, dp_expectations)
+    # utils.print_dictionary(overall_classification_evaluation_data, "overall_classification_evaluation_data")
+    utils.write_json_file(overall_classification_evaluation_data, "overall_classification_evaluation_data_" + str(score_threshold_value))
+    utils.print_write_dict_as_panda_table(overall_classification_evaluation_data, "overall_classification_evaluation_data_" + str(score_threshold_value))
 
     # for web datapoints
     web_dp_predictions = []
@@ -124,9 +125,10 @@ def evaluate(dp_predictions, dp_expectations, types, score_threshold_value):
         if types[i] == "web":
             web_dp_predictions.append(dp_predictions[i])
             web_dp_expectations.append(dp_expectations[i])
-    web_evaluation_data = get_evaluation_data(web_dp_predictions, web_dp_expectations)
-    utils.print_dictionary(web_evaluation_data, "web_evaluation_data")
-    utils.write_json_file(web_evaluation_data, "web_evaluation_data_" + str(score_threshold_value))
+    web_classification_evaluation_data = get_classification_evaluation_data(web_dp_predictions, web_dp_expectations)
+    # utils.print_dictionary(web_classification_evaluation_data, "web_classification_evaluation_data")
+    utils.write_json_file(web_classification_evaluation_data, "web_classification_evaluation_data_" + str(score_threshold_value))
+    utils.print_write_dict_as_panda_table(web_classification_evaluation_data, "web_classification_evaluation_data_" + str(score_threshold_value))
 
     # for mobile datapoints
     mobile_dp_predictions = []
@@ -135,6 +137,7 @@ def evaluate(dp_predictions, dp_expectations, types, score_threshold_value):
         if types[i] == "mobile":
             mobile_dp_predictions.append(dp_predictions[i])
             mobile_dp_expectations.append(dp_expectations[i])
-    mobile_evaluation_data = get_evaluation_data(mobile_dp_predictions, mobile_dp_expectations)
-    utils.print_dictionary(mobile_evaluation_data, "mobile_evaluation_data")
-    utils.write_json_file(mobile_evaluation_data, "mobile_evaluation_data_" + str(score_threshold_value))
+    mobile_classification_evaluation_data = get_classification_evaluation_data(mobile_dp_predictions, mobile_dp_expectations)
+    # utils.print_dictionary(mobile_classification_evaluation_data, "mobile_classification_evaluation_data")
+    utils.write_json_file(mobile_classification_evaluation_data, "mobile_classification_evaluation_data_" + str(score_threshold_value))
+    utils.print_write_dict_as_panda_table(mobile_classification_evaluation_data, "mobile_classification_evaluation_data_" + str(score_threshold_value))
