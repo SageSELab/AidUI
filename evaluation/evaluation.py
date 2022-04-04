@@ -21,16 +21,18 @@ def set_dp_ground_truth(annotation_file, type, ground_truth_info):
         shutil.copyfile(src, dst)
         # create annotation info
         labels = []
+        segments = []
         for annotation in data["annotations"]:
             if(annotation["image_id"] == img_id):
                 category_id = annotation["category_id"]
                 for category in data["categories"]:
                     if(category["id"] == category_id):
                         labels.append(category["name"])
+                        segments.append(annotation["bbox"])
         # print(img_filename)
         # print("mobile")
         # print(labels)
-        ground_truth_info[img_filename] = {"type": type, "labels": labels}
+        ground_truth_info[img_filename] = {"type": type, "labels": labels, "segments": segments}
     f.close()
 
 def set_evaluation_data():
