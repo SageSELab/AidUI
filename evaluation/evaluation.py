@@ -64,6 +64,26 @@ def get_dp_ground_truth(image_file):
             labels_binarization[index] = 1
     # print(labels_binarization)
     dp_ground_truth["labels_binarization"] = labels_binarization
+
+    # segment info
+    segments = []
+    for segment in dp_ground_truth["segments"]:
+        column_min = segment[0]
+        row_min = segment[1]
+        width = segment[2]
+        height = segment[3]
+        column_max = column_min + width
+        row_max = row_min + height
+        item = {
+            "column_min": column_min
+            , "column_max": column_max
+            , "row_min": row_min
+            , "row_max": row_max
+            , "width": width
+            , "height": height
+        }
+        segments.append(item)
+    dp_ground_truth["segments"] = segments
     return dp_ground_truth
 
 def get_classification_evaluation_data(dp_predictions, dp_expectations):
