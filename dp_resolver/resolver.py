@@ -24,7 +24,7 @@ object_detection_candidates = [
     # , class_dp["disguised_ads"]
 ]
 
-def get_dp_predicted(dps):
+def get_labels_binarization(dps):
     dp_predicted = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     if len(dps) != 0:
         for dp in dps:
@@ -37,7 +37,8 @@ def predict_dp_multi_class(ui_dp, score_threshold_value):
     score_threshold = score_threshold_value
     dp = []
     votes = []
-    dps = []
+    labels = []
+    segments = []
     for key, value in ui_dp.items():
         if value["score"] >= score_threshold:
             votes.append(value["votes"])
@@ -50,9 +51,10 @@ def predict_dp_multi_class(ui_dp, score_threshold_value):
     if(len(top_votes) != 0):
         for vote in top_votes:
             for key, value in ui_dp.items():
-                if value["votes"] == vote and value["score"] >= score_threshold and key not in dps:
-                    dps.append(key)
-    return dps
+                if value["votes"] == vote and value["score"] >= score_threshold and key not in labels:
+                    labels.append(key)
+                    segments.append(value["segment_info"])
+    return {"labels": labels, "segments": segments}
 
 def is_relative_height_beyond_threshold(height_diff_threshold, segment_height, neighbor_height):
     if abs(segment_height - neighbor_height) > height_diff_threshold:
@@ -75,7 +77,8 @@ def resolve_size(segment_dp_resolution, analysis_result, segment_id, neighbor):
             for pattern in detected_patterns:
                 if pattern in high_size_diff_patterns:
                     # segment_dp_resolution[pattern]["votes"] += 0.5
-                    if(segment_dp_resolution[pattern]["votes"] < 4):
+                    # if(segment_dp_resolution[pattern]["votes"] < 4):
+                    if(segment_dp_resolution[pattern]["votes"] + 0.5 <= 4):
                         segment_dp_resolution[pattern]["votes"] += 0.5
                     segment_dp_resolution[pattern]["vote_from"][3] = 1
     for id in relative_width.keys():
@@ -83,7 +86,8 @@ def resolve_size(segment_dp_resolution, analysis_result, segment_id, neighbor):
             for pattern in detected_patterns:
                 if pattern in high_size_diff_patterns:
                     # segment_dp_resolution[pattern]["votes"] += 0.5
-                    if(segment_dp_resolution[pattern]["votes"] < 4):
+                    # if(segment_dp_resolution[pattern]["votes"] < 4):
+                    if(segment_dp_resolution[pattern]["votes"] + 0.5 <= 4):
                         segment_dp_resolution[pattern]["votes"] += 0.5
                     segment_dp_resolution[pattern]["vote_from"][3] = 1
     return segment_dp_resolution
@@ -98,7 +102,8 @@ def resolve_visual(segment_dp_resolution, analysis_result, segment_id, neighbor)
             for pattern in detected_patterns:
                 if pattern in high_contrast_patterns:
                     # segment_dp_resolution[pattern]["votes"] += 1
-                    if(segment_dp_resolution[pattern]["votes"] < 4):
+                    # if(segment_dp_resolution[pattern]["votes"] < 4):
+                    if(segment_dp_resolution[pattern]["votes"] + 1 <= 4):
                         segment_dp_resolution[pattern]["votes"] += 1
                     segment_dp_resolution[pattern]["vote_from"][2] = 1
     return segment_dp_resolution
@@ -111,11 +116,12 @@ def resolve_text(segment_dp_resolution, analysis_result, segment_id, neighbor=Fa
     for pattern in detected_patterns:
         # segment_dp_resolution[pattern] = 1
         if(pattern not in segment_dp_resolution.keys()):
-            segment_dp_resolution[pattern] = {"votes": 1, "vote_from": [1, 0, 0, 0]}
+            segment_dp_resolution[pattern] = {"votes": 1, "vote_from": [1, 0, 0, 0], "segment_info": analysis_result[segment_id]["segment_info"]}
         if len(detected_patterns_neighbor) != 0:
             if pattern in detected_patterns_neighbor:
                 # segment_dp_resolution[pattern]["votes"] += 1
-                if(segment_dp_resolution[pattern]["votes"] < 4):
+                # if(segment_dp_resolution[pattern]["votes"] < 4):
+                if(segment_dp_resolution[pattern]["votes"] + 1 <= 4):
                     segment_dp_resolution[pattern]["votes"] += 1
                 segment_dp_resolution[pattern]["vote_from"][1] = 1
     return segment_dp_resolution
@@ -164,12 +170,17 @@ def resolve_ui_dp(segment_dp, object_detection_result):
         for pattern in list(segment_dp_resolution.keys()):
             if pattern in list(ui_dp.keys()):
                 # ui_dp[pattern]["votes"] += segment_dp_resolution[pattern]["votes"]
-                ui_dp[pattern]["votes"] = max(ui_dp[pattern]["votes"], segment_dp_resolution[pattern]["votes"])
-                ui_dp[pattern]["score"] = max(ui_dp[pattern]["score"], segment_dp_resolution[pattern]["score"])
+                # ui_dp[pattern]["votes"] = max(ui_dp[pattern]["votes"], segment_dp_resolution[pattern]["votes"])
+                # ui_dp[pattern]["score"] = max(ui_dp[pattern]["score"], segment_dp_resolution[pattern]["score"])
+                if(segment_dp_resolution[pattern]["score"] > ui_dp[pattern]["score"]):
+                    ui_dp[pattern]["votes"] = segment_dp_resolution[pattern]["votes"]
+                    ui_dp[pattern]["score"] = segment_dp_resolution[pattern]["score"]
+                    ui_dp[pattern]["segment_info"] = segment_dp_resolution[pattern]["segment_info"]
             else:
                 ui_dp[pattern] = {}
                 ui_dp[pattern]["votes"] = segment_dp_resolution[pattern]["votes"]
                 ui_dp[pattern]["score"] = segment_dp_resolution[pattern]["score"]
+                ui_dp[pattern]["segment_info"] = segment_dp_resolution[pattern]["segment_info"]
     # augment object detection information
     if object_detection_result is not None:
         for potential_dp in object_detection_result["potential_dp_classes"]:
@@ -193,11 +204,11 @@ def resolve_dp(input_to_resolver, score_threshold_value):
     # utils.print_dictionary(segment_dp, "segment_dp")
     ui_dp = resolve_ui_dp(segment_dp, object_detection_result)
     # utils.print_dictionary(ui_dp, "ui_dp")
-    dps = predict_dp_multi_class(ui_dp, score_threshold_value)
+    multi_class_prediction = predict_dp_multi_class(ui_dp, score_threshold_value)
     # print(dps)
     # dp_predicted = get_dp_predicted(dps)
     # print(dp_predicted)
-    dp_predicted = {"labels": dps, "labels_binarization": get_dp_predicted(dps)}
+    dp_predicted = {"labels": multi_class_prediction["labels"], "segments": multi_class_prediction["segments"], "labels_binarization": get_labels_binarization(multi_class_prediction["labels"])}
     return dp_predicted
 
 def get_ui_dp(input_to_resolver):

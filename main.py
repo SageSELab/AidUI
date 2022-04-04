@@ -23,8 +23,13 @@ ocr_files.sort()
 # print(ocr_files)
 
 # predictions, expectations and types
-dp_predictions = []
+dp_predictions_labels = []
+dp_predictions_segments = []
+dp_predictions_bin = []
+
 dp_expectations = []
+dp_expectations_segments = []
+
 types = []
 
 # threshold value for score
@@ -43,36 +48,45 @@ for i in range(len(ocr_files)):
     analysis_result = proximity_analysis.analyze_proximity(analysis_result, image_file)
     # print("------------size_analysis-----------")
     analysis_result = size_analysis.analyze_size(analysis_result)
-    # utils.print_dictionary(analysis_result, "analysis_result")
     # print("------------object_detection-----------")
     object_detection_result = object_detection.get_object_detection_result(ocr_files[i])
-    # utils.print_dictionary(object_detection_result, "object_detection_result")
 
+    # print("------------dp resolve-----------")
     input_to_resolver = {"analysis_result": analysis_result, "object_detection_result": object_detection_result}
     dp_predicted = resolver.resolve_dp(input_to_resolver, score_threshold_value)
-    dp_predictions.append(dp_predicted["labels_binarization"])
+    dp_predictions_labels.append(dp_predicted["labels"]) # dp_predicted["labels"] is an array of labels
+    dp_predictions_bin.append(dp_predicted["labels_binarization"]) # dp_predicted["labels_binarization"] is an array of 0/1 binary values
+    dp_predictions_segments.append(dp_predicted["segments"]) # dp_predicted["segments"] is an array of segment objects
 
+    # utils.print_dictionary(dp_predictions_labels, "dp_predictions_labels")
+    # utils.print_dictionary(dp_predictions_bin, "dp_predictions_bin")
+    # utils.print_dictionary(dp_predictions_segments, "dp_predictions_segments")
+
+    # print("------------dp ground truth-----------")
     dp_ground_truth = evaluation.get_dp_ground_truth(image_file)
     dp_expectations.append(dp_ground_truth["labels_binarization"])
     types.append(dp_ground_truth["type"])
 
-    # if(image_file.split("/")[-1] == "(159)www.victorianplumbing.co.uk_62cc.jpg"):
-    #     print("\n####################################  filename: ", image_file.split("/")[-1], "######################################################")
-    #     print("dp_ground_truth: ", dp_ground_truth["labels"])
-    #     print("dp_predicted: ", dp_predicted["labels"])
-    #     utils.print_dictionary(analysis_result, "analysis_result")
-    #     ui_dp = resolver.get_ui_dp(input_to_resolver)
-    #     utils.print_dictionary(ui_dp, "ui_dp")
-    #     break
-
-    # if("DEFAULT CHOICE" in dp_predicted["labels"]):
-    #     # if(image_file == "UIED/data/input/music_30--Music-Bass-Equalizer-0-6_6cef.jpg"):
-    #     print("########################################## filename: ", image_file.split("/")[-1], "####################################")
-    #     print("dp_ground_truth: ", dp_ground_truth["labels"])
-    #     print("dp_predicted: ", dp_predicted["labels"])
-    #     utils.print_dictionary(analysis_result, "analysis_result")
-    #     ui_dp = resolver.get_ui_dp(input_to_resolver)
-    #     utils.print_dictionary(ui_dp, "ui_dp")
-
 # evaluation
 evaluation.evaluate(dp_predictions, dp_expectations, types, score_threshold_value)
+
+#####################################################################################################################################################
+################################# DEBUGGING #########################################################################################################
+#####################################################################################################################################################
+# if(image_file.split("/")[-1] == "(159)www.victorianplumbing.co.uk_62cc.jpg"):
+#     print("\n####################################  filename: ", image_file.split("/")[-1], "######################################################")
+#     print("dp_ground_truth: ", dp_ground_truth["labels"])
+#     print("dp_predicted: ", dp_predicted["labels"])
+#     utils.print_dictionary(analysis_result, "analysis_result")
+#     ui_dp = resolver.get_ui_dp(input_to_resolver)
+#     utils.print_dictionary(ui_dp, "ui_dp")
+#     break
+
+# if("DEFAULT CHOICE" in dp_predicted["labels"]):
+#     # if(image_file == "UIED/data/input/music_30--Music-Bass-Equalizer-0-6_6cef.jpg"):
+#     print("########################################## filename: ", image_file.split("/")[-1], "####################################")
+#     print("dp_ground_truth: ", dp_ground_truth["labels"])
+#     print("dp_predicted: ", dp_predicted["labels"])
+#     utils.print_dictionary(analysis_result, "analysis_result")
+#     ui_dp = resolver.get_ui_dp(input_to_resolver)
+#     utils.print_dictionary(ui_dp, "ui_dp")
