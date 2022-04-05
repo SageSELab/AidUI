@@ -1,22 +1,22 @@
 
 ::::::::::::::::::::Aggregate Results::::::::::::::::::::
-   num_total_dp_instances             accuracy weighted_avg_precision  weighted_avg_recall macro_avg_precision    macro_avg_recall
-0                    206  0.32972972972972975     0.6189457252564049  0.49029126213592233  0.5912729631479632  0.5155090161064426 
+   num_total_dp_instances             accuracy weighted_avg_precision weighted_avg_recall macro_avg_precision    macro_avg_recall
+0                    210  0.35135135135135137     0.6642991400134257                 0.5  0.6412729631479632  0.5315804446778711 
 ::::::::::::::::::::::Category Results:::::::::::::::::::
-                  category num_instances           precision              recall
-0        ACTIVITY MESSAGE             1                 1.0                 1.0
-1     HIGH DEMAND MESSAGE             2                 1.0                 0.5
-2       LOW STOCK MESSAGE            10  0.8181818181818182                 0.9
-3    LIMITED TIME MESSAGE            17  0.8571428571428571  0.7058823529411765
-4         COUNTDOWN TIMER            12                 0.5  0.5833333333333334
-5   ATTENTION DISTRACTION            10                 0.2                 0.1
-6          DEFAULT CHOICE            80  0.6888888888888889              0.3875
-7             FRIEND SPAM             2                 0.0                 0.0
-8           DISGUISED ADS            11                 0.0                 0.0
-9          SOCIAL PYRAMID             1                 1.0                 1.0
-10      PRIVACY ZUCKERING             2                 0.0                 0.0
-11  INTERMEDIATE CURRENCY             1                 1.0                 1.0
-12                NAGGING            42  0.5961538461538461  0.7380952380952381
-13           GAMIFICATION            12                 0.8  0.3333333333333333
-14            ROACH MOTEL             1                 0.0                 0.0
-15      FORCED CONTINUITY             2                 1.0                 1.0
+                  category num_instances           precision               recall
+0        ACTIVITY MESSAGE             1                 1.0                  1.0
+1     HIGH DEMAND MESSAGE             2                 1.0                  0.5
+2       LOW STOCK MESSAGE            10  0.8181818181818182                  0.9
+3    LIMITED TIME MESSAGE            17  0.8571428571428571   0.7058823529411765
+4         COUNTDOWN TIMER            12                 0.5   0.5833333333333334
+5   ATTENTION DISTRACTION            14                 1.0  0.35714285714285715
+6          DEFAULT CHOICE            80  0.6888888888888889               0.3875
+7             FRIEND SPAM             2                 0.0                  0.0
+8           DISGUISED ADS            11                 0.0                  0.0
+9          SOCIAL PYRAMID             1                 1.0                  1.0
+10      PRIVACY ZUCKERING             2                 0.0                  0.0
+11  INTERMEDIATE CURRENCY             1                 1.0                  1.0
+12                NAGGING            42  0.5961538461538461   0.7380952380952381
+13           GAMIFICATION            12                 0.8   0.3333333333333333
+14            ROACH MOTEL             1                 0.0                  0.0
+15      FORCED CONTINUITY             2                 1.0                  1.0

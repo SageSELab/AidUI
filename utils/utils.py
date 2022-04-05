@@ -92,3 +92,37 @@ def print_write_dict_as_panda_table(dict, title):
     # print("\n::::::::::::::::::::::Category Results:::::::::::::::::::")
     # print(category_results, file=f)
     f.close()
+
+def print_write_localization_evaluation_result(dict, title):
+    avg_iou = dict["avg_iou"]
+    aggregate_rows = [[avg_iou]]
+
+    category_rows = []
+    for category, values in dict["dp_iou_info"].items():
+        row = []
+        row.append(category)
+        row.append(values["avg_iou"])
+        category_rows.append(row)
+
+    # panda dataframes
+    aggregate_results = pd.DataFrame(aggregate_rows, columns=["avg_iou"])
+    category_results = pd.DataFrame(category_rows, columns=["category", "avg_iou"])
+
+    # print in table
+    print("\n----------------------------", title, "----------------------------")
+    print("\n::::::::::::::::::::Aggregate Results::::::::::::::::::::")
+    print(aggregate_results)
+    print("\n::::::::::::::::::::::Category Results:::::::::::::::::::")
+    print(category_results)
+
+    # write tables in file
+    filename = "./output/" + title + ".txt"
+    f = open(filename, "w")
+    print("\n::::::::::::::::::::Aggregate Results::::::::::::::::::::\n"
+    , aggregate_results
+    , "\n::::::::::::::::::::::Category Results:::::::::::::::::::\n"
+    , category_results, file=f)
+    # print(aggregate_results, file=f)
+    # print("\n::::::::::::::::::::::Category Results:::::::::::::::::::")
+    # print(category_results, file=f)
+    f.close()

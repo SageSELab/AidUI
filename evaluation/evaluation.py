@@ -6,6 +6,8 @@ from sklearn.metrics import multilabel_confusion_matrix
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
+import torch
+import torchvision.ops.boxes as bops
 from config import *
 import utils.utils as utils
 
@@ -124,18 +126,43 @@ def get_localization_evaluation_data(dp_predictions_segments, dp_expectations_se
         expected_labels = dp_expectations_labels[i]
         predicted_segments = dp_predictions_segments[i]
         expected_segments = dp_expectations_segments[i]
-        for j in range(len(predicted_labels)):
-            if(predicted_labels[j]) in expected_labels:
-                prediction_index = j
-                expectation_index = expected_labels.index(predicted_labels[j])
-                predicted_segment = predicted_segments[prediction_index]
-                expected_segment = expected_segments[expectation_index]
-                if(predicted_labels[j] in dp_pred_exp_segments.keys()):
-                    dp_pred_exp_segments[predicted_labels[j]]["predicted_segments"].append(predicted_segment)
-                    dp_pred_exp_segments[predicted_labels[j]]["expected_segments"].append(expected_segment)
-                else:
-                    dp_pred_exp_segments[predicted_labels[j]] = {"predicted_segments": [predicted_segment], "expected_segments": [expected_segment]}
-        utils.print_dictionary(dp_pred_exp_segments, "dp_pred_exp_segments")
+        if(set(predicted_labels) == set(expected_labels)):
+            for j in range(len(predicted_labels)):
+                if(predicted_labels[j]) in expected_labels:
+                    prediction_index = j
+                    expectation_index = expected_labels.index(predicted_labels[j])
+                    predicted_segment = predicted_segments[prediction_index]
+                    expected_segment = expected_segments[expectation_index]
+                    if(predicted_labels[j] in dp_pred_exp_segments.keys()):
+                        dp_pred_exp_segments[predicted_labels[j]]["predicted_segments"].append(predicted_segment)
+                        dp_pred_exp_segments[predicted_labels[j]]["expected_segments"].append(expected_segment)
+                    else:
+                        dp_pred_exp_segments[predicted_labels[j]] = {"predicted_segments": [predicted_segment], "expected_segments": [expected_segment]}
+
+    localization_evaluation_data = {"avg_iou": None, "dp_iou_info": {}}
+    avg_ious = []
+    for key, value in dp_pred_exp_segments.items():
+        predicted_segments= value["predicted_segments"]
+        expected_segments = value["expected_segments"]
+        iou_list = []
+        for i in range(len(predicted_segments)):
+            y_pred = predicted_segments[i]
+            y_expected = expected_segments[i]
+            # print("y_pred", y_pred)
+            # print("y_expected", y_expected)
+            # box1 = torch.tensor([[y_pred["row_min"], y_pred["column_min"], y_pred["row_max"], y_pred["column_max"]]], dtype=torch.float)
+            # box2 = torch.tensor([[y_expected["row_min"], y_expected["column_min"], y_expected["row_max"], y_expected["column_max"]]], dtype=torch.float)
+            box1 = torch.tensor([[y_pred["column_min"], y_pred["row_min"], y_pred["column_max"], y_pred["row_max"]]], dtype=torch.float)
+            box2 = torch.tensor([[y_expected["column_min"], y_expected["row_min"], y_expected["column_max"], y_expected["row_max"]]], dtype=torch.float)
+            iou = bops.box_iou(box1, box2)
+            # print("iou", iou)
+            iou_list.append(float(iou))
+        avg_iou = sum(iou_list) / len(iou_list)
+        localization_evaluation_data["dp_iou_info"][key] = {"iou_list": iou_list, "avg_iou": avg_iou}
+        avg_ious.append(avg_iou)
+    localization_evaluation_data["avg_iou"] = sum(avg_ious) / len(avg_ious)
+    # utils.print_dictionary(localization_evaluation_data, "localization_evaluation_data")
+    return localization_evaluation_data
 
 def evaluate(dp_predictions_bin, dp_expectations_bin, dp_predictions_segments, dp_expectations_segments, dp_predictions_labels, dp_expectations_labels, types, score_threshold_value):
     # sample code
@@ -157,34 +184,65 @@ def evaluate(dp_predictions_bin, dp_expectations_bin, dp_predictions_segments, d
     ########################################
     # for all datapoints
     ########################################
+
+    # classification evaluation
     overall_classification_evaluation_data = get_classification_evaluation_data(dp_predictions_bin, dp_expectations_bin)
     utils.write_json_file(overall_classification_evaluation_data, "overall_classification_evaluation_data_" + str(score_threshold_value))
     utils.print_write_dict_as_panda_table(overall_classification_evaluation_data, "overall_classification_evaluation_data_" + str(score_threshold_value))
+
+    # localization evaluation
+    overall_localization_evaluation_data = get_localization_evaluation_data(dp_predictions_segments, dp_expectations_segments, dp_predictions_labels, dp_expectations_labels)
+    utils.write_json_file(overall_localization_evaluation_data, "overall_localization_evaluation_data_" + str(score_threshold_value))
+    utils.print_write_localization_evaluation_result(overall_localization_evaluation_data, "overall_localization_evaluation_data_" + str(score_threshold_value))
 
     ########################################
     # for web datapoints
     ########################################
     web_dp_predictions_bin = []
     web_dp_expectations_bin = []
+    web_dp_predictions_segments = []
+    web_dp_expectations_segments = []
+    web_dp_predictions_labels = []
+    web_dp_expectations_labels = []
     for i in range(len(types)):
         if types[i] == "web":
             web_dp_predictions_bin.append(dp_predictions_bin[i])
             web_dp_expectations_bin.append(dp_expectations_bin[i])
+            web_dp_predictions_segments.append(dp_predictions_segments[i])
+            web_dp_expectations_segments.append(dp_expectations_segments[i])
+            web_dp_predictions_labels.append(dp_predictions_labels[i])
+            web_dp_expectations_labels.append(dp_expectations_labels[i])
     web_classification_evaluation_data = get_classification_evaluation_data(web_dp_predictions_bin, web_dp_expectations_bin)
     utils.write_json_file(web_classification_evaluation_data, "web_classification_evaluation_data_" + str(score_threshold_value))
     utils.print_write_dict_as_panda_table(web_classification_evaluation_data, "web_classification_evaluation_data_" + str(score_threshold_value))
+
+    # localization evaluation
+    web_localization_evaluation_data = get_localization_evaluation_data(web_dp_predictions_segments, web_dp_expectations_segments, web_dp_predictions_labels, web_dp_expectations_labels)
+    utils.write_json_file(web_localization_evaluation_data, "web_localization_evaluation_data_" + str(score_threshold_value))
+    utils.print_write_localization_evaluation_result(web_localization_evaluation_data, "web_localization_evaluation_data_" + str(score_threshold_value))
 
     ########################################
     # for mobile datapoints
     ########################################
     mobile_dp_predictions_bin = []
     mobile_dp_expectations_bin = []
+    mobile_dp_predictions_segments = []
+    mobile_dp_expectations_segments = []
+    mobile_dp_predictions_labels = []
+    mobile_dp_expectations_labels = []
     for i in range(len(types)):
         if types[i] == "mobile":
             mobile_dp_predictions_bin.append(dp_predictions_bin[i])
             mobile_dp_expectations_bin.append(dp_expectations_bin[i])
+            mobile_dp_predictions_segments.append(dp_predictions_segments[i])
+            mobile_dp_expectations_segments.append(dp_expectations_segments[i])
+            mobile_dp_predictions_labels.append(dp_predictions_labels[i])
+            mobile_dp_expectations_labels.append(dp_expectations_labels[i])
     mobile_classification_evaluation_data = get_classification_evaluation_data(mobile_dp_predictions_bin, mobile_dp_expectations_bin)
     utils.write_json_file(mobile_classification_evaluation_data, "mobile_classification_evaluation_data_" + str(score_threshold_value))
     utils.print_write_dict_as_panda_table(mobile_classification_evaluation_data, "mobile_classification_evaluation_data_" + str(score_threshold_value))
 
-    get_localization_evaluation_data(dp_predictions_segments, dp_expectations_segments, dp_predictions_labels, dp_expectations_labels)
+    # localization evaluation
+    mobile_localization_evaluation_data = get_localization_evaluation_data(mobile_dp_predictions_segments, mobile_dp_expectations_segments, mobile_dp_predictions_labels, mobile_dp_expectations_labels)
+    utils.write_json_file(mobile_localization_evaluation_data, "mobile_localization_evaluation_data_" + str(score_threshold_value))
+    utils.print_write_localization_evaluation_result(mobile_localization_evaluation_data, "mobile_localization_evaluation_data_" + str(score_threshold_value))

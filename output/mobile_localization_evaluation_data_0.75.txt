@@ -1,0 +1,11 @@
+
+::::::::::::::::::::Aggregate Results::::::::::::::::::::
+    avg_iou
+0  0.17891 
+::::::::::::::::::::::Category Results:::::::::::::::::::
+                 category   avg_iou
+0         DEFAULT CHOICE  0.011021
+1  INTERMEDIATE CURRENCY  0.647191
+2                NAGGING  0.042288
+3           GAMIFICATION  0.153783
+4  ATTENTION DISTRACTION  0.040266
