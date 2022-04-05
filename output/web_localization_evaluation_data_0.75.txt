@@ -1,0 +1,14 @@
+
+::::::::::::::::::::Aggregate Results::::::::::::::::::::
+     avg_iou
+0  0.162462 
+::::::::::::::::::::::Category Results:::::::::::::::::::
+                 category   avg_iou
+0         DEFAULT CHOICE  0.036298
+1  ATTENTION DISTRACTION  0.032980
+2        COUNTDOWN TIMER  0.073967
+3   LIMITED TIME MESSAGE  0.306811
+4      LOW STOCK MESSAGE  0.206805
+5       ACTIVITY MESSAGE  0.226023
+6    HIGH DEMAND MESSAGE  0.369085
+7      FORCED CONTINUITY  0.047725

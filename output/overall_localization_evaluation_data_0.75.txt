@@ -1,0 +1,18 @@
+
+::::::::::::::::::::Aggregate Results::::::::::::::::::::
+     avg_iou
+0  0.178219 
+::::::::::::::::::::::Category Results:::::::::::::::::::
+                  category   avg_iou
+0          DEFAULT CHOICE  0.027783
+1   ATTENTION DISTRACTION  0.034437
+2         COUNTDOWN TIMER  0.073967
+3    LIMITED TIME MESSAGE  0.306811
+4       LOW STOCK MESSAGE  0.206805
+5        ACTIVITY MESSAGE  0.226023
+6     HIGH DEMAND MESSAGE  0.369085
+7          SOCIAL PYRAMID  0.015605
+8   INTERMEDIATE CURRENCY  0.647191
+9                 NAGGING  0.038681
+10           GAMIFICATION  0.144517
+11      FORCED CONTINUITY  0.047725

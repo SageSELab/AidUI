@@ -1,0 +1,12 @@
+
+::::::::::::::::::::Aggregate Results::::::::::::::::::::
+    avg_iou
+0  0.15176 
+::::::::::::::::::::::Category Results:::::::::::::::::::
+                 category   avg_iou
+0         SOCIAL PYRAMID  0.015605
+1         DEFAULT CHOICE  0.024300
+2  INTERMEDIATE CURRENCY  0.647191
+3                NAGGING  0.038681
+4           GAMIFICATION  0.144517
+5  ATTENTION DISTRACTION  0.040266
