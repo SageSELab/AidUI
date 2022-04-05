@@ -117,7 +117,27 @@ def get_classification_evaluation_data(dp_predictions, dp_expectations):
     evaluation_data["accuracy"] = str(accuracy)
     return evaluation_data
 
-def evaluate(dp_predictions, dp_expectations, types, score_threshold_value):
+def get_localization_evaluation_data(dp_predictions_segments, dp_expectations_segments, dp_predictions_labels, dp_expectations_labels):
+    dp_pred_exp_segments = {}
+    for i in range(len(dp_predictions_labels)):
+        predicted_labels = dp_predictions_labels[i]
+        expected_labels = dp_expectations_labels[i]
+        predicted_segments = dp_predictions_segments[i]
+        expected_segments = dp_expectations_segments[i]
+        for j in range(len(predicted_labels)):
+            if(predicted_labels[j]) in expected_labels:
+                prediction_index = j
+                expectation_index = expected_labels.index(predicted_labels[j])
+                predicted_segment = predicted_segments[prediction_index]
+                expected_segment = expected_segments[expectation_index]
+                if(predicted_labels[j] in dp_pred_exp_segments.keys()):
+                    dp_pred_exp_segments[predicted_labels[j]]["predicted_segments"].append(predicted_segment)
+                    dp_pred_exp_segments[predicted_labels[j]]["expected_segments"].append(expected_segment)
+                else:
+                    dp_pred_exp_segments[predicted_labels[j]] = {"predicted_segments": [predicted_segment], "expected_segments": [expected_segment]}
+        utils.print_dictionary(dp_pred_exp_segments, "dp_pred_exp_segments")
+
+def evaluate(dp_predictions_bin, dp_expectations_bin, dp_predictions_segments, dp_expectations_segments, dp_predictions_labels, dp_expectations_labels, types, score_threshold_value):
     # sample code
     # -----------
     # y_gt = np.array([[0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
@@ -134,32 +154,37 @@ def evaluate(dp_predictions, dp_expectations, types, score_threshold_value):
     # Precision = TP / (TP + FP)
     # Recall = TP / (TP + FN)
 
+    ########################################
     # for all datapoints
-    overall_classification_evaluation_data = get_classification_evaluation_data(dp_predictions, dp_expectations)
-    # utils.print_dictionary(overall_classification_evaluation_data, "overall_classification_evaluation_data")
+    ########################################
+    overall_classification_evaluation_data = get_classification_evaluation_data(dp_predictions_bin, dp_expectations_bin)
     utils.write_json_file(overall_classification_evaluation_data, "overall_classification_evaluation_data_" + str(score_threshold_value))
     utils.print_write_dict_as_panda_table(overall_classification_evaluation_data, "overall_classification_evaluation_data_" + str(score_threshold_value))
 
+    ########################################
     # for web datapoints
-    web_dp_predictions = []
-    web_dp_expectations = []
+    ########################################
+    web_dp_predictions_bin = []
+    web_dp_expectations_bin = []
     for i in range(len(types)):
         if types[i] == "web":
-            web_dp_predictions.append(dp_predictions[i])
-            web_dp_expectations.append(dp_expectations[i])
-    web_classification_evaluation_data = get_classification_evaluation_data(web_dp_predictions, web_dp_expectations)
-    # utils.print_dictionary(web_classification_evaluation_data, "web_classification_evaluation_data")
+            web_dp_predictions_bin.append(dp_predictions_bin[i])
+            web_dp_expectations_bin.append(dp_expectations_bin[i])
+    web_classification_evaluation_data = get_classification_evaluation_data(web_dp_predictions_bin, web_dp_expectations_bin)
     utils.write_json_file(web_classification_evaluation_data, "web_classification_evaluation_data_" + str(score_threshold_value))
     utils.print_write_dict_as_panda_table(web_classification_evaluation_data, "web_classification_evaluation_data_" + str(score_threshold_value))
 
+    ########################################
     # for mobile datapoints
-    mobile_dp_predictions = []
-    mobile_dp_expectations = []
+    ########################################
+    mobile_dp_predictions_bin = []
+    mobile_dp_expectations_bin = []
     for i in range(len(types)):
         if types[i] == "mobile":
-            mobile_dp_predictions.append(dp_predictions[i])
-            mobile_dp_expectations.append(dp_expectations[i])
-    mobile_classification_evaluation_data = get_classification_evaluation_data(mobile_dp_predictions, mobile_dp_expectations)
-    # utils.print_dictionary(mobile_classification_evaluation_data, "mobile_classification_evaluation_data")
+            mobile_dp_predictions_bin.append(dp_predictions_bin[i])
+            mobile_dp_expectations_bin.append(dp_expectations_bin[i])
+    mobile_classification_evaluation_data = get_classification_evaluation_data(mobile_dp_predictions_bin, mobile_dp_expectations_bin)
     utils.write_json_file(mobile_classification_evaluation_data, "mobile_classification_evaluation_data_" + str(score_threshold_value))
     utils.print_write_dict_as_panda_table(mobile_classification_evaluation_data, "mobile_classification_evaluation_data_" + str(score_threshold_value))
+
+    get_localization_evaluation_data(dp_predictions_segments, dp_expectations_segments, dp_predictions_labels, dp_expectations_labels)
