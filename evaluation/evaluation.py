@@ -126,18 +126,18 @@ def get_localization_evaluation_data(dp_predictions_segments, dp_expectations_se
         expected_labels = dp_expectations_labels[i]
         predicted_segments = dp_predictions_segments[i]
         expected_segments = dp_expectations_segments[i]
-        if(set(predicted_labels) == set(expected_labels)):
-            for j in range(len(predicted_labels)):
-                if(predicted_labels[j]) in expected_labels:
-                    prediction_index = j
-                    expectation_index = expected_labels.index(predicted_labels[j])
-                    predicted_segment = predicted_segments[prediction_index]
-                    expected_segment = expected_segments[expectation_index]
-                    if(predicted_labels[j] in dp_pred_exp_segments.keys()):
-                        dp_pred_exp_segments[predicted_labels[j]]["predicted_segments"].append(predicted_segment)
-                        dp_pred_exp_segments[predicted_labels[j]]["expected_segments"].append(expected_segment)
-                    else:
-                        dp_pred_exp_segments[predicted_labels[j]] = {"predicted_segments": [predicted_segment], "expected_segments": [expected_segment]}
+        # if(set(predicted_labels) == set(expected_labels)):
+        for j in range(len(predicted_labels)):
+            if(predicted_labels[j]) in expected_labels:
+                prediction_index = j
+                expectation_index = expected_labels.index(predicted_labels[j])
+                predicted_segment = predicted_segments[prediction_index]
+                expected_segment = expected_segments[expectation_index]
+                if(predicted_labels[j] in dp_pred_exp_segments.keys()):
+                    dp_pred_exp_segments[predicted_labels[j]]["predicted_segments"].append(predicted_segment)
+                    dp_pred_exp_segments[predicted_labels[j]]["expected_segments"].append(expected_segment)
+                else:
+                    dp_pred_exp_segments[predicted_labels[j]] = {"predicted_segments": [predicted_segment], "expected_segments": [expected_segment]}
 
     localization_evaluation_data = {"avg_iou": None, "dp_iou_info": {}}
     avg_ious = []
