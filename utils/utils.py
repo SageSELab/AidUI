@@ -52,6 +52,8 @@ def print_write_dict_as_panda_table(dict, title):
     weighted_avg_recall = dict["weighted_avg_recall"]
     macro_avg_precision = dict["macro_avg_precision"]
     macro_avg_recall = dict["macro_avg_recall"]
+    avg_precision = dict["avg_precision"]
+    avg_recall = dict["avg_recall"]
     aggregate_rows = [[
         num_total_dp_instances
         , accuracy
@@ -59,6 +61,8 @@ def print_write_dict_as_panda_table(dict, title):
         , weighted_avg_recall
         , macro_avg_precision
         , macro_avg_recall
+        , avg_precision
+        , avg_recall
     ]]
 
     category_rows = []
@@ -71,7 +75,7 @@ def print_write_dict_as_panda_table(dict, title):
         category_rows.append(row)
 
     # panda dataframes
-    aggregate_results = pd.DataFrame(aggregate_rows, columns=["num_total_dp_instances", "accuracy", "weighted_avg_precision", "weighted_avg_recall", "macro_avg_precision", "macro_avg_recall"])
+    aggregate_results = pd.DataFrame(aggregate_rows, columns=["num_total_dp_instances", "accuracy", "weighted_avg_precision", "weighted_avg_recall", "macro_avg_precision", "macro_avg_recall", "avg_precision", "avg_recall"])
     category_results = pd.DataFrame(category_rows, columns=["category", "num_instances", "precision", "recall"])
 
     # print in table

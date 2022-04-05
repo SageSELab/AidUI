@@ -1,7 +1,7 @@
 
 ::::::::::::::::::::Aggregate Results::::::::::::::::::::
-   num_total_dp_instances             accuracy weighted_avg_precision weighted_avg_recall macro_avg_precision    macro_avg_recall
-0                    146  0.30158730158730157     0.7337769080234835   0.410958904109589  0.3320408163265306  0.2187366737739872 
+   num_total_dp_instances             accuracy weighted_avg_precision weighted_avg_recall macro_avg_precision    macro_avg_recall  avg_precision  avg_recall
+0                    146  0.30158730158730157     0.7337769080234835   0.410958904109589  0.3320408163265306  0.2187366737739872       0.664082    0.437473 
 ::::::::::::::::::::::Category Results:::::::::::::::::::
                   category num_instances           precision              recall
 0        ACTIVITY MESSAGE             0                 0.0                 0.0

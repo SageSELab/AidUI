@@ -97,15 +97,23 @@ def get_classification_evaluation_data(dp_predictions, dp_expectations):
     precision = precision_score(dp_expectations, dp_predictions, average=None)
     recall = recall_score(dp_expectations, dp_predictions, average=None)
 
+    precisions = []
+    recalls = []
     # populate category_info
     category_info = {}
     for i in range(len(conf_mat)):
         category_info[class_bin_index_to_dp[str(i)]] = {
-        "num_instances": str(num_dp_instances[i])
-        , "conf_mat": conf_mat[i].tolist()
-        , "precision": str(precision[i])
-        , "recall": str(recall[i])
-    }
+            "num_instances": str(num_dp_instances[i])
+            , "conf_mat": conf_mat[i].tolist()
+            , "precision": str(precision[i])
+            , "recall": str(recall[i])
+        }
+        # populate precisions & recalls list
+        if(num_dp_instances[i] != 0):
+            precisions.append(precision[i])
+            recalls.append(recall[i])
+    avg_precision = sum(precisions) / len(precisions)
+    avg_recall = sum(recalls) / len(recalls)
 
     # populate evaluation_data
     evaluation_data = {}
@@ -117,6 +125,9 @@ def get_classification_evaluation_data(dp_predictions, dp_expectations):
     evaluation_data["weighted_avg_precision"] = str(precision_score(dp_expectations, dp_predictions, average="weighted"))
     evaluation_data["weighted_avg_recall"] = str(recall_score(dp_expectations, dp_predictions, average="weighted"))
     evaluation_data["accuracy"] = str(accuracy)
+
+    evaluation_data["avg_precision"] = avg_precision
+    evaluation_data["avg_recall"] = avg_recall
     return evaluation_data
 
 def get_localization_evaluation_data(dp_predictions_segments, dp_expectations_segments, dp_predictions_labels, dp_expectations_labels):
