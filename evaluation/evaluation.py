@@ -150,29 +150,56 @@ def get_localization_evaluation_data(dp_predictions_segments, dp_expectations_se
                 else:
                     dp_pred_exp_segments[predicted_labels[j]] = {"predicted_segments": [predicted_segment], "expected_segments": [expected_segment]}
 
-    localization_evaluation_data = {"avg_iou": None, "dp_iou_info": {}}
+    localization_evaluation_data = {"avg_iou": None, "custom_avg_iou": None, "dp_iou_info": {}}
     avg_ious = []
+    custom_avg_ious = []
     for key, value in dp_pred_exp_segments.items():
         predicted_segments= value["predicted_segments"]
         expected_segments = value["expected_segments"]
         iou_list = []
+        custom_iou_list = []
         for i in range(len(predicted_segments)):
             y_pred = predicted_segments[i]
             y_expected = expected_segments[i]
-            # print("y_pred", y_pred)
-            # print("y_expected", y_expected)
-            # box1 = torch.tensor([[y_pred["row_min"], y_pred["column_min"], y_pred["row_max"], y_pred["column_max"]]], dtype=torch.float)
-            # box2 = torch.tensor([[y_expected["row_min"], y_expected["column_min"], y_expected["row_max"], y_expected["column_max"]]], dtype=torch.float)
+
+            # typical IoU calculation
             box1 = torch.tensor([[y_pred["column_min"], y_pred["row_min"], y_pred["column_max"], y_pred["row_max"]]], dtype=torch.float)
             box2 = torch.tensor([[y_expected["column_min"], y_expected["row_min"], y_expected["column_max"], y_expected["row_max"]]], dtype=torch.float)
             iou = bops.box_iou(box1, box2)
-            # print("iou", iou)
             iou_list.append(float(iou))
+
+            # custom IoU calculation
+            custom_iou = 0
+            if(
+                y_expected["column_min"] <= y_pred["column_min"] <= y_expected["column_max"]
+                and y_expected["column_min"] <= y_pred["column_max"] <= y_expected["column_max"]
+                and y_expected["row_min"] <= y_pred["row_min"] <= y_expected["row_max"]
+                and y_expected["row_min"] <= y_pred["row_max"] <= y_expected["row_max"]
+            ):
+                custom_iou = 1
+            else:
+                box1 = torch.tensor([[y_pred["column_min"], y_pred["row_min"], y_pred["column_max"], y_pred["row_max"]]], dtype=torch.float)
+                box2 = torch.tensor([[y_expected["column_min"], y_expected["row_min"], y_expected["column_max"], y_expected["row_max"]]], dtype=torch.float)
+                custom_iou = bops.box_iou(box1, box2)
+            custom_iou_list.append(float(custom_iou))
+
         avg_iou = sum(iou_list) / len(iou_list)
-        localization_evaluation_data["dp_iou_info"][key] = {"iou_list": iou_list, "avg_iou": avg_iou}
         avg_ious.append(avg_iou)
+        # do for custom
+        custom_avg_iou = sum(custom_iou_list) / len(custom_iou_list)
+        custom_avg_ious.append(custom_avg_iou)
+
+        localization_evaluation_data["dp_iou_info"][key] = {
+            "iou_list": iou_list
+            , "avg_iou": avg_iou
+            , "custom_iou_list": custom_iou_list
+            , "custom_avg_iou": custom_avg_iou
+        }
+
     localization_evaluation_data["avg_iou"] = sum(avg_ious) / len(avg_ious)
-    # utils.print_dictionary(localization_evaluation_data, "localization_evaluation_data")
+    # do for custom
+    localization_evaluation_data["custom_avg_iou"] = sum(custom_avg_ious) / len(custom_avg_ious)
+
     return localization_evaluation_data
 
 def evaluate(dp_predictions_bin, dp_expectations_bin, dp_predictions_segments, dp_expectations_segments, dp_predictions_labels, dp_expectations_labels, types, score_threshold_value):

@@ -99,18 +99,21 @@ def print_write_dict_as_panda_table(dict, title):
 
 def print_write_localization_evaluation_result(dict, title):
     avg_iou = dict["avg_iou"]
-    aggregate_rows = [[avg_iou]]
+    # do for custom
+    custom_avg_iou = dict["custom_avg_iou"]
+    aggregate_rows = [[avg_iou, custom_avg_iou]]
 
     category_rows = []
     for category, values in dict["dp_iou_info"].items():
         row = []
         row.append(category)
         row.append(values["avg_iou"])
+        row.append(values["custom_avg_iou"])
         category_rows.append(row)
 
     # panda dataframes
-    aggregate_results = pd.DataFrame(aggregate_rows, columns=["avg_iou"])
-    category_results = pd.DataFrame(category_rows, columns=["category", "avg_iou"])
+    aggregate_results = pd.DataFrame(aggregate_rows, columns=["avg_iou", "custom_avg_iou"])
+    category_results = pd.DataFrame(category_rows, columns=["category", "avg_iou", "custom_avg_iou"])
 
     # print in table
     print("\n----------------------------", title, "----------------------------")

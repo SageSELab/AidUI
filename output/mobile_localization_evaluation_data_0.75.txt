@@ -1,12 +1,12 @@
 
 ::::::::::::::::::::Aggregate Results::::::::::::::::::::
-    avg_iou
-0  0.15176 
+    avg_iou  custom_avg_iou
+0  0.15176         0.88545 
 ::::::::::::::::::::::Category Results:::::::::::::::::::
-                 category   avg_iou
-0         SOCIAL PYRAMID  0.015605
-1         DEFAULT CHOICE  0.024300
-2  INTERMEDIATE CURRENCY  0.647191
-3                NAGGING  0.038681
-4           GAMIFICATION  0.144517
-5  ATTENTION DISTRACTION  0.040266
+                 category   avg_iou  custom_avg_iou
+0         SOCIAL PYRAMID  0.015605        1.000000
+1         DEFAULT CHOICE  0.024300        0.500000
+2  INTERMEDIATE CURRENCY  0.647191        1.000000
+3                NAGGING  0.038681        0.812698
+4           GAMIFICATION  0.144517        1.000000
+5  ATTENTION DISTRACTION  0.040266        1.000000
