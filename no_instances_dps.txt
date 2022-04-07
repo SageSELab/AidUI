@@ -6,3 +6,24 @@ HIGH DEMAND MESSAGE
 PRIVACY ZUCKERING
 ROACH MOTEL
 SOCIAL PYRAMID
+
+
+FAILED cases
+----------------------
+
+########################################## filename:  FRIEND_SPAM_1.png ####################################
+dp_ground_truth:  ['FRIEND SPAM']
+dp_predicted:  []
+
+
+########################################## filename:  privacy_zuckering_1.png ####################################
+dp_ground_truth:  ['PRIVACY ZUCKERING']
+dp_predicted:  []
+
+########################################## filename:  roach_motel_1.png ####################################
+dp_ground_truth:  ['ROACH MOTEL']
+dp_predicted:  ['DEFAULT CHOICE']
+
+########################################## filename:  music_17--Free-Music-8-40_4b8a.jpg ####################################
+dp_ground_truth:  ['DISGUISED ADS']
+dp_predicted:  []
