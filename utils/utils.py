@@ -1,3 +1,4 @@
+import os
 import cv2
 import json
 from matplotlib import pyplot as plt
@@ -133,3 +134,26 @@ def print_write_localization_evaluation_result(dict, title):
     # print("\n::::::::::::::::::::::Category Results:::::::::::::::::::")
     # print(category_results, file=f)
     f.close()
+
+def draw_expectation_prediction_bbox(file, expected_segments, predicted_segments, expected_labels, predicted_labels):
+    if(len(expected_segments) == 1 and len(predicted_segments) == 1):
+        if("GAMIFICATION" in expected_labels):
+            print("file", file)
+            print("---------expected_segments-----------")
+            pp.pprint(expected_segments)
+            print("---------predicted_segments-----------")
+            pp.pprint(predicted_segments)
+            try:
+                # read the input image
+                out_img = cv2.imread(file)
+                # draw bounding box
+                cv2.rectangle(out_img,(expected_segments[0]["column_min"], expected_segments[0]["row_min"]),(expected_segments[0]["column_max"], expected_segments[0]["row_max"]),(0,255,0), 2)
+                cv2.rectangle(out_img,(predicted_segments[0]["column_min"], predicted_segments[0]["row_min"]),(predicted_segments[0]["column_max"], predicted_segments[0]["row_max"]),(0,0,255), 2)
+                # write updated image
+                destination_dir = "./output/bboxes/"
+                filename = file.split("/")[-1]
+                if(not os.path.exists(destination_dir)):
+                    os.mkdir(destination_dir)
+                cv2.imwrite(destination_dir + filename, out_img)
+            except Exception as e:
+                print(e)

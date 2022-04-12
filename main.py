@@ -76,6 +76,9 @@ for i in range(len(ocr_files)):
     # utils.print_dictionary(types, "types")
     # break
 
+    # drawing ground truth and predicted bboxes
+    utils.draw_expectation_prediction_bbox(image_file, dp_ground_truth["segments"], dp_predicted["segments"], dp_ground_truth["labels"], dp_predicted["labels"])
+
 # evaluation
 evaluation.evaluate(dp_predictions_bin, dp_expectations_bin, dp_predictions_segments, dp_expectations_segments, dp_predictions_labels, dp_expectations_labels, types, score_threshold_value)
 
