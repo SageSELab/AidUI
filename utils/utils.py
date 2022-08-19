@@ -46,7 +46,26 @@ def plot_barchart():
     # plt.show()
     plt.savefig('books_read.png')
 
-def print_write_dict_as_panda_table(dict, title):
+def print_classification_evaluation_aggregate_result(dict):
+    aggregate_rows = []
+    for category, values in dict.items():
+        row = []
+        row.append(category)
+        row.append(values["num_data_points"])
+        row.append(values["num_instances"])
+        row.append(values["precision"])
+        row.append(values["recall"])
+        aggregate_rows.append(row)
+
+    # panda dataframes
+    aggregate_results = pd.DataFrame(aggregate_rows, columns=["category", "num_data_points", "num_instances", "precision", "recall"])
+
+    # print in table
+    print("::::::::::::::::::::Aggregate Results::::::::::::::::::::")
+    print(aggregate_results)
+
+def print_write_classification_evaluation_result(dict, title):
+    num_data_points = dict["num_data_points"]
     num_total_dp_instances = dict["num_total_dp_instances"]
     accuracy = dict["accuracy"]
     weighted_avg_precision = dict["weighted_avg_precision"]
@@ -56,7 +75,8 @@ def print_write_dict_as_panda_table(dict, title):
     avg_precision = dict["avg_precision"]
     avg_recall = dict["avg_recall"]
     aggregate_rows = [[
-        num_total_dp_instances
+        num_data_points
+        , num_total_dp_instances
         , accuracy
         , weighted_avg_precision
         , weighted_avg_recall
@@ -76,11 +96,13 @@ def print_write_dict_as_panda_table(dict, title):
         category_rows.append(row)
 
     # panda dataframes
-    aggregate_results = pd.DataFrame(aggregate_rows, columns=["num_total_dp_instances", "accuracy", "weighted_avg_precision", "weighted_avg_recall", "macro_avg_precision", "macro_avg_recall", "avg_precision", "avg_recall"])
+    aggregate_results = pd.DataFrame(aggregate_rows, columns=["num_data_points", "num_total_dp_instances", "accuracy", "weighted_avg_precision", "weighted_avg_recall", "macro_avg_precision", "macro_avg_recall", "avg_precision", "avg_recall"])
     category_results = pd.DataFrame(category_rows, columns=["category", "num_instances", "precision", "recall"])
 
     # print in table
-    print("\n----------------------------", title, "----------------------------")
+    print("\n###############################################################################################################################")
+    print("\n##########################################################", title, "#######################")
+    print("\n###############################################################################################################################")
     print("\n::::::::::::::::::::Aggregate Results::::::::::::::::::::")
     print(aggregate_results)
     print("\n::::::::::::::::::::::Category Results:::::::::::::::::::")
@@ -117,7 +139,9 @@ def print_write_localization_evaluation_result(dict, title):
     category_results = pd.DataFrame(category_rows, columns=["category", "avg_iou", "custom_avg_iou"])
 
     # print in table
-    print("\n----------------------------", title, "----------------------------")
+    print("\n###############################################################################################################################")
+    print("\n##########################################################", title, "#######################")
+    print("\n###############################################################################################################################")
     print("\n::::::::::::::::::::Aggregate Results::::::::::::::::::::")
     print(aggregate_results)
     print("\n::::::::::::::::::::::Category Results:::::::::::::::::::")

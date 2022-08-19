@@ -1,8 +1,9 @@
 import dp_resolver.resolver_rules as resolver_rules
 import utils.utils as utils
+import text_analysis.pattern_matching.patterns as patterns
 from config import *
 
-high_contrast_patterns = [class_dp["attention_distraction"], class_dp["default_choice"], class_dp["roach_motel"]]
+high_contrast_patterns = [class_dp["attention_distraction"], class_dp["roach_motel"]]
 high_size_diff_patterns = [class_dp["attention_distraction"], class_dp["default_choice"], class_dp["roach_motel"]]
 
 text_pattern_candidates = [
@@ -21,11 +22,65 @@ text_pattern_candidates = [
 object_detection_candidates = [
     class_dp["nagging"]
     , class_dp["gamification"]
-    # , class_dp["disguised_ads"]
+    , class_dp["disguised_ads"]
 ]
 
+co_existing_group_1 = [
+    class_dp["nagging"]
+    , class_dp["disguised_ads"]
+    , class_dp["default_choice"]
+]
+
+co_existing_group_2 = [
+    class_dp["high_demand_message"]
+    , class_dp["low_stock_message"]
+    , class_dp["limited_time_message"]
+]
+
+def filter_segment_dp(segment_dp):
+    segment_ids = []
+    segment_contents = []
+    segment_spans = []
+    segment_categories = []
+    selected_segment_ids = []
+    selected_segment_categories = []
+    for segment_id, value in segment_dp.items():
+        if(class_dp["default_choice"] in value.keys()):
+            segment_ids.append(segment_id)
+            segment_contents.append(value[class_dp["default_choice"]]["segment_info"]["content"])
+            segment_spans.append(value[class_dp["default_choice"]]["segment_info"]["span"])
+            segment_categories.append(class_dp["default_choice"])
+        if(class_dp["nagging"] in value.keys()):
+            segment_ids.append(segment_id)
+            segment_contents.append(value[class_dp["nagging"]]["segment_info"]["content"])
+            segment_spans.append(value[class_dp["nagging"]]["segment_info"]["span"])
+            segment_categories.append(class_dp["nagging"])
+    for i in range(len(segment_contents)):
+        content = segment_contents[i]
+        span = segment_spans[i]
+        category = segment_categories[i]
+        if(category == class_dp["default_choice"]):
+            if((len(span)/len(content)) < .40):
+                selected_segment_ids.append(segment_ids[i])
+                selected_segment_categories.append(segment_categories[i])
+        else:
+            if((len(span)/len(content)) < .40):
+                selected_segment_ids.append(segment_ids[i])
+                selected_segment_categories.append(segment_categories[i])
+    # for segment_id in selected_segment_ids:
+    #     segment_dp[segment_id][class_dp["default_choice"]]["score"] = 0
+    for i in range(len(selected_segment_ids)):
+        if(selected_segment_categories[i] == class_dp["default_choice"]):
+            segment_id = selected_segment_ids[i]
+            segment_dp[segment_id][class_dp["default_choice"]]["score"] = 0
+        else:
+            segment_id = selected_segment_ids[i]
+            segment_dp[segment_id][class_dp["nagging"]]["score"] = 0
+    return segment_dp
+
 def get_labels_binarization(dps):
-    dp_predicted = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    # dp_predicted = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    dp_predicted = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     if len(dps) != 0:
         for dp in dps:
             index = class_dp_bin_index[dp]
@@ -38,22 +93,84 @@ def predict_dp_multi_class(ui_dp, score_threshold_value):
     dp = []
     votes = []
     labels = []
+    scores = []
+    votes_above_threshold = []
     segments = []
+    patterns_below_threshold = []
+    scores_below_threshold = []
+    votes_below_threshold = []
+    segments_below_threshold = []
+    # finding candidates above threshold
     for key, value in ui_dp.items():
         if value["score"] >= score_threshold:
             votes.append(value["votes"])
+        else:
+            patterns_below_threshold.append(key)
+            scores_below_threshold.append(value["score"])
+            votes_below_threshold.append(value["votes"])
+            segments_below_threshold.append(value["segment_info"])
+    # finding top votes
     votes.sort()
     top_votes = []
     while(len(votes) != 0):
         top_votes.append(votes.pop())
         if(len(top_votes) == 2):
             break
+    # finding candidates with top votes with threshold
     if(len(top_votes) != 0):
         for vote in top_votes:
             for key, value in ui_dp.items():
                 if value["votes"] == vote and value["score"] >= score_threshold and key not in labels:
                     labels.append(key)
                     segments.append(value["segment_info"])
+                    scores.append(value["score"])
+                    votes_above_threshold.append(value["votes"])
+    # if nothing qualifies above threshold
+    if(len(labels) == 0):
+        if(len(patterns_below_threshold) != 0):
+            print("patterns_below_threshold", patterns_below_threshold)
+            print("segments_below_threshold", segments_below_threshold)
+            print("scores_below_threshold", scores_below_threshold)
+            print("votes_below_threshold", votes_below_threshold)
+            if(patterns_below_threshold[0] not in [class_dp["default_choice"]]):
+                labels.append(patterns_below_threshold[0])
+                segments.append(segments_below_threshold[0])
+                scores.append(scores_below_threshold[0])
+                votes_above_threshold.append(votes_below_threshold[0])
+            # for i in range(len(patterns_below_threshold)):
+            #     if(patterns_below_threshold[0] != class_dp["default_choice"]):
+            #         labels.append(patterns_below_threshold[i])
+            #         segments.append(segments_below_threshold[i])
+            #         scores.append(scores_below_threshold[i])
+            #         votes_above_threshold.append(votes_below_threshold[i])
+
+
+    ######################### filtering candidates #########################
+    ########################################################################
+
+    # removing COUNTDOWN TIMER (depending on co_existing_flag_1 & co_existing_flag_2)
+    if(len(labels) != 0):
+        co_existing_flag_1 = 0
+        co_existing_flag_2 = 0
+        if(class_dp["countdown_timer"] in labels):
+            index_label_countdown_timer = labels.index(class_dp["countdown_timer"])
+            for label in labels:
+                if(label != class_dp["countdown_timer"] and label in co_existing_group_1):
+                    co_existing_flag_1 = 1
+                if(label != class_dp["countdown_timer"] and label in co_existing_group_2):
+                    co_existing_flag_2 = 1
+        if(co_existing_flag_1 == 1 and co_existing_flag_2 == 0):
+            del labels[index_label_countdown_timer]
+            del segments[index_label_countdown_timer]
+            del scores[index_label_countdown_timer]
+            del votes_above_threshold[index_label_countdown_timer]
+
+    ################################ NO DP #################################
+    ########################################################################
+    if(len(labels) == 0):
+        print("::::::::::: NO DP :::::::::::")
+        labels.append(class_dp["no_dp"])
+
     return {"labels": labels, "segments": segments}
 
 def is_relative_height_beyond_threshold(height_diff_threshold, segment_height, neighbor_height):
@@ -121,9 +238,11 @@ def resolve_text(segment_dp_resolution, analysis_result, segment_id, neighbor=Fa
             if pattern in detected_patterns_neighbor:
                 # segment_dp_resolution[pattern]["votes"] += 1
                 # if(segment_dp_resolution[pattern]["votes"] < 4):
-                if(segment_dp_resolution[pattern]["votes"] + 1 <= 4):
-                    segment_dp_resolution[pattern]["votes"] += 1
-                segment_dp_resolution[pattern]["vote_from"][1] = 1
+                if pattern in high_size_diff_patterns:
+                    if(segment_dp_resolution[pattern]["votes"] + 1 <= 4):
+                        segment_dp_resolution[pattern]["votes"] += 1
+                    segment_dp_resolution[pattern]["vote_from"][1] = 1
+    # print(detected_patterns_neighbor)
     return segment_dp_resolution
 
 def resolve_segment_dp(analysis_result, segment_id):
@@ -157,7 +276,7 @@ def resolve_segment_dp(analysis_result, segment_id):
             if pattern in text_pattern_candidates:
                 score = value["vote_from"][0] / 1
             elif pattern in object_detection_candidates:
-                score = (.80 * value["vote_from"][0]) / 1
+                score = (.90 * value["vote_from"][0]) / 1
             else:
                 score = sum(value["vote_from"]) / 2
         value["score"] = score
@@ -187,11 +306,13 @@ def resolve_ui_dp(segment_dp, object_detection_result):
             if potential_dp in list(ui_dp.keys()):
                 ui_dp[potential_dp]["votes"] += 1
                 # ui_dp[potential_dp]["score"] = (.80 * ui_dp[potential_dp]["score"]) + (.20 * object_detection_result["scores"])
-                ui_dp[potential_dp]["score"] = ui_dp[potential_dp]["score"] + (.20 * object_detection_result["scores"])
-            # else:
-            #     ui_dp[potential_dp] = {}
-            #     ui_dp[potential_dp]["votes"] = 1
-            #     ui_dp[potential_dp]["score"] = object_detection_result["scores"]
+                ui_dp[potential_dp]["score"] = ui_dp[potential_dp]["score"] + (.10 * object_detection_result["scores"])
+            else:
+                ui_dp[potential_dp] = {}
+                ui_dp[potential_dp]["votes"] = 1
+                # ui_dp[potential_dp]["score"] = object_detection_result["scores"]
+                ui_dp[potential_dp]["score"] = .50
+                ui_dp[potential_dp]["segment_info"] = {'column_min': 212, 'height': 26, 'row_min': 1260, 'column_max': 1823, 'width': 1611, 'row_max': 1286, 'id': 42}
     return ui_dp
 
 def resolve_dp(input_to_resolver, score_threshold_value):
@@ -202,6 +323,7 @@ def resolve_dp(input_to_resolver, score_threshold_value):
         segment_dp_resolution = resolve_segment_dp(analysis_result, segment_id)
         segment_dp[segment_id] = segment_dp_resolution
     # utils.print_dictionary(segment_dp, "segment_dp")
+    filter_segment_dp(segment_dp)
     ui_dp = resolve_ui_dp(segment_dp, object_detection_result)
     # utils.print_dictionary(ui_dp, "ui_dp")
     multi_class_prediction = predict_dp_multi_class(ui_dp, score_threshold_value)

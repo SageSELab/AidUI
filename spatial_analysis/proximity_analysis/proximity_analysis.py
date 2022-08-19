@@ -28,7 +28,8 @@ def analyze_proximity(dictionary, image_file):
     img = cv2.imread(image_file)
     img_size = img.shape[0] * img.shape[1]
     # print("img size: ", img_size)
-    k = int(img_size * 0.00005) # proximity factor
+    # k = int(img_size * 0.00005) # proximity factor
+    k = int(img_size * 0.05005) # proximity factor
     # print("k: ", k)
 
     # image row/column min/max

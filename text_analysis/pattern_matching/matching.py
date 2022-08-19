@@ -14,18 +14,18 @@ matcher = Matcher(nlp.vocab)
 
 # Define pattern class with corresponding patterns
 matcher.add(class_dp["nagging"], patterns.patterns_nagging)
-matcher.add(class_dp["forced_continuity"], patterns.patterns_forced_continuity)
-matcher.add(class_dp["roach_motel"], patterns.patterns_roach_motel)
+# matcher.add(class_dp["forced_continuity"], patterns.patterns_forced_continuity)
+# matcher.add(class_dp["roach_motel"], patterns.patterns_roach_motel)
 # matcher.add(class_dp["price_comparison_prevention"], patterns.patterns_price_comparison_prevention)
-matcher.add(class_dp["intermediate_currency"], patterns.patterns_intermediate_currency)
-matcher.add(class_dp["privacy_zuckering"], patterns.patterns_privacy_zuckering)
-matcher.add(class_dp["social_pyramid"], patterns.patterns_social_pyramid)
+# matcher.add(class_dp["intermediate_currency"], patterns.patterns_intermediate_currency)
+# matcher.add(class_dp["privacy_zuckering"], patterns.patterns_privacy_zuckering)
+# matcher.add(class_dp["social_pyramid"], patterns.patterns_social_pyramid)
 matcher.add(class_dp["gamification"], patterns.patterns_gamification)
 # matcher.add(class_dp["forced_enrollment"], patterns.patterns_forced_enrollment)
 matcher.add(class_dp["default_choice"], patterns.patterns_default_choice)
 matcher.add(class_dp["attention_distraction"], patterns.patterns_attention_distraction)
 matcher.add(class_dp["disguised_ads"], patterns.patterns_disguised_ads)
-matcher.add(class_dp["friend_spam"], patterns.patterns_friend_spam)
+# matcher.add(class_dp["friend_spam"], patterns.patterns_friend_spam)
 matcher.add(class_dp["countdown_timer"], patterns.patterns_countdown_timer)
 matcher.add(class_dp["limited_time_message"], patterns.patterns_limited_time_message)
 matcher.add(class_dp["low_stock_message"], patterns.patterns_low_stock_message)
@@ -42,6 +42,7 @@ def on_match(doc, match_id, start, end, text_segment, segments):
 
     # update segments object
     if str(id) not in segments.keys():
+        text_segment["span"] = span.text
         segments[str(id)] = {}
         segments[str(id)]["segment_info"] = text_segment
         segments[str(id)]["text_analysis"] = {}

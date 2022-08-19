@@ -3,9 +3,11 @@
 # keywords: Rate, Rating, Star, Like, Upvote etc.
 
 pattern1_nagging = [
-    {"LEMMA": {"IN": ["rate", "like", "upvote"]}},
+    # {"LEMMA": {"IN": ["rate", "like", "upvote"]}},
+    {"LEMMA": {"IN": ["rate", "upvote"]}},
     {"LOWER": {"IN": ["this"]}, "OP": "?"},
-    {"LOWER": {"IN": ["us", "app", "it", "now"]}},
+    # {"LOWER": {"IN": ["us", "app", "it", "now", "image", "picture", "video", "feature"]}},
+    {"LOWER": {"IN": ["us", "app", "now", "image", "picture", "video", "feature"]}},
     {"LOWER": {"IN": ["now"]}, "OP": "?"}
 ]
 
@@ -14,7 +16,8 @@ pattern2_nagging = [
 ]
 
 pattern3_nagging = [
-    {"LOWER": {"IN": ["install", "download"]}},
+    # {"LOWER": {"IN": ["install", "download"]}},
+    {"LOWER": {"IN": ["install"]}},
     {"LOWER": {"IN": ["now"]}, "OP": "?"}
 ]
 
@@ -327,31 +330,32 @@ patterns_forced_enrollment = [pattern1_forced_enrollment, pattern2_forced_enroll
 # by subscribing ....agree/consent to ....
 
 pattern1_default_choice = [
-    {"LOWER": {"IN": ["start", "turn", "add", "yes", "next", "sign", "ok", "continue", "unlock", "subscribe", "confirm", "setup"]}},
+    {"LOWER": {"IN": ["start", "turn", "yes", "next", "sign", "ok", "continue", "unlock", "confirm", "setup", "set"]}},
     {"LOWER": {"IN": ["on", "in", "up", "off"]}, "OP": "?"}
 ]
 
 pattern2_default_choice = [
-    {"LOWER": {"IN": ["no", "not", "later", "cancel", "skip", "exit"]}},
+    {"LOWER": {"IN": ["no", "later", "cancel", "skip", "exit"]}},
     {"LOWER": {"IN": ["now", "thanks", "up", "later", "anytime"]}, "OP": "?"}
 ]
 
 pattern3_default_choice = [
-    {"LOWER": {"IN": ["notify", "notification"]}}
+    # {"LOWER": {"IN": ["notify", "notification", "notifications"]}}
+    {"LOWER": {"IN": ["notification", "notifications"]}}
 ]
 
-pattern4_default_choice = [
-    {"LEMMA": {"IN": ["click", "press", "subscribe", "use"]}, "OP": "?"},
-    {"IS_ALPHA": True, "OP": "*"},
-    {"LEMMA": {"IN": ["agree", "consent", "give"]}},
-    {"IS_ALPHA": True, "OP": "?"},
-    {"LOWER": {"IN": ["permission", "consent"]}, "OP": "?"},
-    {"LOWER": {"IN": ["to"]}, "OP": "?"}
-]
+# pattern4_default_choice = [
+#     {"LEMMA": {"IN": ["click", "press", "subscribe", "use"]}, "OP": "?"},
+#     {"IS_ALPHA": True, "OP": "*"},
+#     {"LEMMA": {"IN": ["agree", "consent", "give"]}},
+#     {"IS_ALPHA": True, "OP": "?"},
+#     {"LOWER": {"IN": ["permission", "consent"]}, "OP": "?"},
+#     {"LOWER": {"IN": ["to"]}, "OP": "?"}
+# ]
 
 patterns_default_choice = [
     pattern1_default_choice, pattern2_default_choice,
-    pattern3_default_choice, pattern4_default_choice
+    pattern3_default_choice
 ]
 
 ############################# attention distraction ############################
@@ -453,12 +457,12 @@ patterns_false_hierarchy = [pattern1_false_hierarchy, pattern2_false_hierarchy]
 #     {"POS": "NUM", "OP": "*"}
 # ]
 
-pattern3_countdown_timer = [
-    {"LOWER": {"IN": ['shop', "order", "time", "sale"]}},
-    {"LOWER": {"IN": ["by", "within", "remaining", "countdown"]}},
-    {"POS": "PUNCT", "OP": "*"},
-    {"POS": "NUM", "OP": "*"}
-]
+# pattern3_countdown_timer = [
+#     {"LOWER": {"IN": ['shop', "order", "time", "sale"]}},
+#     {"LOWER": {"IN": ["by", "within", "remaining", "countdown"]}},
+#     {"POS": "PUNCT", "OP": "*"},
+#     {"POS": "NUM", "OP": "*"}
+# ]
 
 # pattern4_countdown_timer = [
 #     {"POS": "NUM"},
@@ -481,6 +485,17 @@ pattern6_countdown_timer = [
 
 pattern7_countdown_timer = [{"TEXT": {"REGEX": "[0-9]{2}:[0-9]{2}:[0-9]{2}"}}]
 
+pattern8_countdown_timer = [
+    {"POS": "NUM", "OP": "?"},
+    {"LOWER": {"IN": ["hrs", "mins", "secs", "hours", "minutes", "seconds", "hr", "min", "sec"]}},
+    {"LOWER": {"IN": [":"]}, "OP": "?"},
+    {"POS": "NUM", "OP": "?"},
+    {"LOWER": {"IN": ["hrs", "mins", "secs", "hours", "minutes", "seconds", "hr", "min", "sec"]}},
+    {"LOWER": {"IN": [":"]}, "OP": "?"},
+    {"POS": "NUM", "OP": "?"},
+    {"LOWER": {"IN": ["hrs", "mins", "secs", "hours", "minutes", "seconds", "hr", "min", "sec"]}}
+]
+
 
 # tba: only timer
 # - time remaing in one ocr, counter in anther ocr
@@ -490,7 +505,7 @@ pattern7_countdown_timer = [{"TEXT": {"REGEX": "[0-9]{2}:[0-9]{2}:[0-9]{2}"}}]
 # tba: days/hrs/mins/secs
 # tba: time remaining
 
-patterns_countdown_timer = [pattern3_countdown_timer, pattern5_countdown_timer, pattern6_countdown_timer]
+patterns_countdown_timer = [pattern5_countdown_timer, pattern6_countdown_timer, pattern7_countdown_timer, pattern8_countdown_timer]
 
 ############################# limited time message #############################
 # ==============================================================================
@@ -518,8 +533,9 @@ pattern2_limited_time_message = [
 pattern3_limited_time_message = [
     {"LOWER": {"IN": ["ends", "valid", "open", "available", "order"]}},
     {"LOWER": {"IN": ["by", "for", "in", "on", "at", "within"]}},
-    {"POS": "PUNCT", "OP": "*"},
-    {"POS": "NUM", "OP": "*"}
+    # {"POS": "PUNCT", "OP": "*"},
+    # {"POS": "NUM", "OP": "*"}
+    {"POS": "NUM"}
 ]
 
 # pattern ENDS JULY 31st (TBA)
@@ -532,7 +548,7 @@ patterns_limited_time_message = [pattern1_limited_time_message, pattern2_limited
 # only X [items] [available, left] in stock
 # limited stock/quantity/quantities/availability at this price
 pattern1_low_stock_message = [
-    {"LOWER": "limited"},
+    {"LOWER": {"IN": ["limited", "low"]}},
     {"LOWER": {"IN": ["supply", "stock", "quantity", "availability"]}}
 ]
 
@@ -574,12 +590,11 @@ pattern2_high_demand_message = [
     {}
 ]
 pattern3_high_demand_message = [
-    {"LEMMA": {"IN": ["sell"]}},
-    {"LOWER": "fast"},
-    {}
+    {"LEMMA": {"IN": ["sell", "finish"]}},
+    {"LOWER": {"IN": ["fast", "quick"]}}
 ]
 
-patterns_high_demand_message = [pattern1_high_demand_message, pattern2_high_demand_message]
+patterns_high_demand_message = [pattern1_high_demand_message, pattern2_high_demand_message, pattern3_high_demand_message]
 
 ############################# activity message #################################
 # ==============================================================================

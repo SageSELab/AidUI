@@ -17,6 +17,7 @@ class_dp = {
     , "gamification": "GAMIFICATION"
     , "roach_motel": "ROACH MOTEL"
     , "forced_continuity": "FORCED CONTINUITY"
+    , "no_dp": "NO DP"
 }
 
 class_dp_bin_index = {
@@ -37,6 +38,7 @@ class_dp_bin_index = {
     , "GAMIFICATION": 13
     , "ROACH MOTEL": 14
     , "FORCED CONTINUITY": 15
+    , "NO DP": 16
 }
 
 class_bin_index_to_dp = {
@@ -57,4 +59,5 @@ class_bin_index_to_dp = {
     , "13": "GAMIFICATION"
     , "14": "ROACH MOTEL"
     , "15": "FORCED CONTINUITY"
+    , "16": "NO DP"
 }
