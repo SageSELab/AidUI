@@ -1,23 +1,23 @@
 
 ::::::::::::::::::::Aggregate Results::::::::::::::::::::
-   num_data_points num_total_dp_instances            accuracy weighted_avg_precision weighted_avg_recall macro_avg_precision    macro_avg_recall       avg_precision          avg_recall
-0             501                    544  0.6786427145708582     0.7432832077809377  0.7518382352941176  0.4723266299971145  0.4463218621801353  0.7432832077809377  0.7518382352941176 
+   num_data_points num_total_dp_instances            accuracy weighted_avg_precision weighted_avg_recall macro_avg_precision    macro_avg_recall       avg_precision          avg_recall       avg_f1score
+0             501                    544  0.6786427145708582     0.7432832077809377  0.7518382352941176  0.4723266299971145  0.4463218621801353  0.7432832077809377  0.7518382352941176  0.73930050130304 
 ::::::::::::::::::::::Category Results:::::::::::::::::::
-                  category num_instances           precision               recall
-0        ACTIVITY MESSAGE            10                 1.0                  0.8
-1     HIGH DEMAND MESSAGE             5                 1.0                  0.8
-2       LOW STOCK MESSAGE            19                0.75   0.7894736842105263
-3    LIMITED TIME MESSAGE            26                0.95   0.7307692307692307
-4         COUNTDOWN TIMER            28   0.631578947368421   0.8571428571428571
-5   ATTENTION DISTRACTION            13  0.5454545454545454  0.46153846153846156
-6          DEFAULT CHOICE           111  0.6701030927835051   0.5855855855855856
-7             FRIEND SPAM             0                 0.0                  0.0
-8           DISGUISED ADS            21  0.3157894736842105   0.5714285714285714
-9          SOCIAL PYRAMID             0                 0.0                  0.0
-10      PRIVACY ZUCKERING             0                 0.0                  0.0
-11  INTERMEDIATE CURRENCY             0                 0.0                  0.0
-12                NAGGING            57  0.5176470588235295   0.7719298245614035
-13           GAMIFICATION            11                 0.8  0.36363636363636365
-14            ROACH MOTEL             0                 0.0                  0.0
-15      FORCED CONTINUITY             0                 0.0                  0.0
-16                  NO DP           243  0.8489795918367347   0.8559670781893004
+                  category num_instances           precision               recall             f1score
+0        ACTIVITY MESSAGE            10                 1.0                  0.8   0.888888888888889
+1     HIGH DEMAND MESSAGE             5                 1.0                  0.8   0.888888888888889
+2       LOW STOCK MESSAGE            19                0.75   0.7894736842105263  0.7692307692307692
+3    LIMITED TIME MESSAGE            26                0.95   0.7307692307692307  0.8260869565217392
+4         COUNTDOWN TIMER            28   0.631578947368421   0.8571428571428571  0.7272727272727273
+5   ATTENTION DISTRACTION            13  0.5454545454545454  0.46153846153846156  0.4999999999999999
+6          DEFAULT CHOICE           111  0.6701030927835051   0.5855855855855856  0.6249999999999999
+7             FRIEND SPAM             0                 0.0                  0.0                 0.0
+8           DISGUISED ADS            21  0.3157894736842105   0.5714285714285714  0.4067796610169492
+9          SOCIAL PYRAMID             0                 0.0                  0.0                 0.0
+10      PRIVACY ZUCKERING             0                 0.0                  0.0                 0.0
+11  INTERMEDIATE CURRENCY             0                 0.0                  0.0                 0.0
+12                NAGGING            57  0.5176470588235295   0.7719298245614035  0.6197183098591549
+13           GAMIFICATION            11                 0.8  0.36363636363636365  0.5000000000000001
+14            ROACH MOTEL             0                 0.0                  0.0                 0.0
+15      FORCED CONTINUITY             0                 0.0                  0.0                 0.0
+16                  NO DP           243  0.8489795918367347   0.8559670781893004  0.8524590163934425

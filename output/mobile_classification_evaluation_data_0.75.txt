@@ -1,23 +1,25 @@
 
 ::::::::::::::::::::Aggregate Results::::::::::::::::::::
-   num_data_points num_total_dp_instances           accuracy weighted_avg_precision weighted_avg_recall  macro_avg_precision     macro_avg_recall       avg_precision          avg_recall
-0             339                    361  0.640117994100295     0.7129739553562268  0.7146814404432132  0.21800757339973026  0.19767896655686434  0.7129739553562268  0.7146814404432132 
+   num_data_points num_total_dp_instances           accuracy weighted_avg_precision  ...     macro_avg_recall       avg_precision          avg_recall         avg_f1score
+0             339                    361  0.640117994100295     0.7129739553562268  ...  0.19767896655686434  0.7129739553562268  0.7146814404432132  0.7023711789671538
+
+[1 rows x 10 columns] 
 ::::::::::::::::::::::Category Results:::::::::::::::::::
-                  category num_instances           precision               recall
-0        ACTIVITY MESSAGE             0                 0.0                  0.0
-1     HIGH DEMAND MESSAGE             0                 0.0                  0.0
-2       LOW STOCK MESSAGE             0                 0.0                  0.0
-3    LIMITED TIME MESSAGE             0                 0.0                  0.0
-4         COUNTDOWN TIMER             0                 0.0                  0.0
-5   ATTENTION DISTRACTION             9  0.2857142857142857   0.2222222222222222
-6          DEFAULT CHOICE            99  0.7283950617283951   0.5959595959595959
-7             FRIEND SPAM             0                 0.0                  0.0
-8           DISGUISED ADS            21  0.3333333333333333   0.5714285714285714
-9          SOCIAL PYRAMID             0                 0.0                  0.0
-10      PRIVACY ZUCKERING             0                 0.0                  0.0
-11  INTERMEDIATE CURRENCY             0                 0.0                  0.0
-12                NAGGING            57  0.5432098765432098   0.7719298245614035
-13           GAMIFICATION            11                 1.0  0.36363636363636365
-14            ROACH MOTEL             0                 0.0                  0.0
-15      FORCED CONTINUITY             0                 0.0                  0.0
-16                  NO DP           164  0.8154761904761905   0.8353658536585366
+                  category num_instances           precision               recall             f1score
+0        ACTIVITY MESSAGE             0                 0.0                  0.0                 0.0
+1     HIGH DEMAND MESSAGE             0                 0.0                  0.0                 0.0
+2       LOW STOCK MESSAGE             0                 0.0                  0.0                 0.0
+3    LIMITED TIME MESSAGE             0                 0.0                  0.0                 0.0
+4         COUNTDOWN TIMER             0                 0.0                  0.0                 0.0
+5   ATTENTION DISTRACTION             9  0.2857142857142857   0.2222222222222222                0.25
+6          DEFAULT CHOICE            99  0.7283950617283951   0.5959595959595959  0.6555555555555554
+7             FRIEND SPAM             0                 0.0                  0.0                 0.0
+8           DISGUISED ADS            21  0.3333333333333333   0.5714285714285714  0.4210526315789474
+9          SOCIAL PYRAMID             0                 0.0                  0.0                 0.0
+10      PRIVACY ZUCKERING             0                 0.0                  0.0                 0.0
+11  INTERMEDIATE CURRENCY             0                 0.0                  0.0                 0.0
+12                NAGGING            57  0.5432098765432098   0.7719298245614035  0.6376811594202898
+13           GAMIFICATION            11                 1.0  0.36363636363636365  0.5333333333333333
+14            ROACH MOTEL             0                 0.0                  0.0                 0.0
+15      FORCED CONTINUITY             0                 0.0                  0.0                 0.0
+16                  NO DP           164  0.8154761904761905   0.8353658536585366  0.8253012048192772

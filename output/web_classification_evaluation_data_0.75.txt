@@ -1,23 +1,25 @@
 
 ::::::::::::::::::::Aggregate Results::::::::::::::::::::
-   num_data_points num_total_dp_instances            accuracy weighted_avg_precision weighted_avg_recall  macro_avg_precision     macro_avg_recall       avg_precision         avg_recall
-0             162                    183  0.7592592592592593     0.8659375390014169   0.825136612021858  0.40145083111614555  0.37506587937281205  0.8659375390014169  0.825136612021858 
+   num_data_points num_total_dp_instances            accuracy weighted_avg_precision  ...     macro_avg_recall       avg_precision         avg_recall         avg_f1score
+0             162                    183  0.7592592592592593     0.8659375390014169  ...  0.37506587937281205  0.8659375390014169  0.825136612021858  0.8418526761738676
+
+[1 rows x 10 columns] 
 ::::::::::::::::::::::Category Results:::::::::::::::::::
-                  category num_instances           precision              recall
-0        ACTIVITY MESSAGE            10                 1.0                 0.8
-1     HIGH DEMAND MESSAGE             5                 1.0                 0.8
-2       LOW STOCK MESSAGE            19                0.75  0.7894736842105263
-3    LIMITED TIME MESSAGE            26                0.95  0.7307692307692307
-4         COUNTDOWN TIMER            28  0.8275862068965517  0.8571428571428571
-5   ATTENTION DISTRACTION             4                 1.0                 1.0
-6          DEFAULT CHOICE            12               0.375                 0.5
-7             FRIEND SPAM             0                 0.0                 0.0
-8           DISGUISED ADS             0                 0.0                 0.0
-9          SOCIAL PYRAMID             0                 0.0                 0.0
-10      PRIVACY ZUCKERING             0                 0.0                 0.0
-11  INTERMEDIATE CURRENCY             0                 0.0                 0.0
-12                NAGGING             0                 0.0                 0.0
-13           GAMIFICATION             0                 0.0                 0.0
-14            ROACH MOTEL             0                 0.0                 0.0
-15      FORCED CONTINUITY             0                 0.0                 0.0
-16                  NO DP            79   0.922077922077922  0.8987341772151899
+                  category num_instances           precision              recall              f1score
+0        ACTIVITY MESSAGE            10                 1.0                 0.8    0.888888888888889
+1     HIGH DEMAND MESSAGE             5                 1.0                 0.8    0.888888888888889
+2       LOW STOCK MESSAGE            19                0.75  0.7894736842105263   0.7692307692307692
+3    LIMITED TIME MESSAGE            26                0.95  0.7307692307692307   0.8260869565217392
+4         COUNTDOWN TIMER            28  0.8275862068965517  0.8571428571428571   0.8421052631578947
+5   ATTENTION DISTRACTION             4                 1.0                 1.0                  1.0
+6          DEFAULT CHOICE            12               0.375                 0.5  0.42857142857142855
+7             FRIEND SPAM             0                 0.0                 0.0                  0.0
+8           DISGUISED ADS             0                 0.0                 0.0                  0.0
+9          SOCIAL PYRAMID             0                 0.0                 0.0                  0.0
+10      PRIVACY ZUCKERING             0                 0.0                 0.0                  0.0
+11  INTERMEDIATE CURRENCY             0                 0.0                 0.0                  0.0
+12                NAGGING             0                 0.0                 0.0                  0.0
+13           GAMIFICATION             0                 0.0                 0.0                  0.0
+14            ROACH MOTEL             0                 0.0                 0.0                  0.0
+15      FORCED CONTINUITY             0                 0.0                 0.0                  0.0
+16                  NO DP            79   0.922077922077922  0.8987341772151899   0.9102564102564102

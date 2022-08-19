@@ -6,6 +6,7 @@ from sklearn.metrics import multilabel_confusion_matrix
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
+from sklearn.metrics import f1_score
 import torch
 import torchvision.ops.boxes as bops
 from config import *
@@ -95,6 +96,7 @@ def get_classification_evaluation_aggregate_data(dp_predictions, dp_expectations
     accuracy = accuracy_score(dp_expectations, dp_predictions)
     precision = precision_score(dp_expectations, dp_predictions, average=None)
     recall = recall_score(dp_expectations, dp_predictions, average=None)
+    f1score = f1_score(dp_expectations, dp_predictions, average=None)
 
     # num of data points and instances
     num_data_points = len(dp_expectations)
@@ -110,24 +112,24 @@ def get_classification_evaluation_aggregate_data(dp_predictions, dp_expectations
     # NO DP calculation
     nodp_precision = precision[16]
     nodp_recall = recall[16]
+    nodp_f1score = f1score[16]
 
     # DP weighted avg calculation
     dp_weighted_precisions = []
     dp_weighted_recalls = []
+    dp_weighted_f1scores = []
     for i in range(len(conf_mat) - 1):
         dp_weighted_precisions.append(precision[i] * num_instances[i])
         dp_weighted_recalls.append(recall[i] * num_instances[i])
+        dp_weighted_f1scores.append(f1score[i] * num_instances[i])
     dp_weighted_avg_precision = sum(dp_weighted_precisions) / num_dp_instances
     dp_weighted_avg_recall = sum(dp_weighted_recalls) / num_dp_instances
+    dp_weighted_avg_f1score = sum(dp_weighted_f1scores) / num_dp_instances
 
     # (DP + NO DP) weighted avg calculation
     dp_nodp_weighted_avg_precision = (dp_weighted_avg_precision * num_dp_instances + nodp_precision * num_nodp_instances) / num_dp_nodp_instances
     dp_nodp_weighted_avg_recall = (dp_weighted_avg_recall * num_dp_instances + nodp_recall * num_nodp_instances) / num_dp_nodp_instances
-
-    # print("\n::::::::::::::::::::Aggregate Results::::::::::::::::::::")
-    # print("num_nodp_data_points", num_nodp_data_points, "num_nodp_instances", num_nodp_instances, "nodp_precision", nodp_precision, "nodp_recall", nodp_recall)
-    # print("num_dp_data_points", num_dp_data_points, "num_dp_instances", num_dp_instances, "dp_weighted_avg_precision", dp_weighted_avg_precision, "dp_weighted_avg_recall", dp_weighted_avg_recall)
-    # print("num_data_points", num_data_points, "num_instances", num_dp_nodp_instances, "dp_nodp_weighted_avg_precision", dp_nodp_weighted_avg_precision, "dp_nodp_weighted_avg_recall", dp_nodp_weighted_avg_recall)
+    dp_nodp_weighted_avg_f1score = (dp_weighted_avg_f1score * num_dp_instances + nodp_f1score * num_nodp_instances) / num_dp_nodp_instances
 
     evaluation_data = {}
     evaluation_data["no_dp"] = {
@@ -135,18 +137,21 @@ def get_classification_evaluation_aggregate_data(dp_predictions, dp_expectations
         , "num_instances": num_nodp_instances
         , "precision": nodp_precision
         , "recall": nodp_recall
+        , "f1score": nodp_f1score
         }
     evaluation_data["dp"] = {
         "num_data_points": num_dp_data_points
         , "num_instances": num_dp_instances
         , "precision": dp_weighted_avg_precision
         , "recall": dp_weighted_avg_recall
+        , "f1score": dp_weighted_avg_f1score
         }
     evaluation_data["all"] = {
         "num_data_points": num_data_points
         , "num_instances": num_dp_nodp_instances
         , "precision": dp_nodp_weighted_avg_precision
         , "recall": dp_nodp_weighted_avg_recall
+        , "f1score": dp_nodp_weighted_avg_f1score
         }
     return evaluation_data
 
@@ -158,6 +163,7 @@ def get_classification_evaluation_data(dp_predictions, dp_expectations):
     accuracy = accuracy_score(dp_expectations, dp_predictions)
     precision = precision_score(dp_expectations, dp_predictions, average=None)
     recall = recall_score(dp_expectations, dp_predictions, average=None)
+    f1score = f1_score(dp_expectations, dp_predictions, average=None)
 
     precisions = []
     recalls = []
@@ -169,6 +175,7 @@ def get_classification_evaluation_data(dp_predictions, dp_expectations):
             , "conf_mat": conf_mat[i].tolist()
             , "precision": str(precision[i])
             , "recall": str(recall[i])
+            , "f1score": str(f1score[i])
         }
     #     # populate precisions & recalls list
     #     if(num_dp_instances[i] != 0):
@@ -187,8 +194,10 @@ def get_classification_evaluation_data(dp_predictions, dp_expectations):
     evaluation_data["weighted_avg_precision"] = str(precision_score(dp_expectations, dp_predictions, average="weighted"))
     evaluation_data["weighted_avg_recall"] = str(recall_score(dp_expectations, dp_predictions, average="weighted"))
     evaluation_data["accuracy"] = str(accuracy)
+    evaluation_data["weighted_avg_f1score"] = str(f1_score(dp_expectations, dp_predictions, average="weighted"))
     evaluation_data["avg_precision"] = evaluation_data["weighted_avg_precision"]
     evaluation_data["avg_recall"] = evaluation_data["weighted_avg_recall"]
+    evaluation_data["avg_f1score"] = evaluation_data["weighted_avg_f1score"]
     return evaluation_data
 
 def get_localization_evaluation_data(dp_predictions_segments, dp_expectations_segments, dp_predictions_labels, dp_expectations_labels):

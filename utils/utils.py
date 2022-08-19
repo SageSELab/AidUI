@@ -55,10 +55,11 @@ def print_classification_evaluation_aggregate_result(dict):
         row.append(values["num_instances"])
         row.append(values["precision"])
         row.append(values["recall"])
+        row.append(values["f1score"])
         aggregate_rows.append(row)
 
     # panda dataframes
-    aggregate_results = pd.DataFrame(aggregate_rows, columns=["category", "num_data_points", "num_instances", "precision", "recall"])
+    aggregate_results = pd.DataFrame(aggregate_rows, columns=["category", "num_data_points", "num_instances", "precision", "recall", "f1score"])
 
     # print in table
     print("::::::::::::::::::::Aggregate Results::::::::::::::::::::")
@@ -74,6 +75,7 @@ def print_write_classification_evaluation_result(dict, title):
     macro_avg_recall = dict["macro_avg_recall"]
     avg_precision = dict["avg_precision"]
     avg_recall = dict["avg_recall"]
+    avg_f1score = dict["avg_f1score"]
     aggregate_rows = [[
         num_data_points
         , num_total_dp_instances
@@ -84,6 +86,7 @@ def print_write_classification_evaluation_result(dict, title):
         , macro_avg_recall
         , avg_precision
         , avg_recall
+        , avg_f1score
     ]]
 
     category_rows = []
@@ -93,11 +96,12 @@ def print_write_classification_evaluation_result(dict, title):
         row.append(values["num_instances"])
         row.append(values["precision"])
         row.append(values["recall"])
+        row.append(values["f1score"])
         category_rows.append(row)
 
     # panda dataframes
-    aggregate_results = pd.DataFrame(aggregate_rows, columns=["num_data_points", "num_total_dp_instances", "accuracy", "weighted_avg_precision", "weighted_avg_recall", "macro_avg_precision", "macro_avg_recall", "avg_precision", "avg_recall"])
-    category_results = pd.DataFrame(category_rows, columns=["category", "num_instances", "precision", "recall"])
+    aggregate_results = pd.DataFrame(aggregate_rows, columns=["num_data_points", "num_total_dp_instances", "accuracy", "weighted_avg_precision", "weighted_avg_recall", "macro_avg_precision", "macro_avg_recall", "avg_precision", "avg_recall", "avg_f1score"])
+    category_results = pd.DataFrame(category_rows, columns=["category", "num_instances", "precision", "recall", "f1score"])
 
     # print in table
     print("\n###############################################################################################################################")
