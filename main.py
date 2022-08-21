@@ -36,8 +36,8 @@ types = []
 # threshold value for score
 score_threshold_value = .75
 
-# tp fp 2D matrix
-tp_fp_matrix = evaluation.init_tp_fp_matrix()
+# initialize tp fp 2D matrix
+# tp_fp_matrix = evaluation.init_tp_fp_matrix()
 
 # iterate over the OCR files
 for i in range(len(ocr_files)):
@@ -77,7 +77,10 @@ for i in range(len(ocr_files)):
     # utils.draw_expectation_prediction_bbox(image_file, dp_ground_truth["segments"], dp_predicted["segments"], dp_ground_truth["labels"], dp_predicted["labels"])
 
     print("----------------------------------------------------------------------------------------------------------------------------------------------")
+
 # evaluation
+# tp_fp_matrix = evaluation.set_tp_fp_matrix(dp_predictions_bin, dp_expectations_bin)
+# evaluation.print_tp_fp_matrix(tp_fp_matrix)
 evaluation.evaluate(dp_predictions_bin, dp_expectations_bin, dp_predictions_segments, dp_expectations_segments, dp_predictions_labels, dp_expectations_labels, types, score_threshold_value)
 
 #####################################################################################################################################################

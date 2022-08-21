@@ -2,6 +2,7 @@ import numpy as np
 from sklearn.metrics import multilabel_confusion_matrix
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
+import pandas as pd
 
 import pprint
 pp = pprint.PrettyPrinter()
@@ -65,3 +66,64 @@ for dp_category_index in range(len(numpy_tp_fp_matrix)):
 numpy_dp_categorywise_tp_plus_fp = np.array(dp_categorywise_tp_plus_fp)
 print(numpy_dp_categorywise_tp_plus_fp)
 print(numpy_tp_fp_matrix / numpy_dp_categorywise_tp_plus_fp)
+
+
+# x = np.array([[1.055,2,3,4],
+#               [2,3,np.nan,5],
+#               [np.nan,5,2,3]])
+# print(np.argwhere(np.isnan(x)))
+# np.nan_to_num(x, copy=False, nan=0.0)
+# print(x)
+# y = np.round(x, 2)
+# print(y)
+
+
+class_bin_index_to_dp = {
+    "0": "ACTIVITY MESSAGE"
+    , "1": "HIGH DEMAND MESSAGE"
+    , "2": "LOW STOCK MESSAGE"
+    , "3": "LIMITED TIME MESSAGE"
+    , "4": "COUNTDOWN TIMER"
+    , "5": "ATTENTION DISTRACTION"
+    , "6": "DEFAULT CHOICE"
+    , "7": "FRIEND SPAM"
+    # , "8": "FORCED ENROLLMENT"
+    , "8": "DISGUISED ADS"
+    , "9": "SOCIAL PYRAMID"
+    , "10": "PRIVACY ZUCKERING"
+    , "11": "INTERMEDIATE CURRENCY"
+    , "12": "NAGGING"
+    , "13": "GAMIFICATION"
+    , "14": "ROACH MOTEL"
+    , "15": "FORCED CONTINUITY"
+    , "16": "NO DP"
+}
+
+def print_tp_fp_distribution(tp_fp_distribution_rounded):
+    category_rows = []
+    for i in range(len(tp_fp_distribution_rounded)):
+        # print(class_bin_index_to_dp[str(i)])
+        # print(tp_fp_distribution_rounded[i])
+        row = []
+        category = class_bin_index_to_dp[str(i)]
+        category_row = tp_fp_distribution_rounded[i]
+        row.append(category)
+        for item in category_row:
+            row.append(item)
+        category_rows.append(row)
+
+    category_columns = []
+    category_columns.append("category")
+    for i in range(len(tp_fp_distribution_rounded)):
+        category = class_bin_index_to_dp[str(i)]
+        category_columns.append(category)
+
+    # panda dataframes
+    results = pd.DataFrame(category_rows, columns=category_columns)
+    print("::::::::::::::::::::Results::::::::::::::::::::")
+    print(results)
+
+tp_fp_distribution = numpy_tp_fp_matrix / numpy_dp_categorywise_tp_plus_fp
+np.nan_to_num(tp_fp_distribution, copy=False, nan=0.0)
+tp_fp_distribution_rounded = np.round(tp_fp_distribution, 2)
+print_tp_fp_distribution(tp_fp_distribution_rounded)

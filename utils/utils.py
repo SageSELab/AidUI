@@ -3,9 +3,13 @@ import cv2
 import json
 from matplotlib import pyplot as plt
 import pandas as pd
+from config import *
 
 import pprint
 pp = pprint.PrettyPrinter()
+
+def print_array(array):
+    pp.pprint(array)
 
 def write_json_file(dict, filename):
     file = "./output/" + filename + ".json"
@@ -45,6 +49,31 @@ def plot_barchart():
     plt.xticks(rotation=70)
     # plt.show()
     plt.savefig('books_read.png')
+
+def print_tp_fp_distribution(tp_fp_distribution_rounded):
+    category_rows = []
+    for i in range(len(tp_fp_distribution_rounded)):
+        # print(class_bin_index_to_dp[str(i)])
+        # print(tp_fp_distribution_rounded[i])
+        row = []
+        category = class_bin_index_to_dp[str(i)]
+        category_row = tp_fp_distribution_rounded[i]
+        row.append(category)
+        for item in category_row:
+            row.append(item)
+        category_rows.append(row)
+
+    category_columns = []
+    category_columns.append("category")
+    for i in range(len(tp_fp_distribution_rounded)):
+        # category = class_bin_index_to_dp[str(i)]
+        category = str(i)
+        category_columns.append(category)
+
+    # panda dataframes
+    results = pd.DataFrame(category_rows, columns=category_columns)
+    print("::::::::::::::::::::TP FP Distribution Results::::::::::::::::::::")
+    print(results)
 
 def print_classification_evaluation_aggregate_result(dict):
     aggregate_rows = []

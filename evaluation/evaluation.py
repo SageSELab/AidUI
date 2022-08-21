@@ -97,6 +97,54 @@ def init_tp_fp_matrix():
         matrix.append([0 for column in range(num_categories)])
     return matrix
 
+def set_tp_fp_matrix(dp_predictions_bin, dp_expectations_bin):
+    tp_fp_matrix = init_tp_fp_matrix()
+    for i in range(len(dp_expectations_bin)):
+        prediction = dp_predictions_bin[i]
+        ground_truth = dp_expectations_bin[i]
+        ground_truth_dp_category_indices = []
+        for j in range(len(ground_truth)):
+            dp_category_index = j
+            if(ground_truth[dp_category_index] == 1):
+                ground_truth_dp_category_indices.append(dp_category_index)
+                is_tp = (ground_truth[dp_category_index] == 1 and prediction[dp_category_index] == 1)
+                if(is_tp):
+                    tp_fp_matrix[dp_category_index][dp_category_index] += 1
+
+        for k in range(len(ground_truth)):
+            # print(j)
+            dp_category_index = k
+            is_fp = (ground_truth[dp_category_index] == 0 and prediction[dp_category_index] == 1)
+            if(is_fp):
+                samplewise_mcm = multilabel_confusion_matrix(dp_expectations_bin, dp_predictions_bin, samplewise=True)
+                # print("dp_category_index", dp_category_index)
+                # num_tp = samplewise_mcm[0][1][1]
+                fp_share = 1 / len(ground_truth_dp_category_indices)
+                for row_dp_category_index in ground_truth_dp_category_indices:
+                    tp_fp_matrix[row_dp_category_index][dp_category_index] += fp_share
+    return tp_fp_matrix
+
+def get_tp_fp_distribution_rounded(tp_fp_matrix):
+    numpy_tp_fp_matrix = np.array(tp_fp_matrix)
+    # utils.print_array(numpy_tp_fp_matrix)
+    # print(numpy_tp_fp_matrix[:,0])
+    # print(numpy_tp_fp_matrix[:,1])
+    # print(numpy_tp_fp_matrix[:,2])
+    # print(numpy_tp_fp_matrix[:,3])
+
+    dp_categorywise_tp_plus_fp = []
+    for dp_category_index in range(len(numpy_tp_fp_matrix)):
+        # print(numpy_tp_fp_matrix[:,dp_category_index])
+        # print(sum(numpy_tp_fp_matrix[:,dp_category_index]))
+        dp_categorywise_tp_plus_fp.append(sum(numpy_tp_fp_matrix[:,dp_category_index]))
+    numpy_dp_categorywise_tp_plus_fp = np.array(dp_categorywise_tp_plus_fp)
+    # print(numpy_dp_categorywise_tp_plus_fp)
+    # print(numpy_tp_fp_matrix / numpy_dp_categorywise_tp_plus_fp)
+    tp_fp_distribution = numpy_tp_fp_matrix / numpy_dp_categorywise_tp_plus_fp
+    np.nan_to_num(tp_fp_distribution, copy=False, nan=0.0)
+    tp_fp_distribution_rounded = np.round(tp_fp_distribution, 2)
+    return tp_fp_distribution_rounded
+
 def get_classification_evaluation_aggregate_data(dp_predictions, dp_expectations):
     # metrics calculation
     conf_mat = multilabel_confusion_matrix(np.array(dp_expectations), np.array(dp_predictions))
@@ -316,6 +364,11 @@ def evaluate(dp_predictions_bin, dp_expectations_bin, dp_predictions_segments, d
     overall_classification_evaluation_aggregate_data = get_classification_evaluation_aggregate_data(dp_predictions_bin, dp_expectations_bin)
     utils.print_classification_evaluation_aggregate_result(overall_classification_evaluation_aggregate_data)
 
+    # TP FP Distribution
+    tp_fp_matrix = set_tp_fp_matrix(dp_predictions_bin, dp_expectations_bin)
+    tp_fp_distribution_rounded = get_tp_fp_distribution_rounded(tp_fp_matrix)
+    utils.print_tp_fp_distribution(tp_fp_distribution_rounded)
+
     # localization evaluation
     overall_localization_evaluation_data = get_localization_evaluation_data(dp_predictions_segments, dp_expectations_segments, dp_predictions_labels, dp_expectations_labels)
     utils.write_json_file(overall_localization_evaluation_data, "overall_localization_evaluation_data_" + str(score_threshold_value))
@@ -382,37 +435,3 @@ def evaluate(dp_predictions_bin, dp_expectations_bin, dp_predictions_segments, d
     mobile_localization_evaluation_data = get_localization_evaluation_data(mobile_dp_predictions_segments, mobile_dp_expectations_segments, mobile_dp_predictions_labels, mobile_dp_expectations_labels)
     utils.write_json_file(mobile_localization_evaluation_data, "mobile_localization_evaluation_data_" + str(score_threshold_value))
     utils.print_write_localization_evaluation_result(mobile_localization_evaluation_data, "mobile_localization_evaluation_data_" + str(score_threshold_value))
-
-    ########################################
-    # for NO DP datapoints
-    ########################################
-    # no_dp_predictions_bin = []
-    # no_dp_expectations_bin = []
-    # no_dp_predictions_labels = []
-    # no_dp_expectations_labels = []
-    # for i in range(len(types)):
-    #     if dp_expectations_labels[i] == [class_dp["no_dp"]]:
-    #         no_dp_predictions_bin.append(dp_predictions_bin[i])
-    #         no_dp_expectations_bin.append(dp_expectations_bin[i])
-    #         no_dp_predictions_labels.append(dp_predictions_labels[i])
-    #         no_dp_expectations_labels.append(dp_expectations_labels[i])
-    # no_dp_classification_evaluation_data = get_classification_evaluation_data(no_dp_predictions_bin, no_dp_expectations_bin)
-    # utils.write_json_file(no_dp_classification_evaluation_data, "no_dp_classification_evaluation_data" + str(score_threshold_value))
-    # utils.print_write_classification_evaluation_result(no_dp_classification_evaluation_data, "no_dp_classification_evaluation_data" + str(score_threshold_value))
-
-    ########################################
-    # for DP datapoints
-    ########################################
-    # with_dp_predictions_bin = []
-    # with_dp_expectations_bin = []
-    # with_dp_predictions_labels = []
-    # with_dp_expectations_labels = []
-    # for i in range(len(types)):
-    #     if dp_expectations_labels[i] != [class_dp["no_dp"]]:
-    #         with_dp_predictions_bin.append(dp_predictions_bin[i])
-    #         with_dp_expectations_bin.append(dp_expectations_bin[i])
-    #         with_dp_predictions_labels.append(dp_predictions_labels[i])
-    #         with_dp_expectations_labels.append(dp_expectations_labels[i])
-    # with_dp_classification_evaluation_data = get_classification_evaluation_data(with_dp_predictions_bin, with_dp_expectations_bin)
-    # utils.write_json_file(with_dp_classification_evaluation_data, "with_dp_classification_evaluation_data" + str(score_threshold_value))
-    # utils.print_write_classification_evaluation_result(with_dp_classification_evaluation_data, "with_dp_classification_evaluation_data" + str(score_threshold_value))
