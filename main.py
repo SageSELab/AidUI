@@ -36,6 +36,9 @@ types = []
 # threshold value for score
 score_threshold_value = .75
 
+# tp fp 2D matrix
+tp_fp_matrix = evaluation.init_tp_fp_matrix()
+
 # iterate over the OCR files
 for i in range(len(ocr_files)):
     print(i, ". processing: ", img_files[i])
@@ -56,41 +59,22 @@ for i in range(len(ocr_files)):
     input_to_resolver = {"analysis_result": analysis_result, "object_detection_result": object_detection_result}
     dp_predicted = resolver.resolve_dp(input_to_resolver, score_threshold_value)
     dp_predictions_labels.append(dp_predicted["labels"]) # dp_predicted["labels"] is an array of labels
-    # print("dp_predicted[labels]", dp_predicted["labels"])
     dp_predictions_bin.append(dp_predicted["labels_binarization"]) # dp_predicted["labels_binarization"] is an array of 0/1 binary values
     dp_predictions_segments.append(dp_predicted["segments"]) # dp_predicted["segments"] is an array of segment objects
-
-    # utils.print_dictionary(dp_predictions_labels, "dp_predictions_labels")
-    # utils.print_dictionary(dp_predictions_bin, "dp_predictions_bin")
-    # utils.print_dictionary(dp_predictions_segments, "dp_predictions_segments")
 
     # print("------------dp ground truth-----------")
     dp_ground_truth = evaluation.get_dp_ground_truth(image_file)
     dp_expectations_labels.append(dp_ground_truth["labels"])
-    # print("dp_ground_truth[labels]", dp_ground_truth["labels"])
     dp_expectations_bin.append(dp_ground_truth["labels_binarization"])
     dp_expectations_segments.append(dp_ground_truth["segments"])
     types.append(dp_ground_truth["type"])
 
-    # utils.print_dictionary(dp_expectations_labels, "dp_expectations_labels")
-    # utils.print_dictionary(dp_expectations_bin, "dp_expectations_bin")
-    # utils.print_dictionary(dp_expectations_segments, "dp_expectations_segments")
-    # utils.print_dictionary(types, "types")
-    # break
+    # print("------------predicted and ground truth labels-----------")
+    print("dp_predicted[labels]", dp_predicted["labels"])
+    print("dp_ground_truth[labels]", dp_ground_truth["labels"])
 
     # drawing ground truth and predicted bboxes
     # utils.draw_expectation_prediction_bbox(image_file, dp_ground_truth["segments"], dp_predicted["segments"], dp_ground_truth["labels"], dp_predicted["labels"])
-
-    if("NO DP" in dp_ground_truth["labels"]):
-        # if(image_file == "UIED/data/input/music_30--Music-Bass-Equalizer-0-6_6cef.jpg"):
-        # print("########################################## filename: ", image_file.split("/")[-1], "####################################")
-        print("########################################## DEBUG ####################################")
-        print("dp_ground_truth: ", dp_ground_truth["labels"])
-        print("dp_predicted: ", dp_predicted["labels"])
-        # utils.print_dictionary(analysis_result, "analysis_result")
-        ui_dp = resolver.get_ui_dp(input_to_resolver)
-        utils.print_dictionary(ui_dp, "ui_dp")
-        print("########################################## DEBUG ####################################")
 
     print("----------------------------------------------------------------------------------------------------------------------------------------------")
 # evaluation
@@ -116,3 +100,14 @@ evaluation.evaluate(dp_predictions_bin, dp_expectations_bin, dp_predictions_segm
 #     utils.print_dictionary(analysis_result, "analysis_result")
 #     ui_dp = resolver.get_ui_dp(input_to_resolver)
 #     utils.print_dictionary(ui_dp, "ui_dp")
+
+# if("NO DP" in dp_ground_truth["labels"]):
+#     # if(image_file == "UIED/data/input/music_30--Music-Bass-Equalizer-0-6_6cef.jpg"):
+#     # print("########################################## filename: ", image_file.split("/")[-1], "####################################")
+#     print("########################################## DEBUG ####################################")
+#     print("dp_ground_truth: ", dp_ground_truth["labels"])
+#     print("dp_predicted: ", dp_predicted["labels"])
+#     # utils.print_dictionary(analysis_result, "analysis_result")
+#     ui_dp = resolver.get_ui_dp(input_to_resolver)
+#     utils.print_dictionary(ui_dp, "ui_dp")
+#     print("########################################## DEBUG ####################################")

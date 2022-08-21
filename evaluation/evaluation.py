@@ -90,6 +90,13 @@ def get_dp_ground_truth(image_file):
     dp_ground_truth["segments"] = segments
     return dp_ground_truth
 
+def init_tp_fp_matrix():
+    num_categories = 17
+    matrix = []
+    for row in range(num_categories):
+        matrix.append([0 for column in range(num_categories)])
+    return matrix
+
 def get_classification_evaluation_aggregate_data(dp_predictions, dp_expectations):
     # metrics calculation
     conf_mat = multilabel_confusion_matrix(np.array(dp_expectations), np.array(dp_predictions))

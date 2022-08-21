@@ -128,10 +128,10 @@ def predict_dp_multi_class(ui_dp, score_threshold_value):
     # if nothing qualifies above threshold
     if(len(labels) == 0):
         if(len(patterns_below_threshold) != 0):
-            print("patterns_below_threshold", patterns_below_threshold)
-            print("segments_below_threshold", segments_below_threshold)
-            print("scores_below_threshold", scores_below_threshold)
-            print("votes_below_threshold", votes_below_threshold)
+            # print("patterns_below_threshold", patterns_below_threshold)
+            # print("segments_below_threshold", segments_below_threshold)
+            # print("scores_below_threshold", scores_below_threshold)
+            # print("votes_below_threshold", votes_below_threshold)
             if(patterns_below_threshold[0] not in [class_dp["default_choice"]]):
                 labels.append(patterns_below_threshold[0])
                 segments.append(segments_below_threshold[0])
@@ -168,7 +168,7 @@ def predict_dp_multi_class(ui_dp, score_threshold_value):
     ################################ NO DP #################################
     ########################################################################
     if(len(labels) == 0):
-        print("::::::::::: NO DP :::::::::::")
+        # print("::::::::::: NO DP :::::::::::")
         labels.append(class_dp["no_dp"])
 
     return {"labels": labels, "segments": segments}
