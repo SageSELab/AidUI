@@ -61,3 +61,24 @@ class_bin_index_to_dp = {
     , "15": "FORCED CONTINUITY"
     , "16": "NO DP"
 }
+
+class_bin_index_to_dp_acronym = {
+    "0": "AM"
+    , "1": "HDM"
+    , "2": "LSM"
+    , "3": "LTM"
+    , "4": "CT"
+    , "5": "AD"
+    , "6": "DC"
+    , "7": "FS"
+    # , "8": "FORCED ENROLLMENT"
+    , "8": "DA"
+    , "9": "SP"
+    , "10": "PZ"
+    , "11": "IC"
+    , "12": "NAG"
+    , "13": "GAM"
+    , "14": "RM"
+    , "15": "FC"
+    , "16": "NO DP"
+}

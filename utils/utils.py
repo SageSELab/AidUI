@@ -66,8 +66,8 @@ def print_tp_fp_distribution(tp_fp_distribution_rounded):
     category_columns = []
     category_columns.append("category")
     for i in range(len(tp_fp_distribution_rounded)):
-        # category = class_bin_index_to_dp[str(i)]
-        category = str(i)
+        category = class_bin_index_to_dp_acronym[str(i)]
+        # category = str(i)
         category_columns.append(category)
 
     # panda dataframes
