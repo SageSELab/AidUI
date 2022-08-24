@@ -1,4 +1,3 @@
-import dp_resolver.resolver_rules as resolver_rules
 import utils.utils as utils
 import text_analysis.pattern_matching.patterns as patterns
 from config import *
