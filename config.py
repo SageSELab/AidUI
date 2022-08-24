@@ -82,3 +82,6 @@ class_bin_index_to_dp_acronym = {
     , "15": "FC"
     , "16": "NO DP"
 }
+
+classes_excluded_in_report = ["FRIEND SPAM", "SOCIAL PYRAMID", "PRIVACY ZUCKERING", "INTERMEDIATE CURRENCY", "ROACH MOTEL", "FORCED CONTINUITY"]
+classes_acronyms_excluded_in_report = ["FS", "SP", "PZ", "IC", "RM", "FC"]

@@ -57,18 +57,22 @@ def print_tp_fp_distribution(tp_fp_distribution_rounded):
         # print(tp_fp_distribution_rounded[i])
         row = []
         category = class_bin_index_to_dp[str(i)]
-        category_row = tp_fp_distribution_rounded[i]
-        row.append(category)
-        for item in category_row:
-            row.append(item)
-        category_rows.append(row)
+        # category_row = tp_fp_distribution_rounded[i]
+        if(category not in classes_excluded_in_report):
+            row.append(category)
+            category_row = tp_fp_distribution_rounded[i]
+            for j in range(len(category_row)):
+                category_acronym = class_bin_index_to_dp_acronym[str(j)]
+                if(category_acronym not in classes_acronyms_excluded_in_report):
+                    row.append(category_row[j])
+            category_rows.append(row)
 
     category_columns = []
     category_columns.append("category")
     for i in range(len(tp_fp_distribution_rounded)):
-        category = class_bin_index_to_dp_acronym[str(i)]
-        # category = str(i)
-        category_columns.append(category)
+        category_acronym = class_bin_index_to_dp_acronym[str(i)]
+        if(category_acronym not in classes_acronyms_excluded_in_report):
+            category_columns.append(category_acronym)
 
     # panda dataframes
     results = pd.DataFrame(category_rows, columns=category_columns)
@@ -120,13 +124,14 @@ def print_write_classification_evaluation_result(dict, title):
 
     category_rows = []
     for category, values in dict["category_info"].items():
-        row = []
-        row.append(category)
-        row.append(values["num_instances"])
-        row.append(values["precision"])
-        row.append(values["recall"])
-        row.append(values["f1score"])
-        category_rows.append(row)
+        if(category not in classes_excluded_in_report):
+            row = []
+            row.append(category)
+            row.append(values["num_instances"])
+            row.append(values["precision"])
+            row.append(values["recall"])
+            row.append(values["f1score"])
+            category_rows.append(row)
 
     # panda dataframes
     aggregate_results = pd.DataFrame(aggregate_rows, columns=["num_data_points", "num_total_dp_instances", "accuracy", "weighted_avg_precision", "weighted_avg_recall", "macro_avg_precision", "macro_avg_recall", "avg_precision", "avg_recall", "avg_f1score"])

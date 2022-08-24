@@ -13,13 +13,7 @@
 4         COUNTDOWN TIMER            28  0.8275862068965517  0.8571428571428571   0.8421052631578947
 5   ATTENTION DISTRACTION             4                 1.0                 1.0                  1.0
 6          DEFAULT CHOICE            12               0.375                 0.5  0.42857142857142855
-7             FRIEND SPAM             0                 0.0                 0.0                  0.0
-8           DISGUISED ADS             0                 0.0                 0.0                  0.0
-9          SOCIAL PYRAMID             0                 0.0                 0.0                  0.0
-10      PRIVACY ZUCKERING             0                 0.0                 0.0                  0.0
-11  INTERMEDIATE CURRENCY             0                 0.0                 0.0                  0.0
-12                NAGGING             0                 0.0                 0.0                  0.0
-13           GAMIFICATION             0                 0.0                 0.0                  0.0
-14            ROACH MOTEL             0                 0.0                 0.0                  0.0
-15      FORCED CONTINUITY             0                 0.0                 0.0                  0.0
-16                  NO DP            79   0.922077922077922  0.8987341772151899   0.9102564102564102
+7           DISGUISED ADS             0                 0.0                 0.0                  0.0
+8                 NAGGING             0                 0.0                 0.0                  0.0
+9            GAMIFICATION             0                 0.0                 0.0                  0.0
+10                  NO DP            79   0.922077922077922  0.8987341772151899   0.9102564102564102
