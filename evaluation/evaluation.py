@@ -186,10 +186,18 @@ def get_classification_evaluation_aggregate_data(dp_predictions, dp_expectations
     dp_nodp_weighted_avg_recall = (dp_weighted_avg_recall * num_dp_instances + nodp_recall * num_nodp_instances) / num_dp_nodp_instances
     dp_nodp_weighted_avg_f1score = (dp_weighted_avg_f1score * num_dp_instances + nodp_f1score * num_nodp_instances) / num_dp_nodp_instances
 
+    # FP count for DP, NO DP
+    nodp_num_fp = conf_mat[16][0, 1]
+    dp_num_fp = 0
+    for i in range(len(conf_mat) - 1):
+        dp_num_fp += conf_mat[i][0, 1]
+    dp_nodp_num_fp = dp_num_fp + nodp_num_fp
+
     evaluation_data = {}
     evaluation_data["no_dp"] = {
         "num_data_points": num_nodp_data_points
         , "num_instances": num_nodp_instances
+        , "num_fp": nodp_num_fp
         , "precision": nodp_precision
         , "recall": nodp_recall
         , "f1score": nodp_f1score
@@ -197,6 +205,7 @@ def get_classification_evaluation_aggregate_data(dp_predictions, dp_expectations
     evaluation_data["dp"] = {
         "num_data_points": num_dp_data_points
         , "num_instances": num_dp_instances
+        , "num_fp": ""
         , "precision": dp_weighted_avg_precision
         , "recall": dp_weighted_avg_recall
         , "f1score": dp_weighted_avg_f1score
@@ -204,6 +213,7 @@ def get_classification_evaluation_aggregate_data(dp_predictions, dp_expectations
     evaluation_data["all"] = {
         "num_data_points": num_data_points
         , "num_instances": num_dp_nodp_instances
+        , "num_fp": ""
         , "precision": dp_nodp_weighted_avg_precision
         , "recall": dp_nodp_weighted_avg_recall
         , "f1score": dp_nodp_weighted_avg_f1score

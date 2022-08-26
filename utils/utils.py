@@ -86,13 +86,14 @@ def print_classification_evaluation_aggregate_result(dict):
         row.append(category)
         row.append(values["num_data_points"])
         row.append(values["num_instances"])
+        row.append(values["num_fp"])
         row.append(values["precision"])
         row.append(values["recall"])
         row.append(values["f1score"])
         aggregate_rows.append(row)
 
     # panda dataframes
-    aggregate_results = pd.DataFrame(aggregate_rows, columns=["category", "num_data_points", "num_instances", "precision", "recall", "f1score"])
+    aggregate_results = pd.DataFrame(aggregate_rows, columns=["category", "num_data_points", "num_instances", "num_fp", "precision", "recall", "f1score"])
 
     # print in table
     print("::::::::::::::::::::Aggregate Results::::::::::::::::::::")
