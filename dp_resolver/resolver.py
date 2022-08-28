@@ -311,7 +311,11 @@ def resolve_ui_dp(segment_dp, object_detection_result):
                 ui_dp[potential_dp]["votes"] = 1
                 # ui_dp[potential_dp]["score"] = object_detection_result["scores"]
                 ui_dp[potential_dp]["score"] = .50
-                ui_dp[potential_dp]["segment_info"] = {'column_min': 212, 'height': 26, 'row_min': 1260, 'column_max': 1823, 'width': 1611, 'row_max': 1286, 'id': 42}
+                row_min = object_detection_result["boxes"][0]
+                column_min = object_detection_result["boxes"][1]
+                row_max = object_detection_result["boxes"][2]
+                column_max = object_detection_result["boxes"][3]
+                ui_dp[potential_dp]["segment_info"] = {'column_min': column_min, 'height': row_max - row_min, 'row_min': row_min, 'column_max': column_max, 'width': column_max - column_min, 'row_max': row_max, 'id': 42}
     return ui_dp
 
 def resolve_dp(input_to_resolver, score_threshold_value):
