@@ -70,11 +70,22 @@ for i in range(len(ocr_files)):
     types.append(dp_ground_truth["type"])
 
     # print("------------predicted and ground truth labels-----------")
-    print("dp_predicted[labels]", dp_predicted["labels"])
-    print("dp_ground_truth[labels]", dp_ground_truth["labels"])
+    # print("dp_predicted[labels]", dp_predicted["labels"])
+    # print("dp_ground_truth[labels]", dp_ground_truth["labels"])
 
     # drawing ground truth and predicted bboxes
     # utils.draw_expectation_prediction_bbox(image_file, dp_ground_truth["segments"], dp_predicted["segments"], dp_ground_truth["labels"], dp_predicted["labels"])
+
+    # if(("NO DP" in dp_predicted["labels"])):
+    #     # if(image_file == "UIED/data/input/music_30--Music-Bass-Equalizer-0-6_6cef.jpg"):
+    #     # print("########################################## filename: ", image_file.split("/")[-1], "####################################")
+    #     print("########################################## DEBUG ####################################")
+    #     print("dp_ground_truth: ", dp_ground_truth["labels"])
+    #     print("dp_predicted: ", dp_predicted["labels"])
+    #     # utils.print_dictionary(analysis_result, "analysis_result")
+    #     ui_dp = resolver.get_ui_dp(input_to_resolver)
+    #     utils.print_dictionary(ui_dp, "ui_dp")
+    #     print("########################################## DEBUG ####################################")
 
     print("----------------------------------------------------------------------------------------------------------------------------------------------")
 
