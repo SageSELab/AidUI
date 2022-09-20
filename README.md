@@ -1,7 +1,7 @@
 
 ## AidUI (Automatically Identifying Dark Patterns in UI)
 This is the repository of project AidUI.
-- List of examples and patterns for different DP categories: https://docs.google.com/spreadsheets/d/15PAtmx9d7Us9sj4vFq1_r_pQM8KDxhWUYWT3q6-RE-o/edit#gid=2050474263
+- List of examples and patterns for different DP categories: https://docs.google.com/spreadsheets/d/1Sgu1o4aSdxa9QMJCU8yNJtVo0X7A8zRf/edit?usp=sharing&ouid=104998694462888676969&rtpof=true&sd=true
 - AidUI implementation source code: https://anonymous.4open.science/r/AidUI-ICSE2023/
 - Evaluation Dataset for AidUI: https://anonymous.4open.science/r/AidUI-ICSE2023/evaluation/evaluation_dataset/
 - Visual Cue Detection Model Notebooks: https://anonymous.4open.science/r/AidUI-ICSE2023/object_detection/object_detection_frcnn_mscoco_boilerplate/
