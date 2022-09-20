@@ -5,7 +5,7 @@ This is the repository of project AidUI.
 - AidUI implementation source code: https://anonymous.4open.science/r/AidUI-ICSE2023/
 - Evaluation Dataset for AidUI: https://anonymous.4open.science/r/AidUI-ICSE2023/evaluation/evaluation_dataset/
 - Visual Cue Detection Model Notebooks: https://anonymous.4open.science/r/AidUI-ICSE2023/object_detection/object_detection_frcnn_mscoco_boilerplate/
-- Training dataset for Visual Cue Detection model: https://drive.google.com/file/d/1GEwLKuMhnzuctsaw9pfj_PseL2XKWu0C/view?usp=sharing
+- Training dataset for Visual Cue Detection model: https://drive.google.com/file/d/1UIJIcZCAXeltrsyS63Wu55IcMLTJv3-X/view?usp=sharing
 
 
 **Directory structure of AidUI major components:**
