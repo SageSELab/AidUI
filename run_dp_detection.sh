@@ -16,6 +16,9 @@
 # python -c "import evaluation.evaluation as evaluation; evaluation.test_confusion_matrix()"
 #---------------------test---------------------------------
 
+# create ./input directory
+mkdir ./input/
+
 # input to turn on evaluation mode
 EVAL_MODE="off"
 echo "turn on evaluation mode? answer with y/n"
