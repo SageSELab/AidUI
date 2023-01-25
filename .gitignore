@@ -22,5 +22,8 @@ input/
 # .pth files
 *.pth
 
+# .pyc files
+*.pyc
+
 # txt files
 # no_instances_dps.txt

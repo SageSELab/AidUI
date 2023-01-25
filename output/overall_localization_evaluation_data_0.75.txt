@@ -1,16 +1,16 @@
 
 ::::::::::::::::::::Aggregate Results::::::::::::::::::::
      avg_iou  custom_avg_iou
-0  0.162509        0.832443 
+0  0.162944        0.832443 
 ::::::::::::::::::::::Category Results:::::::::::::::::::
                  category   avg_iou  custom_avg_iou
-0  ATTENTION DISTRACTION  0.040522        1.000000
-1        COUNTDOWN TIMER  0.232830        0.823345
+0  ATTENTION DISTRACTION  0.040514        1.000000
+1        COUNTDOWN TIMER  0.233360        0.823345
 2   LIMITED TIME MESSAGE  0.262628        0.808963
-3         DEFAULT CHOICE  0.023957        0.569231
-4      LOW STOCK MESSAGE  0.224227        1.000000
+3         DEFAULT CHOICE  0.023956        0.569231
+4      LOW STOCK MESSAGE  0.228066        1.000000
 5       ACTIVITY MESSAGE  0.351397        0.740450
-6                NAGGING  0.015497        0.957066
+6                NAGGING  0.015498        0.957066
 7          DISGUISED ADS  0.006653        0.916667
 8    HIGH DEMAND MESSAGE  0.340726        0.730416
 9           GAMIFICATION  0.126649        0.778296

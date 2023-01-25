@@ -1,11 +1,11 @@
 
 ::::::::::::::::::::Aggregate Results::::::::::::::::::::
-     avg_iou  custom_avg_iou
-0  0.050921         0.83888 
+    avg_iou  custom_avg_iou
+0  0.05092         0.83888 
 ::::::::::::::::::::::Category Results:::::::::::::::::::
                  category   avg_iou  custom_avg_iou
-0                NAGGING  0.015497        0.957066
-1         DEFAULT CHOICE  0.024014        0.542373
+0                NAGGING  0.015498        0.957066
+1         DEFAULT CHOICE  0.024011        0.542373
 2          DISGUISED ADS  0.006653        0.916667
 3           GAMIFICATION  0.126649        0.778296
 4  ATTENTION DISTRACTION  0.081790        1.000000
