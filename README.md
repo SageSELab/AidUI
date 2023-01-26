@@ -2,7 +2,7 @@
 
 ## Overview
 This repository contains the replication package of our ICSE'23 paper:
-> **S M Hasan Mansur, Sabiha Salma, Damilola Awofisayo, and Kevin Moran, “AidUI: Toward Automated Recognition of Dark Patterns in User Interfaces,” in Proceedings of the 45th IEEE/ACM International Conference on Software Engineering (ICSE 2023), 2023, to appear**
+> S M Hasan Mansur, Sabiha Salma, Damilola Awofisayo, and Kevin Moran, “AidUI: Toward Automated Recognition of Dark Patterns in User Interfaces,” in Proceedings of the 45th IEEE/ACM International Conference on Software Engineering (ICSE 2023), 2023, to appear
 
 
 
