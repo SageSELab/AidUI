@@ -44,9 +44,9 @@ Based on the observations gained during taxonomy study, we developed AidUI, the 
 To setup and run AidUI, following steps need to be done.
 1. #### Clone AidUI
 Clone this repositry by using the ```git clone``` command. If git is not already installed, please follow the installation instructions provided [here](https://git-scm.com/downloads).
-#### Install Anaconda
+2. #### Install Anaconda
 To install Anaconda, please follow the [link](https://www.anaconda.com/)
-#### Setup the conda environments
+3. #### Setup the conda environments
 Installed Anaconda comes with a default conda envirionment _"base"_. We can check the available environments using the following command:
 ```bash
 conda info --envs
@@ -64,12 +64,12 @@ conda create --name dl_dp_obj_det_env --file location\to\dl_dp_obj_det_env.txt
 ```bash
 conda create --name dp_uied3 --file location\to\dp_uied3.txt
 ```
-#### Download and setup Visual Cue Detection model
+4. #### Download and setup Visual Cue Detection model
 - Download the pretrained Visual Cue Detection model from [here](provide the zenodo link)
 
 - Then, copy the downloaded model into the destination dir: ```AidUI/object_detection/object_detection_frcnn_mscoco_boilerplate/```
 
-#### Run AidUI
+5. #### Run AidUI
 - Move to the root directory of AidUI
 
 - Execute the following command to run AidUI
