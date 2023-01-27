@@ -6,8 +6,8 @@
 This repository contains the replication package of our **ICSE'23** paper:
 > S M Hasan Mansur, Sabiha Salma, Damilola Awofisayo, and Kevin Moran, “_**AidUI: Toward Automated Recognition of Dark Patterns in User Interfaces**_,” in Proceedings of the 45th IEEE/ACM International Conference on Software Engineering (ICSE 2023), 2023, to appear
 
-This replication package includes three main parts which we discuss in details in later sections: 
-- Part1: Our proposed unified taxonomy of UI Dark Patterns 
+This replication package includes three main parts which we discuss in details in later sections:
+- Part1: Our proposed unified taxonomy of UI Dark Patterns
 - Part2: Source code and setup instructions of AidUI, our developed research prototype to detect UI Dark Patterns
 - Part3: Datasets for AidUI
 
@@ -16,14 +16,14 @@ There has been a wealth of work from the general HCI community that has construc
 
 <p align="center"> <img src="docs_images/dp-taxonomy.png" width="900"></p>
 
-We aimed to prioritize the detection strategy of AidUI toward certain patterns that carry with them distinct visual and textual cues which both manifest on a single screen. Thus, we identified a final set of 10 target Dark Patterns, toward which we oriented AidUI’S analysis. The targeted Dark Pattern categories are marked with a <img src="docs_images/check.png" width="18"> in the above figure. However, we provide descriptions and examples of each Dark Pattern in this [document](provide the pdf link here).
+We aimed to prioritize the detection strategy of AidUI toward certain patterns that carry with them distinct visual and textual cues which both manifest on a single screen. Thus, we identified a final set of 10 target Dark Patterns, toward which we oriented AidUI’S analysis. The targeted Dark Pattern categories are marked with a <img src="docs_images/check.png" width="18"> in the above figure. We provide descriptions and examples of each Dark Pattern in this [document](provide the pdf link here).
 
 ## Part2: Source code and setup instructions of AidUI
-Based on the observations gained during taxonomy study, we developed AidUI, the research prototype of our proposed automated approach to detect UI dark pattens. 
+Based on the observations gained during taxonomy study, we developed AidUI, the research prototype of our proposed automated approach to detect UI dark pattens.
 
 <p align="center"> <img src="docs_images/design.png" width="900"></p>
 
-The architecture of AidUI, depicted in in the Figure above, is designed around four main phases: (1) the *Visual Cue Detection* phase, which leverages a deep learning based object detection model to identify UI objects representing visual cues for DPs, (2) the *UI \& Text Content Detection* phase, which *extracts UI segments containing both text  and non-text content*, (3) the *DP Analysis Phase* phase, which employs text pattern matching, as well as color and spatial analysis techniques to analyze the extracted UI segments and identifies a set of potential DPs,  and (4) the *DP Resolution* phase, which uses results from both Visual Cue Detection and DP Analysis phases to predict a final set of underlying DPs in the given UI. It is important to note that AidUI operates *purely on pixel data* from UI screenshots, making it extensible to different software domains. 
+The architecture of AidUI, depicted in in the Figure above, is designed around four main phases: (1) the *Visual Cue Detection* phase, which leverages a deep learning based object detection model to identify UI objects representing visual cues for DPs, (2) the *UI \& Text Content Detection* phase, which *extracts UI segments containing both text  and non-text content*, (3) the *DP Analysis Phase* phase, which employs text pattern matching, as well as color and spatial analysis techniques to analyze the extracted UI segments and identifies a set of potential DPs,  and (4) the *DP Resolution* phase, which uses results from both Visual Cue Detection and DP Analysis phases to predict a final set of underlying DPs in the given UI. It is important to note that AidUI operates *purely on pixel data* from UI screenshots, making it extensible to different software domains.
 
 We set up the directory structure of the project to cloesly follow the architecture of the tool presented above. The following subsections present the directory structure of the source code of AidUI as well as the instructions to set it up.
 
@@ -34,7 +34,7 @@ We set up the directory structure of the project to cloesly follow the architect
 │   ├── UIED --> module to extract UI area segments(text/non text)
 |   |
 │   ├── object_detetion --> DL model to detect visual cue(i.e., icons)
-│   │   ├── object_detection_frcnn_mscoco_boilerplate 
+│   │   ├── object_detection_frcnn_mscoco_boilerplate
 |   |
 │   ├── text_analysis --> module to detect lexical patterns
 │   │   ├── pattern_matching
@@ -91,6 +91,20 @@ conda create --name dp_uied3 --file env_specification_files/dp_uied3.txt
 ```bash
 ./run_dp_detection.sh
 ```
+You should see the following prompt:
+```
+turn on evaluation mode? answer with y/n
+```
+Type y and press ENTER
+
+The process usually takes around # minutes (based on our experience on Ubuntu 20.04.2 LTS)
+
+Once the process is complete, you can expect the following output files in the directory ```AidUI/output/```
+
+- [env_specification_files/dl_dp_obj_det_env.txt](env_specification_files/dl_dp_obj_det_env.txt)
+- [env_specification_files/dl_dp_obj_det_env.txt](env_specification_files/dl_dp_obj_det_env.txt)
+- [env_specification_files/dl_dp_obj_det_env.txt](env_specification_files/dl_dp_obj_det_env.txt)
+
 
 ## Part3: Datasets for AidUI
 _CONTEXTDP_, the evaluation dataset for AidUI, contains 162 web and 339 mobile screenshots depicting 301 DP and 243 Non-DP instances. We make this dataset fully open source to encourage future work on automated DP detection and localization.
