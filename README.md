@@ -48,7 +48,7 @@ To setup and run AidUI, following steps need to be done.
 Clone this repositry by using the ```git clone``` command. If git is not already installed, please follow the installation instructions provided [here](https://git-scm.com/downloads).
 
 2. #### Install Anaconda
-To install Anaconda, please follow the [link](https://www.anaconda.com/)
+To install Anaconda, please follow the instructions at this [link](https://www.anaconda.com/).
 
 3. #### Setup the conda environments
 Installed Anaconda comes with a default conda envirionment _"base"_. We can check the available environments using the following command:
@@ -61,12 +61,12 @@ We provide the specification files to build identical conda environments as ours
 - _**"dl_dp_obj_det_env"**_: [env_specification_files/dl_dp_obj_det_env.txt](env_specification_files/dl_dp_obj_det_env.txt)
 - _**"dp_uied3"**_: [env_specification_files/dp_uied3.txt](env_specification_files/dp_uied3.txt)
 
-Following commands can be used to create the required enviroinments:
+Following commands can be used to create the required enviroinments from the root of the cloned repository:
 ```bash
-conda create --name dl_dp_obj_det_env --file location\to\dl_dp_obj_det_env.txt
+conda create --name dl_dp_obj_det_env --file env_specification_files/dl_dp_obj_det_env.txt
 ```
 ```bash
-conda create --name dp_uied3 --file location\to\dp_uied3.txt
+conda create --name dp_uied3 --file env_specification_files/dp_uied3.txt
 ```
 
 4. #### Download and setup Visual Cue Detection model
