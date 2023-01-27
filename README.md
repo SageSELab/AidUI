@@ -9,7 +9,8 @@ This replication package includes three main parts which we discuss in details i
 - Part2: Source code and setup instructions of AidUI, our developed research prototype to detect UI Dark Patterns
 - Part3: CONTEXTDP, the evaluation dataset for AidUI
 
-## Part1
+## Part1: Unified Taxonomy of UI Dark Patterns
+
 
 
 
