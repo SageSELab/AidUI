@@ -80,7 +80,7 @@ conda create --name dp_uied3 --file env_specification_files/dp_uied3.txt
 ```
 
 4. #### Download and setup Visual Cue Detection model
-- Download the pretrained Visual Cue Detection model from [here](provide the zenodo link)
+- Download the pretrained Visual Cue Detection model from [here]([provide the zenodo link](https://github.com/SageSELab/AidUI/releases/download/v-ICSE'23-data/trained-visual-cue-detection-model.pth)
 
 - Then, copy the downloaded model into the destination dir: ```AidUI/object_detection/object_detection_frcnn_mscoco_boilerplate/```
 
@@ -97,7 +97,7 @@ _CONTEXTDP_, the evaluation dataset for AidUI, contains 162 web and 339 mobile s
 
 _CONTEXTDP_ is provided along with this repository in the directory location: ```AidUI/evaluation/evaluation_dataset/```. It is also available [here](https://github.com/SageSELab/AidUI/releases/download/v-ICSE'23-data/AidUI-Evaluation-Dataset.tar.gz).
 
-We also provide the dataset for training visual cue detection model. The dataset is available [here](provide zenodo link).
+We also provide the dataset for training visual cue detection model. The dataset is available [here](https://www.dropbox.com/s/s1mihip6eupspir/AidUI-Object-Detection-Dataset-Master.tar.gz?dl=0).
 
 
 ## References
