@@ -44,10 +44,12 @@ Based on the observations gained during taxonomy study, we developed AidUI, the 
 To setup and run AidUI, following steps need to be done.
 #### Install Anaconda
 #### Setup the conda environments
-Installed Anaconda comes with a default conda envirionment "base". We can chech the available environments using the following command
+Installed Anaconda comes with a default conda envirionment _"base"_. We can check the available environments using the following command:
 ```bash
 conda info --envs
 ```
+For AidUI, two conda environments need to be setup: _**"dl_dp_obj_det_env"**_ and _**"dp_uied3"**_
+We provide the specification files to build identical conda environments as ours:
 
 
 
