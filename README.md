@@ -45,6 +45,7 @@ To setup and run AidUI, following steps need to be done.
 #### Clone AidUI
 Clone this repositry by using the ```git clone``` command. If git is not already installed, please follow the installation instructions provided [here](https://git-scm.com/downloads).
 #### Install Anaconda
+To install Anaconda, please follow the [link](https://www.anaconda.com/)
 #### Setup the conda environments
 Installed Anaconda comes with a default conda envirionment _"base"_. We can check the available environments using the following command:
 ```bash
