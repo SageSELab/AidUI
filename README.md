@@ -12,7 +12,7 @@ This replication package includes three main parts which we discuss in details i
 ## Part1: Unified Taxonomy of UI Dark Patterns
 There has been a wealth of work from the general HCI community that has constructed Dark Pattern taxonomies. Given the somewhat complementary, yet disparate nature of existing taxonomies of Dark Patterns, we aimed to create a unified taxonomy that merges together similar categories and provides a larger landscape of patterns for mobile and web apps toward which we can design and evaluate our automated detection approach. Our unified taxonomy is primarily a fusing of the various categories and subcategories derived by Gray et al. [1], Mathur et al. [2] and Brignull et al. [3]. 
 
-<p align="center"> <img src="https://dl.dropboxusercontent.com/s/gg84imhpleb38cv/Burt-Overview.png?dl=0" width="600"></p>
+<p align="center"> <img src="docs_images/dp-taxonomy.pdf" width="600"></p>
 
 
 
