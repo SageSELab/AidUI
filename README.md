@@ -80,7 +80,7 @@ conda create --name dp_uied3 --file env_specification_files/dp_uied3.txt
 ```
 
 4. #### Download and setup Visual Cue Detection model
-- Download the pretrained Visual Cue Detection model from [here]([provide the zenodo link](https://github.com/SageSELab/AidUI/releases/download/v-ICSE'23-data/trained-visual-cue-detection-model.pth)
+- Download the pretrained Visual Cue Detection model from [here](https://github.com/SageSELab/AidUI/releases/download/v-ICSE'23-data/trained-visual-cue-detection-model.pth).
 
 - Then, copy the downloaded model into the destination dir: ```AidUI/object_detection/object_detection_frcnn_mscoco_boilerplate/```
 
