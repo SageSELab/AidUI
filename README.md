@@ -63,6 +63,9 @@ conda create --name dl_dp_obj_det_env --file location\to\dl_dp_obj_det_env.txt
 ```bash
 conda create --name dp_uied3 --file location\to\dp_uied3.txt
 ```
+#### Download and setup Visual Cue Detection model
+Download the pretrained Visual Cue Detection model from [here](provide the zenodo link)
+Then, using the following command copy the downloaded model into the destination dir: ```AidUI/object_detection/object_detection_frcnn_mscoco_boilerplate```
 
 
 
