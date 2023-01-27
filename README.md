@@ -14,6 +14,7 @@ There has been a wealth of work from the general HCI community that has construc
 
 <p align="center"> <img src="docs_images/test.jpg" width="300"></p>
 
+We aimed to prioritize the detection strategy of AIDUI toward certain patterns that carry with them distinct visual and textual cues which both manifest on a single screen. Thus, we identified a final set of 10 target Dark Patterns, toward which we oriented AIDUI’S analysis. The targeted Dark Pattern categories are marked with a in the above figure.
 
 
 
