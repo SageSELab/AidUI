@@ -16,6 +16,31 @@ There has been a wealth of work from the general HCI community that has construc
 
 We aimed to prioritize the detection strategy of AidUI toward certain patterns that carry with them distinct visual and textual cues which both manifest on a single screen. Thus, we identified a final set of 10 target Dark Patterns, toward which we oriented AidUI’S analysis. The targeted Dark Pattern categories are marked with a <img src="docs_images/check.png" width="18"> in the above figure. However, we provide descriptions and examples of each Dark Pattern in this [document](docs_images/dp_taxonomy.pdf).
 
+## Part2: Source code and setup instructions of AidUI
+### Source Code Directory structure
+```bash
+├── DLDarkPatterns
+│   ├── UIED (UI area(text/non text) extraction)
+|   |
+│   ├── object_detetion
+│   │   ├── object_detection_frcnn_mscoco_boilerplate
+│   │   ├── synthetic_data_generation
+|   |
+│   ├── text_analysis
+│   │   ├── pattern_matching
+│   │   
+│   ├── visual_analysis
+│   │   ├── histogram_analysis
+|   |
+│   ├── spatial_analysis
+│   │   ├── size_analysis
+│   │   ├── proximity_analysis
+|   |
+│   ├── dp_resolver
+```
+
+
+
 
 
 <!-- # AidUI (Automatically Identifying Dark Patterns in UI)
