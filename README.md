@@ -20,7 +20,7 @@ We aimed to prioritize the detection strategy of AidUI toward certain patterns t
 ### Source Code Directory structure
 ```bash
 ├── AidUI
-│   ├── UIED --> UI area(text/non text) extraction)
+│   ├── UIED --> module to extract UI area segments(text/non text)
 |   |
 │   ├── object_detetion --> DL model to detect visual cue(i.e., icons)
 │   │   ├── object_detection_frcnn_mscoco_boilerplate 
@@ -35,7 +35,7 @@ We aimed to prioritize the detection strategy of AidUI toward certain patterns t
 │   │   ├── size_analysis
 │   │   ├── proximity_analysis
 |   |
-│   ├── dp_resolver --> 
+│   ├── dp_resolver --> module to identify potential underlying dark patterns in UIs
 ```
 
 
