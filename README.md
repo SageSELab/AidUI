@@ -7,7 +7,7 @@ This repository contains the replication package of our **ICSE'23** paper:
 This replication package includes three main parts which we discuss in details in later sections: 
 - Part1: Our proposed unified taxonomy of UI Dark Patterns 
 - Part2: Source code and setup instructions of AidUI, our developed research prototype to detect UI Dark Patterns
-- Part3: CONTEXTDP, the evaluation dataset for AidUI
+- Part3: Datasets for AidUI
 
 ## Part1: Unified Taxonomy of UI Dark Patterns
 There has been a wealth of work from the general HCI community that has constructed Dark Pattern taxonomies. Given the somewhat complementary, yet disparate nature of existing taxonomies of Dark Patterns, we aimed to create a unified taxonomy that merges together similar categories and provides a larger landscape of patterns for mobile and web apps toward which we can design and evaluate our automated detection approach. Our unified taxonomy is primarily a fusing of the various categories and subcategories derived by Gray et al. [1], Mathur et al. [2] and Brignull et al. [3]. Our final unified taxonomy, illustrated in the following figure, spans 7 parent categories which organize a total of 27 classes that describe different Dark Patterns.
