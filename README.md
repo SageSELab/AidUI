@@ -56,6 +56,14 @@ We provide the specification files to build identical conda environments as ours
 - _**"dl_dp_obj_det_env"**_: [env_specification_files/dl_dp_obj_det_env.txt](env_specification_files/dl_dp_obj_det_env.txt)
 - _**"dp_uied3"**_: [env_specification_files/dp_uied3.txt](env_specification_files/dp_uied3.txt)
 
+Following commands can be used to create the required enviroinments:
+```bash
+conda create --name dl_dp_obj_det_env --file location\to\dl_dp_obj_det_env.txt
+```
+```bash
+conda create --name dp_uied3 --file location\to\dp_uied3.txt
+```
+
 
 
 <!-- # AidUI (Automatically Identifying Dark Patterns in UI)
