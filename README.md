@@ -77,10 +77,12 @@ conda create --name dp_uied3 --file location\to\dp_uied3.txt
 ./run_dp_detection.sh
 ```
 
-## Part3: Evaluation Dataset for AidUI
+## Part3: Datasets for AidUI
 _CONTEXTDP_, the evaluation dataset for AidUI, contains 162 web and 339 mobile screenshots depicting 301 DP and 243 Non-DP instances. We make this dataset fully open source to encourage future work on automated DP detection and localization.
 
-This dataset is provided along with this repository in the directory location: ```AidUI/evaluation/evaluation_dataset/```. It is also available [here](provide zenodo link).
+_CONTEXTDP_ is provided along with this repository in the directory location: ```AidUI/evaluation/evaluation_dataset/```. It is also available [here](provide zenodo link).
+
+We also provide the dataset for training visual cue detection model. The dataset is available [here](provide zenodo link).
 
 
 ## References
