@@ -19,8 +19,8 @@ We aimed to prioritize the detection strategy of AidUI toward certain patterns t
 ## Part2: Source code and setup instructions of AidUI
 ### Source Code Directory structure
 ```bash
-├── DLDarkPatterns
-│   ├── UIED (UI area(text/non text) extraction)
+├── AidUI
+│   ├── UIED --> UI area(text/non text) extraction)
 |   |
 │   ├── object_detetion
 │   │   ├── object_detection_frcnn_mscoco_boilerplate
