@@ -42,7 +42,7 @@ Based on the observations gained during taxonomy study, we developed AidUI, the 
 **NOTE**: Our provided instructions for installing AidUI are based on Ubuntu 20.04.2 LTS. Similar steps can be performed for other operating systems from UNIX family (i.e., Linux, MacOS and so on).
 
 To setup and run AidUI, following steps need to be done.
-#### Clone AidUI
+1. #### Clone AidUI
 Clone this repositry by using the ```git clone``` command. If git is not already installed, please follow the installation instructions provided [here](https://git-scm.com/downloads).
 #### Install Anaconda
 To install Anaconda, please follow the [link](https://www.anaconda.com/)
