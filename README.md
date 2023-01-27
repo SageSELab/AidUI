@@ -19,7 +19,15 @@ There has been a wealth of work from the general HCI community that has construc
 We aimed to prioritize the detection strategy of AidUI toward certain patterns that carry with them distinct visual and textual cues which both manifest on a single screen. Thus, we identified a final set of 10 target Dark Patterns, toward which we oriented AidUI’S analysis. The targeted Dark Pattern categories are marked with a <img src="docs_images/check.png" width="18"> in the above figure. However, we provide descriptions and examples of each Dark Pattern in this [document](provide the pdf link here).
 
 ## Part2: Source code and setup instructions of AidUI
-Based on the observations gained during taxonomy study, we developed AidUI, the research prototype of our proposed automated approach to detect UI dark pattens. Following subsections present the directory structure of the source code of AidUI as well as the instructions to set it up.
+Based on the observations gained during taxonomy study, we developed AidUI, the research prototype of our proposed automated approach to detect UI dark pattens. 
+
+<p align="center"> <img src="docs_images/design.png" width="900"></p>
+
+The architecture of AidUI, depicted in in the Figure above, is designed around four main phases: (1) the *Visual Cue Detection* phase, which leverages a deep learning based object detection model to identify UI objects representing visual cues for DPs, (2) the *UI \& Text Content Detection* phase, which *extracts UI segments containing both text  and non-text content*, (3) the *DP Analysis Phase* phase, which employs text pattern matching, as well as color and spatial analysis techniques to analyze the extracted UI segments and identifies a set of potential DPs,  and (4) the *DP Resolution* phase, which uses results from both Visual Cue Detection and DP Analysis phases to predict a final set of underlying DPs in the given UI. It is important to note that \AidUI operates *purely on pixel data* from UI screenshots, making it extensible to different software domains. 
+
+We set up the directory structure of the project to cloesly follow the architecture of the tool presented above. The following subsections present the directory structure of the source code of AidUI as well as the instructions to set it up.
+
+
 ### Source Code Directory structure
 ```bash
 ├── AidUI
@@ -41,9 +49,11 @@ Based on the observations gained during taxonomy study, we developed AidUI, the 
 │   ├── dp_resolver --> module to identify potential underlying dark patterns in UIs
 ```
 ### Setup AidUI
+
 **NOTE**: Our provided instructions for installing AidUI are based on Ubuntu 20.04.2 LTS. Similar steps can be performed for other operating systems from UNIX family (i.e., Linux, MacOS and so on).
 
 To setup and run AidUI, following steps need to be done.
+
 1. #### Clone AidUI
 Clone this repositry by using the ```git clone``` command. If git is not already installed, please follow the installation instructions provided [here](https://git-scm.com/downloads).
 
