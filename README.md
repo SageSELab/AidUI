@@ -38,6 +38,7 @@ Based on the observations gained during taxonomy study, we developed AidUI, the 
 |   |
 │   ├── dp_resolver --> module to identify potential underlying dark patterns in UIs
 ```
+### Setup AidUI
 
 
 
