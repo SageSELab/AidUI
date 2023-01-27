@@ -22,17 +22,16 @@ We aimed to prioritize the detection strategy of AidUI toward certain patterns t
 ├── AidUI
 │   ├── UIED --> UI area(text/non text) extraction)
 |   |
-│   ├── object_detetion
-│   │   ├── object_detection_frcnn_mscoco_boilerplate
-│   │   ├── synthetic_data_generation
+│   ├── object_detetion --> DL model for visual cue(i.e., icons) detection
+│   │   ├── object_detection_frcnn_mscoco_boilerplate 
 |   |
-│   ├── text_analysis
+│   ├── text_analysis --> module for detecting lexical patterns
 │   │   ├── pattern_matching
 │   │   
-│   ├── visual_analysis
+│   ├── visual_analysis --> module for brightness analysis of neighbor UI segments
 │   │   ├── histogram_analysis
 |   |
-│   ├── spatial_analysis
+│   ├── spatial_analysis --> module for analyzing relative size and proximity of neighbor UI segments
 │   │   ├── size_analysis
 │   │   ├── proximity_analysis
 |   |
