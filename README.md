@@ -4,12 +4,10 @@
 This repository contains the replication package of our **ICSE'23** paper:
 > S M Hasan Mansur, Sabiha Salma, Damilola Awofisayo, and Kevin Moran, “_**AidUI: Toward Automated Recognition of Dark Patterns in User Interfaces**_,” in Proceedings of the 45th IEEE/ACM International Conference on Software Engineering (ICSE 2023), 2023, to appear
 
-This replication package includes three main components: 
+This replication package includes three main parts which we discuss in details in later sections: 
 - Part1: Our proposed unified taxonomy of UI Dark Patterns 
 - Part2: Source code and setup instructions of AidUI, our developed research prototype to detect UI Dark Patterns
 - Part3: CONTEXTDP, the evaluation dataset for AidUI
-
-The following sections will walk you through the above stated conponents.
 
 ## Part1
 
