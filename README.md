@@ -14,7 +14,7 @@ There has been a wealth of work from the general HCI community that has construc
 
 <p align="center"> <img src="docs_images/test.jpg" width="300"></p>
 
-We aimed to prioritize the detection strategy of AidUI toward certain patterns that carry with them distinct visual and textual cues which both manifest on a single screen. Thus, we identified a final set of 10 target Dark Patterns, toward which we oriented AidUI’S analysis. The targeted Dark Pattern categories are marked with a <img src="docs_images/check.png" width="18"> in the above figure. However, we provide descriptions and examples of each Dark Pattern in this [document](docs_images/dp_taxonomy.pdf).
+We aimed to prioritize the detection strategy of AidUI toward certain patterns that carry with them distinct visual and textual cues which both manifest on a single screen. Thus, we identified a final set of 10 target Dark Patterns, toward which we oriented AidUI’S analysis. The targeted Dark Pattern categories are marked with a <img src="docs_images/check.png" width="18"> in the above figure. However, we provide descriptions and examples of each Dark Pattern in this [document](provide the pdf link here).
 
 ## Part2: Source code and setup instructions of AidUI
 Based on the observations gained during taxonomy study, we developed AidUI, the research prototype of our proposed automated approach to detect UI dark pattens. Following subsections present the directory structure of the source code of AidUI as well as the instructions to set it up.
