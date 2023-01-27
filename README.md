@@ -39,6 +39,8 @@ Based on the observations gained during taxonomy study, we developed AidUI, the 
 │   ├── dp_resolver --> module to identify potential underlying dark patterns in UIs
 ```
 ### Setup AidUI
+**NOTE**: Our provided instructions for installing AidUI are based on Ubuntu 20.04.2 LTS. Similar steps can be performed for other operating systems from UNIX family (i.e., Linux, MacOS and so on).
+
 To setup and run AidUI, following steps need to be done.
 #### Install Anaconda
 #### Setup the conda environments
