@@ -49,7 +49,10 @@ Installed Anaconda comes with a default conda envirionment _"base"_. We can chec
 conda info --envs
 ```
 For AidUI, two conda environments need to be setup: _**"dl_dp_obj_det_env"**_ and _**"dp_uied3"**_
+
 We provide the specification files to build identical conda environments as ours:
+- _**"dl_dp_obj_det_env"**_:
+- _**"dp_uied3"**_:
 
 
 
