@@ -83,6 +83,12 @@ _CONTEXTDP_, the evaluation dataset for AidUI, contains 162 web and 339 mobile s
 This dataset is provided along with this repository in the directory location: ```AidUI/evaluation/evaluation_dataset/```. It is also available [here](provide zenodo link).
 
 
+## References
+1. C. M. Gray, Y. Kou, B. Battles, J. Hoggatt, and A. L. Toombs. The dark (patterns) side of ux design. In Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems, pages 1–14, 2018.
+2. A. Mathur, G. Acar, M. J. Friedman, E. Lucherini, J. Mayer, M. Chetty, and A. Narayanan. Dark patterns at scale: Findings from a crawl of 11k shopping websites. Proceedings of the ACM on Human-Computer Interaction, 3(CSCW):1–32, 2019.
+3. H. Brignull, M. Miquel, J. Rosenberg, and J. Offer. Dark patterns - user interfaces designed to trick people. 2010.
+
+
 
 
 <!-- # AidUI (Automatically Identifying Dark Patterns in UI)
