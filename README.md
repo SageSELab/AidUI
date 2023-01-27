@@ -23,7 +23,7 @@ Based on the observations gained during taxonomy study, we developed AidUI, the 
 
 <p align="center"> <img src="docs_images/design.png" width="900"></p>
 
-The architecture of AidUI, depicted in in the Figure above, is designed around four main phases: (1) the *Visual Cue Detection* phase, which leverages a deep learning based object detection model to identify UI objects representing visual cues for DPs, (2) the *UI \& Text Content Detection* phase, which *extracts UI segments containing both text  and non-text content*, (3) the *DP Analysis Phase* phase, which employs text pattern matching, as well as color and spatial analysis techniques to analyze the extracted UI segments and identifies a set of potential DPs,  and (4) the *DP Resolution* phase, which uses results from both Visual Cue Detection and DP Analysis phases to predict a final set of underlying DPs in the given UI. It is important to note that \AidUI operates *purely on pixel data* from UI screenshots, making it extensible to different software domains. 
+The architecture of AidUI, depicted in in the Figure above, is designed around four main phases: (1) the *Visual Cue Detection* phase, which leverages a deep learning based object detection model to identify UI objects representing visual cues for DPs, (2) the *UI \& Text Content Detection* phase, which *extracts UI segments containing both text  and non-text content*, (3) the *DP Analysis Phase* phase, which employs text pattern matching, as well as color and spatial analysis techniques to analyze the extracted UI segments and identifies a set of potential DPs,  and (4) the *DP Resolution* phase, which uses results from both Visual Cue Detection and DP Analysis phases to predict a final set of underlying DPs in the given UI. It is important to note that AidUI operates *purely on pixel data* from UI screenshots, making it extensible to different software domains. 
 
 We set up the directory structure of the project to cloesly follow the architecture of the tool presented above. The following subsections present the directory structure of the source code of AidUI as well as the instructions to set it up.
 
@@ -95,7 +95,7 @@ conda create --name dp_uied3 --file env_specification_files/dp_uied3.txt
 ## Part3: Datasets for AidUI
 _CONTEXTDP_, the evaluation dataset for AidUI, contains 162 web and 339 mobile screenshots depicting 301 DP and 243 Non-DP instances. We make this dataset fully open source to encourage future work on automated DP detection and localization.
 
-_CONTEXTDP_ is provided along with this repository in the directory location: ```AidUI/evaluation/evaluation_dataset/```. It is also available [here](provide zenodo link).
+_CONTEXTDP_ is provided along with this repository in the directory location: ```AidUI/evaluation/evaluation_dataset/```. It is also available [here](https://github.com/SageSELab/AidUI/releases/download/v-ICSE'23-data/AidUI-Evaluation-Dataset.tar.gz).
 
 We also provide the dataset for training visual cue detection model. The dataset is available [here](provide zenodo link).
 
