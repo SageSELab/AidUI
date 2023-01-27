@@ -42,6 +42,8 @@ Based on the observations gained during taxonomy study, we developed AidUI, the 
 **NOTE**: Our provided instructions for installing AidUI are based on Ubuntu 20.04.2 LTS. Similar steps can be performed for other operating systems from UNIX family (i.e., Linux, MacOS and so on).
 
 To setup and run AidUI, following steps need to be done.
+#### Clone AidUI
+Clone this repositry by using the ```git clone``` command. If git is not already installed, please follow the installation instructions provided [here](https://git-scm.com/downloads).
 #### Install Anaconda
 #### Setup the conda environments
 Installed Anaconda comes with a default conda envirionment _"base"_. We can check the available environments using the following command:
@@ -51,8 +53,8 @@ conda info --envs
 For AidUI, two conda environments need to be setup: _**"dl_dp_obj_det_env"**_ and _**"dp_uied3"**_
 
 We provide the specification files to build identical conda environments as ours:
-- _**"dl_dp_obj_det_env"**_:
-- _**"dp_uied3"**_:
+- _**"dl_dp_obj_det_env"**_: [env_specification_files/dl_dp_obj_det_env.txt](env_specification_files/dl_dp_obj_det_env.txt)
+- _**"dp_uied3"**_: [env_specification_files/dp_uied3.txt](env_specification_files/dp_uied3.txt)
 
 
 
