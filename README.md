@@ -50,7 +50,7 @@ We set up the directory structure of the project to cloesly follow the architect
 ```
 ### Setup AidUI
 
-**NOTE**: Our provided instructions for installing AidUI are based on Ubuntu 20.04.2 LTS. Similar steps can be performed for other operating systems from UNIX family (i.e., Linux, MacOS and so on).
+**NOTE**: ***Our provided instructions for installing AidUI are currently only capplicable to Ubuntu 20.04.2 LTS (although other recent versions of Ubuntu should be fine), due to the specific Anaconda packages required. As such, these instructions will likely not work on Windows or mcOS.*** 
 
 To setup and run AidUI, following steps need to be done.
 
