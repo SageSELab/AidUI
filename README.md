@@ -16,7 +16,7 @@ There has been a wealth of work from the general HCI community that has construc
 
 <p align="center"> <img src="docs_images/dp-taxonomy.png" width="900"></p>
 
-We aimed to prioritize the detection strategy of AidUI toward certain patterns that carry with them distinct visual and textual cues which both manifest on a single screen. Thus, we identified a final set of 10 target Dark Patterns, toward which we oriented AidUI’S analysis. The targeted Dark Pattern categories are marked with a <img src="docs_images/check.png" width="18"> in the above figure. We provide descriptions and examples of each Dark Pattern in this [document](provide the pdf link here).
+We aimed to prioritize the detection strategy of AidUI toward certain patterns that carry with them distinct visual and textual cues which both manifest on a single screen. Thus, we identified a final set of 10 target Dark Patterns, toward which we oriented AidUI’S analysis. The targeted Dark Pattern categories are marked with a <img src="docs_images/check.png" width="18"> in the above figure. We provide descriptions and examples of each Dark Pattern in this [document](docs_images/DP_patterns_examples.xlsx).
 
 ## Part2: Source code and setup instructions of AidUI
 Based on the observations gained during taxonomy study, we developed AidUI, the research prototype of our proposed automated approach to detect UI dark pattens.
@@ -91,20 +91,23 @@ conda create --name dp_uied3 --file env_specification_files/dp_uied3.txt
 ```bash
 ./run_dp_detection.sh
 ```
-You should see the following prompt:
+- You should see the following prompt:
 ```
 turn on evaluation mode? answer with y/n
 ```
-Type y and press ENTER
+- Type y and press ENTER
 
-The process usually takes around # minutes (based on our experience on Ubuntu 20.04.2 LTS)
+- The process usually takes around 1.5 hour (based on our experience on Ubuntu 20.04.2 LTS).
 
-Once the process is complete, you can expect the following output files in the directory ```AidUI/output/```
+6. #### Output
+Once the process is complete, we can expect the following output files in the directory ```AidUI/output/```
 
-- [env_specification_files/dl_dp_obj_det_env.txt](env_specification_files/dl_dp_obj_det_env.txt)
-- [env_specification_files/dl_dp_obj_det_env.txt](env_specification_files/dl_dp_obj_det_env.txt)
-- [env_specification_files/dl_dp_obj_det_env.txt](env_specification_files/dl_dp_obj_det_env.txt)
-
+- [overall classification output](output/overall_classification_evaluation_data_0.75.txt)
+- [overall localization output](output/overall_localization_evaluation_data_0.75.txt)
+- [mobile classification output](output/mobile_classification_evaluation_data_0.75.txt)
+- [mobile localization output](output/mobile_localization_evaluation_data_0.75.txt)
+- [web classification output](output/web_classification_evaluation_data_0.75.txt)
+- [web localization output](output/web_localization_evaluation_data_0.75.txt)
 
 ## Part3: Datasets for AidUI
 _CONTEXTDP_, the evaluation dataset for AidUI, contains 162 web and 339 mobile screenshots depicting 301 DP and 243 Non-DP instances. We make this dataset fully open source to encourage future work on automated DP detection and localization.
