@@ -97,7 +97,7 @@ turn on evaluation mode? answer with y/n
 ```
 - Type y and press ENTER
 
-- The process usually takes around 1.5 hour (based on our experience on Ubuntu 20.04.2 LTS).
+- The process usually takes around 1.5 hours (based on our experience on Ubuntu 20.04.2 LTS).
 
 6. #### Output
 Once the process is complete, we can expect the following output files in the directory ```AidUI/output/```
