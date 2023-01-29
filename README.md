@@ -55,7 +55,7 @@ We set up the directory structure of the project to cloesly follow the architect
 To setup and run AidUI, following steps need to be done.
 
 1. #### Install Docker
-- To install Docker, please follow the instructions at this [link](https://www.docker.com/).
+To install Docker, please follow the instructions at this [link](https://www.docker.com/).
 
 2. #### Download AidUI docker image by executing the following command:
 ```bash
