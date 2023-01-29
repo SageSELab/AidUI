@@ -85,14 +85,14 @@ turn on evaluation mode? answer with y/n
 - The process usually takes around 1.5~2 hours
 
 7. #### Output
-- Once the process is complete, we can expect the following output files in the directory ```AidUI/output/```
+ Once the process is complete, we can expect the following output files in the directory ```AidUI/output/```
 
- -- [overall classification output](output/example-output/overall_classification_evaluation_data_0.75.txt)
- - [overall localization output](output/example-output/overall_localization_evaluation_data_0.75.txt)
- - [mobile classification output](output/example-output/mobile_classification_evaluation_data_0.75.txt)
- - [mobile localization output](output/example-output/mobile_localization_evaluation_data_0.75.txt)
- - [web classification output](output/example-output/web_classification_evaluation_data_0.75.txt)
- - [web localization output](output/example-output/web_localization_evaluation_data_0.75.txt)
+- [overall classification output](output/example-output/overall_classification_evaluation_data_0.75.txt)
+- [overall localization output](output/example-output/overall_localization_evaluation_data_0.75.txt)
+- [mobile classification output](output/example-output/mobile_classification_evaluation_data_0.75.txt)
+- [mobile localization output](output/example-output/mobile_localization_evaluation_data_0.75.txt)
+- [web classification output](output/example-output/web_classification_evaluation_data_0.75.txt)
+- [web localization output](output/example-output/web_localization_evaluation_data_0.75.txt)
 
 <!--
 **NOTE**: ***Our provided instructions for installing AidUI are currently only capplicable to Ubuntu 20.04.2 LTS (although other recent versions of Ubuntu should be fine), due to the specific Anaconda packages required. As such, these instructions will likely not work on Windows or mcOS.*** 
