@@ -57,33 +57,43 @@ To setup and run AidUI, following steps need to be done.
 1. #### Install Docker
 - To install Docker, please follow the instructions at this [link](https://www.docker.com/).
 
-2. Download AidUI docker image by executing the following command:
+2. #### Download AidUI docker image by executing the following command:
 ```bash
 docker pull smhasanmansur/aidui-img
 ```
 
-3. Run the container by executing the following command:
+3. #### Run the container by executing the following command:
 ```bash
 docker run -it smhasanmansur/aidui-img
 ```
 The above command will give access to the command line of the container.
 
-4. Use following command to move to the root directory of AidUI:
+4. #### Use following command to move to the root directory of AidUI:
 ```bash
 cd AidUI/
 ```
 
-5. Execute the following command to run AidUI
+5. #### Execute the following command to run AidUI
 ```bash
 ./run_dp_detection.sh
 ```
 
-6. You should see the following prompt:
+6. #### You should see the following prompt:
 ```
 turn on evaluation mode? answer with y/n
 ```
 - Type y and press ENTER
 - The process usually takes around 1.5~2 hours
+
+7. #### Output
+Once the process is complete, we can expect the following output files in the directory ```AidUI/output/```
+
+- [overall classification output](output/example-output/overall_classification_evaluation_data_0.75.txt)
+- [overall localization output](output/example-output/overall_localization_evaluation_data_0.75.txt)
+- [mobile classification output](output/example-output/mobile_classification_evaluation_data_0.75.txt)
+- [mobile localization output](output/example-output/mobile_localization_evaluation_data_0.75.txt)
+- [web classification output](output/example-output/web_classification_evaluation_data_0.75.txt)
+- [web localization output](output/example-output/web_localization_evaluation_data_0.75.txt)
 
 <!--
 **NOTE**: ***Our provided instructions for installing AidUI are currently only capplicable to Ubuntu 20.04.2 LTS (although other recent versions of Ubuntu should be fine), due to the specific Anaconda packages required. As such, these instructions will likely not work on Windows or mcOS.*** 
@@ -135,16 +145,6 @@ turn on evaluation mode? answer with y/n
 
 - The process usually takes around 1.5 hours (based on our experience on Ubuntu 20.04.2 LTS).
 -->
-
-6. #### Output
-Once the process is complete, we can expect the following output files in the directory ```AidUI/output/```
-
-- [overall classification output](output/example-output/overall_classification_evaluation_data_0.75.txt)
-- [overall localization output](output/example-output/overall_localization_evaluation_data_0.75.txt)
-- [mobile classification output](output/example-output/mobile_classification_evaluation_data_0.75.txt)
-- [mobile localization output](output/example-output/mobile_localization_evaluation_data_0.75.txt)
-- [web classification output](output/example-output/web_classification_evaluation_data_0.75.txt)
-- [web localization output](output/example-output/web_localization_evaluation_data_0.75.txt)
 
 ## Part3: Datasets for AidUI
 _CONTEXTDP_, the evaluation dataset for AidUI, contains 162 web and 339 mobile screenshots depicting 301 DP and 243 Non-DP instances. We make this dataset fully open source to encourage future work on automated DP detection and localization.
