@@ -10,7 +10,8 @@ class Config:
         # self.MODEL_PATH = 'E:\\Mulong\\Model\\UI2CODE\\cnn6_icon.h5'
         # self.class_map = ['button', 'input', 'icon', 'img', 'text']
         # self.CNN_PATH = 'E:/Mulong/Model/rico_compos/cnn-rico-1.h5'
-        self.CNN_PATH = '/home/hasan/Downloads/model/cnn-rico-1.h5'
+        # self.CNN_PATH = '/home/hasan/Downloads/model/cnn-rico-1.h5'
+        self.CNN_PATH = '/root/.cache/torch/hub/checkpoints/cnn-rico-1.h5'
         self.element_class = ['Button', 'CheckBox', 'Chronometer', 'EditText', 'ImageButton', 'ImageView',
                               'ProgressBar', 'RadioButton', 'RatingBar', 'SeekBar', 'Spinner', 'Switch',
                               'ToggleButton', 'VideoView', 'TextView']

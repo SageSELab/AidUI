@@ -59,7 +59,8 @@ then
   # conda activate dl_dp_obj_det_env
   cp ./input/*.* ./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_data/test
   cd ./object_detection/object_detection_frcnn_mscoco_boilerplate
-  jupyter nbconvert --to notebook --execute object_detection_frcnn_mscoco_inference.ipynb
+  # jupyter nbconvert --to notebook --execute object_detection_frcnn_mscoco_inference.ipynb
+  python object_detection_frcnn_mscoco_inference.py
   echo "waiting 10s"
   sleep 10s
   cd ../..
