@@ -50,6 +50,42 @@ We set up the directory structure of the project to cloesly follow the architect
 ```
 ### Setup AidUI
 
+**NOTE**: We have bundled AidUI in a docker image so that the replication process can smoothly run on every major OS. The docker image of AidUI is available [here](https://hub.docker.com/r/smhasanmansur/aidui-img)
+
+To setup and run AidUI, following steps need to be done.
+
+1. #### Install Docker
+To install Docker, please follow the instructions at this [link](https://www.docker.com/).
+
+2. Download AidUI docker image by executing the following command:
+```bash
+docker pull smhasanmansur/aidui-img
+```
+
+3. Run the container by executing the following command:
+```bash
+docker run -it smhasanmansur/aidui-img
+```
+The above command will give access to the command line of the container.
+
+4. Use following command to move to the root directory of AidUI:
+```bash
+cd AidUI/
+```
+
+5. Execute the following command to run AidUI
+```bash
+./run_dp_detection.sh
+```
+
+6. You should see the following prompt:
+```
+turn on evaluation mode? answer with y/n
+```
+- Type y and press ENTER
+- The process usually takes around 1.5~2 hours
+
+<!--
 **NOTE**: ***Our provided instructions for installing AidUI are currently only capplicable to Ubuntu 20.04.2 LTS (although other recent versions of Ubuntu should be fine), due to the specific Anaconda packages required. As such, these instructions will likely not work on Windows or mcOS.*** 
 
 To setup and run AidUI, following steps need to be done.
@@ -98,6 +134,7 @@ turn on evaluation mode? answer with y/n
 - Type y and press ENTER
 
 - The process usually takes around 1.5 hours (based on our experience on Ubuntu 20.04.2 LTS).
+-->
 
 6. #### Output
 Once the process is complete, we can expect the following output files in the directory ```AidUI/output/```
