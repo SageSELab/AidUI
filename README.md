@@ -154,7 +154,7 @@ We also provide the Visual Cue Detection model and the training dataset for it.
 
 Download the pretrained Visual Cue Detection model from [here](https://github.com/SageSELab/AidUI/releases/download/v-ICSE'23-data/trained-visual-cue-detection-model.pth).
 
-The dataset is available [here](https://www.dropbox.com/s/s1mihip6eupspir/AidUI-Object-Detection-Dataset-Master.tar.gz?dl=0).
+The training dataset is available [here](https://www.dropbox.com/s/s1mihip6eupspir/AidUI-Object-Detection-Dataset-Master.tar.gz?dl=0).
 
 
 ## References
