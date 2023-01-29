@@ -9,7 +9,7 @@ This repository contains the replication package of our **ICSE'23** paper:
 This replication package includes three main parts which we discuss in details in later sections:
 - Part1: Our proposed unified taxonomy of UI Dark Patterns
 - Part2: Source code and setup instructions of AidUI, our developed research prototype to detect UI Dark Patterns
-- Part3: Datasets for AidUI
+- Part3: Datasets and model for AidUI
 
 ## Part1: Unified Taxonomy of UI Dark Patterns
 There has been a wealth of work from the general HCI community that has constructed Dark Pattern taxonomies. Given the somewhat complementary, yet disparate nature of existing taxonomies of Dark Patterns, we aimed to create a unified taxonomy that merges together similar categories and provides a larger landscape of patterns for mobile and web apps toward which we can design and evaluate our automated detection approach. Our unified taxonomy is primarily a fusing of the various categories and subcategories derived by Gray et al. [1], Mathur et al. [2] and Brignull et al. [3]. Our final unified taxonomy, illustrated in the following figure, spans 7 parent categories which organize a total of 27 classes that describe different Dark Patterns.
@@ -145,12 +145,16 @@ turn on evaluation mode? answer with y/n
 - The process usually takes around 1.5 hours (based on our experience on Ubuntu 20.04.2 LTS).
 -->
 
-## Part3: Datasets for AidUI
+## Part3: Datasets and model for AidUI
 _CONTEXTDP_, the evaluation dataset for AidUI, contains 162 web and 339 mobile screenshots depicting 301 DP and 243 Non-DP instances. We make this dataset fully open source to encourage future work on automated DP detection and localization.
 
 _CONTEXTDP_ is provided along with this repository in the directory location: ```AidUI/evaluation/evaluation_dataset/```. It is also available [here](https://github.com/SageSELab/AidUI/releases/download/v-ICSE'23-data/AidUI-Evaluation-Dataset.tar.gz).
 
-We also provide the dataset for training visual cue detection model. The dataset is available [here](https://www.dropbox.com/s/s1mihip6eupspir/AidUI-Object-Detection-Dataset-Master.tar.gz?dl=0).
+We also provide the Visual Cue Detection model and the training dataset for it.
+
+Download the pretrained Visual Cue Detection model from [here](https://github.com/SageSELab/AidUI/releases/download/v-ICSE'23-data/trained-visual-cue-detection-model.pth).
+
+The dataset is available [here](https://www.dropbox.com/s/s1mihip6eupspir/AidUI-Object-Detection-Dataset-Master.tar.gz?dl=0).
 
 
 ## References
