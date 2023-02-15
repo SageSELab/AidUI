@@ -1,23 +1,5 @@
 #!/bin/bash
 
-# -------------------sample commands-----------------------
-# echo "What is your name?"
-# read PERSON
-# echo "Hello, $PERSON"
-
-# source ~/anaconda3/etc/profile.d/conda.sh
-# conda activate my_env
-# jupyter nbconvert --to notebook --execute mynotebook.ipynb
-
-# https://stackoverflow.com/questions/2119702/calling-a-python-function-from-bash-script
-# -------------------sample commands-----------------------
-
-#---------------------test---------------------------------
-# python -c "import evaluation.evaluation as evaluation; evaluation.test_confusion_matrix()"
-#---------------------test---------------------------------
-
-
-
 echo "--------------------------------------conda initiate--------------------------------------"
 eval "$(conda shell.bash hook)"
 
@@ -41,7 +23,6 @@ fi
 if [[ $EVAL_MODE = "on" ]]
 then
   echo "EVAL MODE is ON"
-  # copy evaluation datast UIs to ./input folder and create the groud truth info for each UI
   python -c "import evaluation.evaluation as evaluation; evaluation.set_evaluation_data()"
   echo "--------------------------------------input UIs copied to input folder--------------------------------------"
   sleep 10s
@@ -52,14 +33,8 @@ then
   mkdir ./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_output/
   mkdir ./UIED/data/input/
 
-  # echo "--------------------------------------conda initiate--------------------------------------"
-  # eval "$(conda shell.bash hook)"
-  #
-  # echo "---------------activate object detection env (dl_dp_obj_det_env), copy input files & conduct object detection inference---------------"
-  # conda activate dl_dp_obj_det_env
   cp ./input/*.* ./object_detection/object_detection_frcnn_mscoco_boilerplate/inference_data/test
   cd ./object_detection/object_detection_frcnn_mscoco_boilerplate
-  # jupyter nbconvert --to notebook --execute object_detection_frcnn_mscoco_inference.ipynb
   python object_detection_frcnn_mscoco_inference.py
   echo "waiting 10s"
   sleep 10s
