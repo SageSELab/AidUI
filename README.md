@@ -50,7 +50,7 @@ We set up the directory structure of the project to cloesly follow the architect
 ```
 ### Setup AidUI
 
-**NOTE**: **We have bundled AidUI in a docker image so that the replication process can smoothly run on every major OS. The docker image of AidUI is available [here](https://hub.docker.com/r/smhasanmansur/aidui-img)**
+**NOTE**: **We have bundled AidUI in a docker image so that the replication process can smoothly run on every major OS. The docker image of AidUI is available [here](https://hub.docker.com/r/smhasanmansur/aidui-img) on dockerhub, or [here](https://www.dropbox.com/s/8nzyf4u6qwg9cl3/aidui-img.tar.gz?dl=0) as a direct download. Additionally, you can find the dockerfile [here](https://github.com/SageSELab/AidUI/blob/master/Dockerfile)**
 
 To setup and run AidUI, following steps need to be done.
 
