@@ -2,6 +2,7 @@ FROM continuumio/miniconda3
 
 RUN apt-get update && apt-get install libgl1 -y
 
+## Use these enviornment files found in this repo
 ADD dl_dp_obj_det_env /opt/conda/envs/dl_dp_obj_det_env
 
 ADD dp_uied3 /opt/conda/envs/dp_uied3
