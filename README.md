@@ -1,6 +1,6 @@
 <h2 align="center"> AidUI: Toward Automated Recognition of Dark Patterns in User Interfaces </h2>
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7644926.svg)](https://doi.org/10.5281/zenodo.7644926) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7644939.svg)](https://doi.org/10.5281/zenodo.7644939) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Overview
 This repository contains the replication package of our **ICSE'23** paper:
@@ -25,7 +25,7 @@ Based on the observations gained during taxonomy study, we developed AidUI, the 
 
 The architecture of AidUI, depicted in in the Figure above, is designed around four main phases: (1) the *Visual Cue Detection* phase, which leverages a deep learning based object detection model to identify UI objects representing visual cues for DPs, (2) the *UI \& Text Content Detection* phase, which *extracts UI segments containing both text  and non-text content*, (3) the *DP Analysis Phase* phase, which employs text pattern matching, as well as color and spatial analysis techniques to analyze the extracted UI segments and identifies a set of potential DPs,  and (4) the *DP Resolution* phase, which uses results from both Visual Cue Detection and DP Analysis phases to predict a final set of underlying DPs in the given UI. It is important to note that AidUI operates *purely on pixel data* from UI screenshots, making it extensible to different software domains.
 
-We set up the directory structure of the project to cloesly follow the architecture of the tool presented above. The following subsections present the directory structure of the source code of AidUI as well as the instructions to set it up.
+We set up the directory structure of the project to closely follow the architecture of the tool presented above. The following subsections present the directory structure of the source code of AidUI as well as the instructions to set it up.
 
 
 ### Source Code Directory structure
@@ -48,7 +48,7 @@ We set up the directory structure of the project to cloesly follow the architect
 |   |
 │   ├── dp_resolver --> module to identify potential underlying dark patterns in UIs
 ```
-### Setup AidUI Using Docker (Reccomended)
+### Setup AidUI Using Docker (Recommended)
 
 **NOTE**: **We have bundled AidUI in a docker image so that the replication process can smoothly run on every major OS. The docker image of AidUI is available [here](https://hub.docker.com/r/smhasanmansur/aidui-img) on dockerhub, or [here](https://www.dropbox.com/s/8nzyf4u6qwg9cl3/aidui-img.tar.gz?dl=0) as a direct download. Additionally, you can find the dockerfile [here](https://github.com/SageSELab/AidUI/blob/master/Dockerfile)**
 
@@ -98,18 +98,18 @@ turn on evaluation mode? answer with y/n
 
 ### Install and Run AidUI without Docker (Ubuntu Only)
 
-**NOTE**: ***Our provided instructions for installing AidUI are currently only capplicable to Ubuntu 20.04.2 LTS (although other recent versions of Ubuntu should be fine), due to the specific Anaconda packages required. As such, these instructions will likely not work on Windows or mcOS.*** 
+**NOTE**: ***Our provided instructions for installing AidUI are currently only applicable to Ubuntu 20.04.2 LTS (although other recent versions of Ubuntu should be fine), due to the specific Anaconda packages required. As such, these instructions will likely not work on Windows or mcOS.*** 
 
 To setup and run AidUI, following steps need to be done.
 
 1. #### Clone AidUI
-Clone this repositry by using the ```git clone``` command. If git is not already installed, please follow the installation instructions provided [here](https://git-scm.com/downloads).
+Clone this repository by using the ```git clone``` command. If git is not already installed, please follow the installation instructions provided [here](https://git-scm.com/downloads).
 
 2. #### Install Anaconda
 To install Anaconda, please follow the instructions at this [link](https://www.anaconda.com/).
 
 3. #### Setup the conda environments
-Installed Anaconda comes with a default conda envirionment _"base"_. We can check the available environments using the following command:
+Installed Anaconda comes with a default conda environment _"base"_. We can check the available environments using the following command:
 ```bash
 conda info --envs
 ```
@@ -119,7 +119,7 @@ We provide the specification files to build identical conda environments as ours
 - _**"dl_dp_obj_det_env"**_: [env_specification_files/dl_dp_obj_det_env.txt](env_specification_files/dl_dp_obj_det_env.txt)
 - _**"dp_uied3"**_: [env_specification_files/dp_uied3.txt](env_specification_files/dp_uied3.txt)
 
-Following commands can be used to create the required enviroinments from the root of the cloned repository:
+Following commands can be used to create the required environments from the root of the cloned repository:
 ```bash
 conda create --name dl_dp_obj_det_env --file env_specification_files/dl_dp_obj_det_env.txt
 ```
@@ -155,7 +155,7 @@ _CONTEXTDP_ is provided along with this repository in the directory location: ``
 
 We also provide the Visual Cue Detection model and the training dataset for it.
 
-Download the pretrained Visual Cue Detection model from [here](https://github.com/SageSELab/AidUI/releases/download/v-ICSE'23-data/trained-visual-cue-detection-model.pth).
+Download the pre-trained Visual Cue Detection model from [here](https://github.com/SageSELab/AidUI/releases/download/v-ICSE'23-data/trained-visual-cue-detection-model.pth).
 
 The training dataset is available [here](https://www.dropbox.com/s/s1mihip6eupspir/AidUI-Object-Detection-Dataset-Master.tar.gz?dl=0).
 
