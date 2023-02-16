@@ -48,7 +48,7 @@ We set up the directory structure of the project to cloesly follow the architect
 |   |
 │   ├── dp_resolver --> module to identify potential underlying dark patterns in UIs
 ```
-### Setup AidUI
+### Setup AidUI Using Docker (Reccomended)
 
 **NOTE**: **We have bundled AidUI in a docker image so that the replication process can smoothly run on every major OS. The docker image of AidUI is available [here](https://hub.docker.com/r/smhasanmansur/aidui-img) on dockerhub, or [here](https://www.dropbox.com/s/8nzyf4u6qwg9cl3/aidui-img.tar.gz?dl=0) as a direct download. Additionally, you can find the dockerfile [here](https://github.com/SageSELab/AidUI/blob/master/Dockerfile)**
 
@@ -94,7 +94,10 @@ turn on evaluation mode? answer with y/n
 - [web classification output](output/example-output/web_classification_evaluation_data_0.75.txt)
 - [web localization output](output/example-output/web_localization_evaluation_data_0.75.txt)
 
-<!--
+
+
+### Install and Run AidUI without Docker (Ubuntu Only)
+
 **NOTE**: ***Our provided instructions for installing AidUI are currently only capplicable to Ubuntu 20.04.2 LTS (although other recent versions of Ubuntu should be fine), due to the specific Anaconda packages required. As such, these instructions will likely not work on Windows or mcOS.*** 
 
 To setup and run AidUI, following steps need to be done.
@@ -143,7 +146,7 @@ turn on evaluation mode? answer with y/n
 - Type y and press ENTER
 
 - The process usually takes around 1.5 hours (based on our experience on Ubuntu 20.04.2 LTS).
--->
+
 
 ## Part3: Datasets and model for AidUI
 _CONTEXTDP_, the evaluation dataset for AidUI, contains 162 web and 339 mobile screenshots depicting 301 DP and 243 Non-DP instances. We make this dataset fully open source to encourage future work on automated DP detection and localization.
@@ -161,38 +164,3 @@ The training dataset is available [here](https://www.dropbox.com/s/s1mihip6eupsp
 1. C. M. Gray, Y. Kou, B. Battles, J. Hoggatt, and A. L. Toombs. The dark (patterns) side of ux design. In Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems, pages 1–14, 2018.
 2. A. Mathur, G. Acar, M. J. Friedman, E. Lucherini, J. Mayer, M. Chetty, and A. Narayanan. Dark patterns at scale: Findings from a crawl of 11k shopping websites. Proceedings of the ACM on Human-Computer Interaction, 3(CSCW):1–32, 2019.
 3. H. Brignull, M. Miquel, J. Rosenberg, and J. Offer. Dark patterns - user interfaces designed to trick people. 2010.
-
-
-
-
-<!-- # AidUI (Automatically Identifying Dark Patterns in UI)
-This is the repository of project AidUI.
-- List of examples and patterns for different DP categories: https://docs.google.com/spreadsheets/d/1Sgu1o4aSdxa9QMJCU8yNJtVo0X7A8zRf/edit?usp=sharing&ouid=104998694462888676969&rtpof=true&sd=true
-- AidUI implementation source code: https://anonymous.4open.science/r/AidUI-ICSE2023/
-- Evaluation Dataset for AidUI: https://anonymous.4open.science/r/AidUI-ICSE2023/evaluation/evaluation_dataset/
-- Visual Cue Detection Model Notebooks: https://anonymous.4open.science/r/AidUI-ICSE2023/object_detection/object_detection_frcnn_mscoco_boilerplate/
-- Training dataset for Visual Cue Detection model: https://drive.google.com/file/d/1UIJIcZCAXeltrsyS63Wu55IcMLTJv3-X/view?usp=sharing
-
-
-**Directory structure of AidUI major components:**
-```bash
-├── DLDarkPatterns
-│   ├── UIED (UI area(text/non text) extraction)
-|   |
-│   ├── object_detetion
-│   │   ├── object_detection_frcnn_mscoco_boilerplate
-│   │   ├── synthetic_data_generation
-|   |
-│   ├── text_analysis
-│   │   ├── pattern_matching
-│   │   
-│   ├── visual_analysis
-│   │   ├── histogram_analysis
-|   |
-│   ├── spatial_analysis
-│   │   ├── size_analysis
-│   │   ├── proximity_analysis
-|   |
-│   ├── dp_resolver
-```
- -->
