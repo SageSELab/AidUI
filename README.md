@@ -1,6 +1,6 @@
 <h2 align="center"> AidUI: Toward Automated Recognition of Dark Patterns in User Interfaces </h2>
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7644950.svg)](https://doi.org/10.5281/zenodo.7644950) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7644966.svg)](https://doi.org/10.5281/zenodo.7644966) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Overview
 This repository contains the replication package of our **ICSE'23** paper:
