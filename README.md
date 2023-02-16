@@ -94,7 +94,7 @@ turn on evaluation mode? answer with y/n
 - [web classification output](output/example-output/web_classification_evaluation_data_0.75.txt)
 - [web localization output](output/example-output/web_localization_evaluation_data_0.75.txt)
 
-
+------------
 
 ### Install and Run AidUI without Docker (Ubuntu Only)
 
